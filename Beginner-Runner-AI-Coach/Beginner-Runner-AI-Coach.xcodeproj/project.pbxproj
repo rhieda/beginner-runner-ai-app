@@ -1,0 +1,598 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		B6525A242F896E960069C518 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6525A0C2F896E950069C518 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B6525A132F896E950069C518;
+			remoteInfo = "Beginner-Runner-AI-Coach";
+		};
+		B6525A2E2F896E960069C518 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B6525A0C2F896E950069C518 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B6525A132F896E950069C518;
+			remoteInfo = "Beginner-Runner-AI-Coach";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B6525A142F896E950069C518 /* Beginner-Runner-AI-Coach.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Beginner-Runner-AI-Coach.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6525A232F896E960069C518 /* Beginner-Runner-AI-CoachTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Beginner-Runner-AI-CoachTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B6525A2D2F896E960069C518 /* Beginner-Runner-AI-CoachUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Beginner-Runner-AI-CoachUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B6525A472F8D176D0069C518 /* Exceptions for "Beginner-Runner-AI-Coach" folder in "Beginner-Runner-AI-Coach" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B6525A132F896E950069C518 /* Beginner-Runner-AI-Coach */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		B6525A162F896E950069C518 /* Beginner-Runner-AI-Coach */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B6525A472F8D176D0069C518 /* Exceptions for "Beginner-Runner-AI-Coach" folder in "Beginner-Runner-AI-Coach" target */,
+			);
+			path = "Beginner-Runner-AI-Coach";
+			sourceTree = "<group>";
+		};
+		B6525A262F896E960069C518 /* Beginner-Runner-AI-CoachTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Beginner-Runner-AI-CoachTests";
+			sourceTree = "<group>";
+		};
+		B6525A302F896E960069C518 /* Beginner-Runner-AI-CoachUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Beginner-Runner-AI-CoachUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B6525A112F896E950069C518 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6525A202F896E960069C518 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6525A2A2F896E960069C518 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B6525A0B2F896E950069C518 = {
+			isa = PBXGroup;
+			children = (
+				B6525A162F896E950069C518 /* Beginner-Runner-AI-Coach */,
+				B6525A262F896E960069C518 /* Beginner-Runner-AI-CoachTests */,
+				B6525A302F896E960069C518 /* Beginner-Runner-AI-CoachUITests */,
+				B6525A152F896E950069C518 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B6525A152F896E950069C518 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B6525A142F896E950069C518 /* Beginner-Runner-AI-Coach.app */,
+				B6525A232F896E960069C518 /* Beginner-Runner-AI-CoachTests.xctest */,
+				B6525A2D2F896E960069C518 /* Beginner-Runner-AI-CoachUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B6525A132F896E950069C518 /* Beginner-Runner-AI-Coach */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6525A372F896E960069C518 /* Build configuration list for PBXNativeTarget "Beginner-Runner-AI-Coach" */;
+			buildPhases = (
+				B6525A102F896E950069C518 /* Sources */,
+				B6525A112F896E950069C518 /* Frameworks */,
+				B6525A122F896E950069C518 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				B6525A162F896E950069C518 /* Beginner-Runner-AI-Coach */,
+			);
+			name = "Beginner-Runner-AI-Coach";
+			packageProductDependencies = (
+			);
+			productName = "Beginner-Runner-AI-Coach";
+			productReference = B6525A142F896E950069C518 /* Beginner-Runner-AI-Coach.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B6525A222F896E960069C518 /* Beginner-Runner-AI-CoachTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6525A3A2F896E960069C518 /* Build configuration list for PBXNativeTarget "Beginner-Runner-AI-CoachTests" */;
+			buildPhases = (
+				B6525A1F2F896E960069C518 /* Sources */,
+				B6525A202F896E960069C518 /* Frameworks */,
+				B6525A212F896E960069C518 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B6525A252F896E960069C518 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B6525A262F896E960069C518 /* Beginner-Runner-AI-CoachTests */,
+			);
+			name = "Beginner-Runner-AI-CoachTests";
+			packageProductDependencies = (
+			);
+			productName = "Beginner-Runner-AI-CoachTests";
+			productReference = B6525A232F896E960069C518 /* Beginner-Runner-AI-CoachTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B6525A2C2F896E960069C518 /* Beginner-Runner-AI-CoachUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B6525A3D2F896E960069C518 /* Build configuration list for PBXNativeTarget "Beginner-Runner-AI-CoachUITests" */;
+			buildPhases = (
+				B6525A292F896E960069C518 /* Sources */,
+				B6525A2A2F896E960069C518 /* Frameworks */,
+				B6525A2B2F896E960069C518 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B6525A2F2F896E960069C518 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B6525A302F896E960069C518 /* Beginner-Runner-AI-CoachUITests */,
+			);
+			name = "Beginner-Runner-AI-CoachUITests";
+			packageProductDependencies = (
+			);
+			productName = "Beginner-Runner-AI-CoachUITests";
+			productReference = B6525A2D2F896E960069C518 /* Beginner-Runner-AI-CoachUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B6525A0C2F896E950069C518 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					B6525A132F896E950069C518 = {
+						CreatedOnToolsVersion = 26.0.1;
+					};
+					B6525A222F896E960069C518 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = B6525A132F896E950069C518;
+					};
+					B6525A2C2F896E960069C518 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = B6525A132F896E950069C518;
+					};
+				};
+			};
+			buildConfigurationList = B6525A0F2F896E950069C518 /* Build configuration list for PBXProject "Beginner-Runner-AI-Coach" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B6525A0B2F896E950069C518;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = B6525A152F896E950069C518 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B6525A132F896E950069C518 /* Beginner-Runner-AI-Coach */,
+				B6525A222F896E960069C518 /* Beginner-Runner-AI-CoachTests */,
+				B6525A2C2F896E960069C518 /* Beginner-Runner-AI-CoachUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B6525A122F896E950069C518 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6525A212F896E960069C518 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6525A2B2F896E960069C518 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B6525A102F896E950069C518 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6525A1F2F896E960069C518 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B6525A292F896E960069C518 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B6525A252F896E960069C518 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B6525A132F896E950069C518 /* Beginner-Runner-AI-Coach */;
+			targetProxy = B6525A242F896E960069C518 /* PBXContainerItemProxy */;
+		};
+		B6525A2F2F896E960069C518 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B6525A132F896E950069C518 /* Beginner-Runner-AI-Coach */;
+			targetProxy = B6525A2E2F896E960069C518 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		B6525A352F896E960069C518 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B6525A362F896E960069C518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B6525A382F896E960069C518 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Beginner-Runner-AI-Coach/Beginner-Runner-AI-Coach.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2GEE43J5XT;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Beginner-Runner-AI-Coach/Info.plist";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Accept please?";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Accept Please?";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rhieda.Beginner-Runner-AI-Coach";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B6525A392F896E960069C518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Beginner-Runner-AI-Coach/Beginner-Runner-AI-Coach.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2GEE43J5XT;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Beginner-Runner-AI-Coach/Info.plist";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "Accept please?";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "Accept Please?";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rhieda.Beginner-Runner-AI-Coach";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B6525A3B2F896E960069C518 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rhieda.Beginner-Runner-AI-CoachTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Beginner-Runner-AI-Coach.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Beginner-Runner-AI-Coach";
+			};
+			name = Debug;
+		};
+		B6525A3C2F896E960069C518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rhieda.Beginner-Runner-AI-CoachTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Beginner-Runner-AI-Coach.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Beginner-Runner-AI-Coach";
+			};
+			name = Release;
+		};
+		B6525A3E2F896E960069C518 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rhieda.Beginner-Runner-AI-CoachUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Beginner-Runner-AI-Coach";
+			};
+			name = Debug;
+		};
+		B6525A3F2F896E960069C518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rhieda.Beginner-Runner-AI-CoachUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Beginner-Runner-AI-Coach";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B6525A0F2F896E950069C518 /* Build configuration list for PBXProject "Beginner-Runner-AI-Coach" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6525A352F896E960069C518 /* Debug */,
+				B6525A362F896E960069C518 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6525A372F896E960069C518 /* Build configuration list for PBXNativeTarget "Beginner-Runner-AI-Coach" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6525A382F896E960069C518 /* Debug */,
+				B6525A392F896E960069C518 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6525A3A2F896E960069C518 /* Build configuration list for PBXNativeTarget "Beginner-Runner-AI-CoachTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6525A3B2F896E960069C518 /* Debug */,
+				B6525A3C2F896E960069C518 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B6525A3D2F896E960069C518 /* Build configuration list for PBXNativeTarget "Beginner-Runner-AI-CoachUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B6525A3E2F896E960069C518 /* Debug */,
+				B6525A3F2F896E960069C518 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B6525A0C2F896E950069C518 /* Project object */;
+}
