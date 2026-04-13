@@ -1,25 +1,5 @@
+import Foundation
 import HealthKit
-
-enum HealthKitManagerError: LocalizedError {
-    case datasourceUnavailable
-    case authorizationFailed
-}
-
-enum HealthDataRequesterError: LocalizedError {
-    case noDataAvailable
-    case invalidParameter
-}
-protocol HealthKitManagerRepresentation: Actor {
-    func isDatasourceAvailable() -> Bool
-    func requestAuthorization() throws
-}
-
-protocol HealthDataRequester: Actor {
-    func requestData(
-        from beginDate: Date,
-        to endDate: Date
-    ) async throws -> Double
-}
 
 actor StepsDatasource: HealthDataRequester {
     let healthStore: HKHealthStore
@@ -28,7 +8,6 @@ actor StepsDatasource: HealthDataRequester {
         self.healthStore = healthStore
     }
 
-    // mover
     func requestAuthorization() throws -> Self {
         let allowedTypes: Set<HKObjectType> = [
             .quantityType(forIdentifier: .stepCount)!
@@ -81,11 +60,4 @@ actor StepsDatasource: HealthDataRequester {
             healthStore.execute(query)
         }
     }
-}
-
-protocol HealthDataSource: Actor {
-    func fetchSteps(
-        from beginDate: String,
-        to endDate: String
-    ) async throws -> [String: Double]
 }

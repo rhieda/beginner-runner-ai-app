@@ -1,0 +1,52 @@
+name: Beginner-Runner-AI-Coach
+options:
+  bundleIdPrefix: com.rhieda
+targets:
+  Beginner-Runner-AI-Coach:
+    type: application
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Beginner-Runner-AI-Coach
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.rhieda.Beginner-Runner-AI-Coach
+      DEVELOPMENT_ASSET_PATHS: '"Beginner-Runner-AI-Coach/Preview Content"'
+      ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+      ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    info:
+      path: Beginner-Runner-AI-Coach/App/Info.plist
+    entitlements:
+      path: Beginner-Runner-AI-Coach/App/Beginner-Runner-AI-Coach.entitlements
+    frameworks:
+      - sdk: HealthKit.framework
+      - sdk: SwiftData.framework
+    preBuildScripts:
+      - name: SwiftLint
+        script: |
+          if which swiftlint >/dev/null; then
+            swiftlint
+          else
+            echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
+          fi
+
+  Beginner-Runner-AI-CoachTests:
+    type: bundle.unit-test
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Beginner-Runner-AI-CoachTests
+    dependencies:
+      - target: Beginner-Runner-AI-Coach
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.rhieda.Beginner-Runner-AI-CoachTests
+
+  Beginner-Runner-AI-CoachUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    deploymentTarget: "17.0"
+    sources:
+      - path: Beginner-Runner-AI-CoachUITests
+    dependencies:
+      - target: Beginner-Runner-AI-Coach
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: com.rhieda.Beginner-Runner-AI-CoachUITests

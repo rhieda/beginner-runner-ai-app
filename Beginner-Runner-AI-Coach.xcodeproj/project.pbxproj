@@ -29,22 +29,9 @@
 		B6525A2D2F896E960069C518 /* Beginner-Runner-AI-CoachUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Beginner-Runner-AI-CoachUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		B6525A472F8D176D0069C518 /* Exceptions for "Beginner-Runner-AI-Coach" folder in "Beginner-Runner-AI-Coach" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = B6525A132F896E950069C518 /* Beginner-Runner-AI-Coach */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B6525A162F896E950069C518 /* Beginner-Runner-AI-Coach */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				B6525A472F8D176D0069C518 /* Exceptions for "Beginner-Runner-AI-Coach" folder in "Beginner-Runner-AI-Coach" target */,
-			);
 			path = "Beginner-Runner-AI-Coach";
 			sourceTree = "<group>";
 		};
