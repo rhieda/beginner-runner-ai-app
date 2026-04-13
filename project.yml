@@ -1,6 +1,12 @@
 name: Beginner-Runner-AI-Coach
 options:
   bundleIdPrefix: com.rhieda
+
+packages:
+  SwiftLint:
+    url: https://github.com/realm/SwiftLint
+    from: 0.54.0
+
 targets:
   Beginner-Runner-AI-Coach:
     type: application
@@ -33,14 +39,8 @@ targets:
     dependencies:
       - sdk: HealthKit.framework
       - sdk: SwiftData.framework
-    preBuildScripts:
-      - name: SwiftLint
-        script: |
-          if which swiftlint >/dev/null; then
-            swiftlint
-          else
-            echo "warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint"
-          fi
+      - plugin: SwiftLintPlugin
+        package: SwiftLint
 
   Beginner-Runner-AI-CoachTests:
     type: bundle.unit-test
