@@ -12,9 +12,13 @@ actor StepsDatasource: HealthDataRequester {
         let allowedTypes: Set<HKObjectType> = [
             .quantityType(forIdentifier: .stepCount)!
         ]
+        
+        let writeTypes: Set<HKSampleType> = [
+            .quantityType(forIdentifier: .stepCount)!
+        ]
 
         healthStore.requestAuthorization(
-            toShare: nil,
+            toShare: writeTypes,
             read: allowedTypes
         ) { didSucceed, error in
             if let error {

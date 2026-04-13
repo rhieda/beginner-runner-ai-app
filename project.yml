@@ -15,9 +15,22 @@ targets:
       ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
     info:
       path: Beginner-Runner-AI-Coach/App/Info.plist
+      properties:
+        NSHealthShareUsageDescription: "The Beginner-Runner-AI-Coach app needs access to your HealthKit data to monitor your runs and progress."
+        NSHealthUpdateUsageDescription: "The Beginner-Runner-AI-Coach app needs to save your running activities and performance metrics to HealthKit."
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
     entitlements:
       path: Beginner-Runner-AI-Coach/App/Beginner-Runner-AI-Coach.entitlements
-    frameworks:
+      properties:
+        com.apple.developer.healthkit: true
+        com.apple.developer.healthkit.access: []
+    capabilities:
+      - healthKit: {}
+    dependencies:
       - sdk: HealthKit.framework
       - sdk: SwiftData.framework
     preBuildScripts:
