@@ -1,0 +1,52 @@
+disabled_rules: # rule identifiers to exclude from running
+  - trailing_whitespace
+  - line_length
+
+opt_in_rules: # some rules are only opt-in
+  - empty_count
+  - force_unwrapping
+
+analyzer_rules: # Rules run by 'swiftlint analyze' (experimental)
+  - unused_import
+
+included: # paths to include during linting. '--path' is ignored if present.
+  - Beginner-Runner-AI-Coach
+  - Beginner-Runner-AI-CoachTests
+  - Beginner-Runner-AI-CoachUITests
+
+excluded: # paths to ignore during linting. Takes precedence over 'included'.
+  - DerivedData
+  - Pods
+  - Frameworks
+
+# configurable rules can be customized from this file
+# binary rules can set their severity level
+force_cast: warning # implicitly
+force_try:
+  severity: warning # explicitly
+line_length: 110
+# rules that have both warning and error levels, can set just the warning level
+# implicitly
+type_body_length:
+  - 300 # warning
+  - 400 # error
+# or they can set both explicitly
+file_length:
+  warning: 500
+  error: 1200
+# naming rules can set advisory thresholds for length and characters
+type_name:
+  min_length: 4 # only warning
+  max_length: # warning and error
+    warning: 40
+    error: 50
+  excluded: iPhone # excluded via string
+identifier_name:
+  min_length: # only warning
+    warning: 3
+  excluded: # excluded via string array
+    - id
+    - x
+    - y
+    - z
+reporter: "xcode" # reporter type (xcode, json, csv, checkstyle, junit, html, emoji, sonarqube, markdown)
