@@ -22,10 +22,3 @@ protocol HealthDataRequester: Actor {
         to endDate: Date
     ) async throws -> Double
 }
-
-protocol HealthDataSource: Actor {
-    func fetchSteps(
-        from beginDate: String,
-        to endDate: String
-    ) async throws -> [String: Double]
-}
