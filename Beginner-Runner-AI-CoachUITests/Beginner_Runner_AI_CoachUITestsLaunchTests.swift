@@ -7,7 +7,7 @@
 
 import XCTest
 
-final class Beginner_Runner_AI_CoachUITestsLaunchTests: XCTestCase {
+final class BeginnerRunnerAICoachUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
@@ -15,6 +15,7 @@ final class Beginner_Runner_AI_CoachUITestsLaunchTests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
+        fatalError("Should not finish with error")
     }
 
     @MainActor
@@ -31,3 +32,4 @@ final class Beginner_Runner_AI_CoachUITestsLaunchTests: XCTestCase {
         add(attachment)
     }
 }
+

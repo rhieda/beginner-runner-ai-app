@@ -8,7 +8,7 @@
 import Testing
 @testable import Beginner_Runner_AI_Coach
 
-struct Beginner_Runner_AI_CoachTests {
+struct BeginnerRunnerAICoachTests {
 
     @Test func example() async throws {
         // Write your test here and use APIs like `#expect(...)` to check expected conditions.

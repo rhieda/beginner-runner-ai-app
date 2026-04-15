@@ -10,7 +10,7 @@ import SwiftData
 import HealthKit
 
 @main
-struct Beginner_Runner_AI_CoachApp: App {
+struct BeginnerRunnerAICoachApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -36,7 +36,7 @@ struct Beginner_Runner_AI_CoachApp: App {
 
     func start() async throws {
         let datasource = HKHealthStore()
-        let fetcher = StepsDatasource(healthStore: datasource)
+        let fetcher = StepsDataProvider(healthStore: datasource)
         let data = try await fetcher
             .requestAuthorization()
             .requestData(
@@ -46,3 +46,4 @@ struct Beginner_Runner_AI_CoachApp: App {
         dump(data)
     }
 }
+
