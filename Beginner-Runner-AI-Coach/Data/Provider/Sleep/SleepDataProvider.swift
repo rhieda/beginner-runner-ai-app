@@ -36,7 +36,7 @@ final actor SleepDataProvider: HealthKitDataRequester {
                     return
                 }
 
-                guard let statistics,
+                guard let statistics: [HKSample],
                       let sleepSample = statistics as? [HKCategorySample] else {
                     continuation.resume(throwing: HealthDataRequesterError.noDataAvailable)
                     return

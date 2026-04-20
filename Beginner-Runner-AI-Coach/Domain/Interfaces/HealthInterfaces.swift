@@ -35,10 +35,15 @@ protocol HealthKitManagerAuthorizationRequestable: Actor {
     func requestAuthorization() throws -> Self
 }
 
-protocol HealthKitDataRequester: Actor {
+protocol HealthKitDataRequestable: Actor {
     func requestData(
         from beginDate: Date,
         to endDate: Date
     ) async throws -> Double
 }
 
+/// Allows user to store data
+protocol HealthKitDataStorable: Actor {
+    associatedtype T
+    func store(input: T) throws
+}
