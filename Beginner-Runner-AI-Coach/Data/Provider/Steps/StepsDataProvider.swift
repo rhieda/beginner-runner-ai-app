@@ -1,7 +1,7 @@
 import Foundation
 import HealthKit
 
-actor StepsDataProvider: HealthKitDataRequester {
+actor StepsDataProvider: HealthKitDataRequestable {
     let healthStore: HKHealthStore
 
     init(healthStore: HKHealthStore) {

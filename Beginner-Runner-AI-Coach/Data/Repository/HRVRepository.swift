@@ -2,8 +2,8 @@ import HealthKit
 
 protocol HRVRepositoryRepresentable: Actor {
     associatedtype T
-    var provider: HealthKitDataRequester { get }
-    var cachedProvider: HealthKitDataRequester? { get }
+    var provider: HealthKitDataRequestable { get }
+    var cachedProvider: HealthKitDataRequestable? { get }
 
     func request(
         from beginDate: Date,
@@ -19,12 +19,12 @@ final actor HRVRepository: HRVRepositoryRepresentable {
         var endDate: Date
     }
 
-    var provider: any HealthKitDataRequester
-    var cachedProvider: (any HealthKitDataRequester)?
+    var provider: any HealthKitDataRequestable
+    var cachedProvider: (any HealthKitDataRequestable)?
 
     init(
-        provider: any HealthKitDataRequester,
-        cachedProvider: (any HealthKitDataRequester)? = nil
+        provider: any HealthKitDataRequestable,
+        cachedProvider: (any HealthKitDataRequestable)? = nil
     ) {
         self.provider = provider
         self.cachedProvider = cachedProvider

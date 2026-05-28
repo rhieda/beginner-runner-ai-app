@@ -1,6 +1,6 @@
 import HealthKit
 
-final actor TrainingLoadDataProvider: HealthKitDataRequester {
+final actor TrainingLoadDataProvider: HealthKitDataRequestable {
     private(set) var effort: Double = 0.0
 
     init(effort: Double) {

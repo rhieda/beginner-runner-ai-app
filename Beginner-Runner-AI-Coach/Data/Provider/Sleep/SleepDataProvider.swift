@@ -1,6 +1,6 @@
 import HealthKit
 
-final actor SleepDataProvider: HealthKitDataRequester {
+final actor SleepDataProvider: HealthKitDataRequestable {
     let healthStore: HKHealthStore
 
     init(healthStore: HKHealthStore) {
