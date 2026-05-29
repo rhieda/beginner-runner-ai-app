@@ -1,0 +1,13 @@
+# Cursor Rules for Beginner Runner AI Coach
+
+Please follow the rules and architecture defined in the project:
+
+- Always refer to `AI_INSTRUCTIONS.md` for coding standards and architectural rules.
+- Always refer to `architecture-sample.md` for the structural overview.
+- Always check `docs/specs/` for the feature specification before writing any implementation code.
+
+Target Platform: iOS (Latest)
+Primary Language: Swift
+Framework: SwiftUI
+State Management: @Observable
+Architecture: Clean Architecture + DDD
