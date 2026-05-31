@@ -45,7 +45,7 @@ where Provider: HealthKitTimeSeriesRequestable,
         // 3. Save to cache
         if let cachedProvider = cachedProvider {
             for sample in liveSamples {
-                try? cachedProvider.store(input: sample)
+                try? await cachedProvider.store(input: sample)
             }
         }
 

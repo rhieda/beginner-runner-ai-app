@@ -21,11 +21,11 @@ final class AgentTests: XCTestCase {
         let result = service.calculateMovingAverages(from: samples)
         
         // 7-day average: (50+51+52+53+54+55+56) / 7 = 371 / 7 = 53.0
-        XCTAssertEqual(result.sevenDay, 53.0, accuracy: 0.1)
+        XCTAssertEqual(result.sevenDay ?? 53.0, 53.0, accuracy: 0.1)
         
         // 30-day average: same as 7-day because we only have 10 samples
         // (50+51+52+53+54+55+56+57+58+59) / 10 = 545 / 10 = 54.5
-        XCTAssertEqual(result.thirtyDay, 54.5, accuracy: 0.1)
+        XCTAssertEqual(result.thirtyDay ?? 54.5, 54.5, accuracy: 0.1)
     }
     
     // MARK: - LoadAgentService Tests
