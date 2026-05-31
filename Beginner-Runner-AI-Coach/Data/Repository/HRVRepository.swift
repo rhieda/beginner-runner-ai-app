@@ -7,13 +7,17 @@ protocol HRVRepositoryRepresentable: Actor {
     ) async throws -> [HealthDataBaseLocalSample]
 }
 
-final actor HRVRepository: HRVRepositoryRepresentable {
-    private let provider: any HealthKitTimeSeriesRequestable
-    private let cachedProvider: (any HealthKitTimeSeriesRequestable & HealthKitDataStorable)?
+final actor HRVRepository<Provider, Cache>: HRVRepositoryRepresentable 
+where Provider: HealthKitTimeSeriesRequestable, 
+      Cache: HealthKitTimeSeriesRequestable & HealthKitDataStorable,
+      Cache.T == HealthDataBaseLocalSample {
+    
+    private let provider: Provider
+    private let cachedProvider: Cache?
 
     init(
-        provider: any HealthKitTimeSeriesRequestable,
-        cachedProvider: (any HealthKitTimeSeriesRequestable & HealthKitDataStorable)? = nil
+        provider: Provider,
+        cachedProvider: Cache? = nil
     ) {
         self.provider = provider
         self.cachedProvider = cachedProvider
@@ -27,8 +31,6 @@ final actor HRVRepository: HRVRepositoryRepresentable {
         if let cachedProvider = cachedProvider {
             do {
                 let cachedSamples = try await cachedProvider.requestTimeSeries(from: beginDate, to: endDate)
-                // For this implementation, we assume if we have data in cache, we return it.
-                // A more robust implementation would check for gaps.
                 if !cachedSamples.isEmpty {
                     return cachedSamples
                 }
@@ -40,7 +42,7 @@ final actor HRVRepository: HRVRepositoryRepresentable {
         // 2. Fetch from HealthKit
         let liveSamples = try await provider.requestTimeSeries(from: beginDate, to: endDate)
 
-        // 3. Save to cache asynchronously
+        // 3. Save to cache
         if let cachedProvider = cachedProvider {
             for sample in liveSamples {
                 try? cachedProvider.store(input: sample)
