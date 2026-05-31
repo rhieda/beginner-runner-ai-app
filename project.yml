@@ -6,7 +6,7 @@ targets:
   Beginner-Runner-AI-Coach:
     type: application
     platform: iOS
-    deploymentTarget: "17.0"
+    deploymentTarget: "18.0"
     sources:
       - path: Beginner-Runner-AI-Coach
     settings:
@@ -47,7 +47,7 @@ targets:
   Beginner-Runner-AI-CoachTests:
     type: bundle.unit-test
     platform: iOS
-    deploymentTarget: "17.0"
+    deploymentTarget: "18.0"
     sources:
       - path: Beginner-Runner-AI-CoachTests
     dependencies:
@@ -58,7 +58,7 @@ targets:
   Beginner-Runner-AI-CoachUITests:
     type: bundle.ui-testing
     platform: iOS
-    deploymentTarget: "17.0"
+    deploymentTarget: "18.0"
     sources:
       - path: Beginner-Runner-AI-CoachUITests
     dependencies:

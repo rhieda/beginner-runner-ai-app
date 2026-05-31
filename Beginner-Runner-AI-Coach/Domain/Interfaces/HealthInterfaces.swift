@@ -11,14 +11,39 @@ enum HealthDataRequesterError: LocalizedError {
     case invalidParameter
 }
 
+enum HealthKitDataTypeIdentifier: CaseIterable {
+    case steps
+    case hrv
+    case sleep
+    case trainingLoad
+    
+    var readType: HKObjectType {
+        fatalError("Not Implemented Yet")
+    }
+
+    var writingType: HKSampleType {
+        fatalError("Not Implemented Yet")
+    }
+}
+
 protocol HealthKitManagerRepresentation: Actor {
     func isDatasourceAvailable() -> Bool
     func requestAuthorization() throws
 }
 
-protocol HealthDataRequester: Actor {
+protocol HealthKitManagerAuthorizationRequestable: Actor {
+    func requestAuthorization() throws -> Self
+}
+
+protocol HealthKitDataRequestable: Actor {
     func requestData(
         from beginDate: Date,
         to endDate: Date
     ) async throws -> Double
+}
+
+/// Allows user to store data
+protocol HealthKitDataStorable: Actor {
+    associatedtype T
+    func store(input: T) throws
 }

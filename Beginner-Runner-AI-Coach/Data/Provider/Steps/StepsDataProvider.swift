@@ -1,7 +1,7 @@
 import Foundation
 import HealthKit
 
-actor StepsDataProvider: HealthDataRequester {
+actor StepsDataProvider: HealthKitDataRequestable {
     let healthStore: HKHealthStore
 
     init(healthStore: HKHealthStore) {
@@ -52,8 +52,8 @@ actor StepsDataProvider: HealthDataRequester {
                     continuation.resume(throwing: HealthDataRequesterError.noDataAvailable)
                     return
                 }
-                guard let statistics = statistics,
-                      let sum = statistics.sumQuantity() else {
+                guard let statistics: HKStatistics = statistics,
+                      let sum: HKQuantity = statistics.sumQuantity() else {
                     continuation.resume(throwing: HealthDataRequesterError.noDataAvailable)
                     return
                 }
