@@ -65,3 +65,15 @@ targets:
       - target: Beginner-Runner-AI-Coach
     settings:
       PRODUCT_BUNDLE_IDENTIFIER: com.rhieda.Beginner-Runner-AI-CoachUITests
+
+schemes:
+  Beginner-Runner-AI-Coach:
+    build:
+      targets:
+        Beginner-Runner-AI-Coach: all
+    test:
+      targets:
+        - Beginner-Runner-AI-CoachTests
+        - Beginner-Runner-AI-CoachUITests
+    run:
+      executable: Beginner-Runner-AI-Coach
