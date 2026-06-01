@@ -59,26 +59,22 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack(path: $path) {
-            VStack {
-                Button("one") {
-                    path.append("one")
+            VStack(spacing: 20) {
+                NavigationLink {
+                    SandboxView()
+                } label: {
+                    Label("Open Provider Sandbox", systemImage: "testtube.2")
+                        .font(.headline)
+                        .padding()
+                        .background(Color.blue.opacity(0.1))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
-                Button("two") {
-                    path.append(2)
-                }
-                Button("Present") {
-                    shouldPresentSheet.toggle()
-                }.sheet(isPresented: $shouldPresentSheet) {
-                    Button("Hello Present") {
-                         
-                    }
-                }
-            }.navigationTitle("Navigation tests")
-            .navigationDestination(for: Int.self) { selection in
-                Text("You selected the number \(selection)")
-            }.navigationDestination(for: String.self) { selection in
-                Text("You selected the string \(selection)")
+                
+                Text("Developer Testing Area")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
+            .navigationTitle("Main Menu")
         }
     }
 }

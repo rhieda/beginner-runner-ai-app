@@ -42,6 +42,30 @@ protocol HealthKitDataRequestable: Actor {
     ) async throws -> Double
 }
 
+protocol HealthKitTimeSeriesRequestable: Actor {
+    func requestTimeSeries(
+        from beginDate: Date,
+        to endDate: Date
+    ) async throws -> [HealthDataBaseLocalSample]
+}
+
+struct WorkoutSample: Sendable {
+    let id: UUID
+    let duration: TimeInterval
+    let averageHeartRate: Double?
+    let maxHeartRate: Double?
+    let startDate: Date
+    let endDate: Date
+    let activityType: HKWorkoutActivityType
+}
+
+protocol WorkoutDataRequestable: Actor {
+    func requestWorkouts(
+        from beginDate: Date,
+        to endDate: Date
+    ) async throws -> [WorkoutSample]
+}
+
 /// Allows user to store data
 protocol HealthKitDataStorable: Actor {
     associatedtype T

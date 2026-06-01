@@ -15,7 +15,6 @@ final class BeginnerRunnerAICoachUITestsLaunchTests: XCTestCase {
 
     override func setUpWithError() throws {
         continueAfterFailure = false
-        fatalError("Should not finish with error")
     }
 
     @MainActor
