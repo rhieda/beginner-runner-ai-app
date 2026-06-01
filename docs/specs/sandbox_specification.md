@@ -10,8 +10,8 @@ The Provider Sandbox is a dedicated feature designed for developers to manually 
 - **Metrics**: HRV (SDNN), Resting Heart Rate, Heart Rate, and Workouts.
 
 ### 2.2 Data Provider Verification
-- **Test HRV**: Fetches daily HRV averages for the last 30 days and displays calculated 7-day (Ready) and 30-day (Baseline) moving averages.
-- **Test RHR**: Fetches daily Resting Heart Rate averages for the last 7 days.
+- **Test HRV**: Fetches daily HRV averages for the last 30 days. Logs each daily value found and displays calculated 7-day (Ready) and 30-day (Baseline) moving averages.
+- **Test RHR**: Fetches daily Resting Heart Rate averages for the last 7 days and logs each individual daily sample.
 - **Test Workouts & TRIMP**: Fetches the most recent workout from the last 7 days and calculates the TRIMP (Training Impulse) score using the current RHR baseline.
 
 ### 2.3 Live Logging

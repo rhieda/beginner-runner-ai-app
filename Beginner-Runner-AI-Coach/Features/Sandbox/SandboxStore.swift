@@ -52,6 +52,12 @@ final class SandboxStore {
             let samples = try await hrvProvider.requestTimeSeries(from: start, to: end)
             log("Fetched \(samples.count) daily HRV averages.")
             
+            // Log each day
+            for sample in samples.sorted(by: { $0.beginDate > $1.beginDate }) {
+                let dateStr = sample.beginDate.formatted(date: .numeric, time: .omitted)
+                log("  [\(dateStr)]: \(String(format: "%.1f", sample.value)) ms")
+            }
+            
             let trends = recoveryAgent.calculateMovingAverages(from: samples)
             let sevenDayStr = trends.sevenDay != nil ? String(format: "%.1f", trends.sevenDay!) : "N/A"
             let thirtyDayStr = trends.thirtyDay != nil ? String(format: "%.1f", trends.thirtyDay!) : "N/A"
@@ -70,8 +76,10 @@ final class SandboxStore {
             let samples = try await rhrProvider.requestTimeSeries(from: start, to: end)
             log("Fetched \(samples.count) daily RHR averages.")
             
-            if let first = samples.first {
-                log("Most recent RHR: \(String(format: "%.1f", first.value)) bpm")
+            // Log each day
+            for sample in samples.sorted(by: { $0.beginDate > $1.beginDate }) {
+                let dateStr = sample.beginDate.formatted(date: .numeric, time: .omitted)
+                log("  [\(dateStr)]: \(String(format: "%.1f", sample.value)) bpm")
             }
         } catch {
             log("RHR Fetch Error: \(error.localizedDescription)")
