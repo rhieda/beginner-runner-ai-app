@@ -19,6 +19,10 @@ final class SandboxStore {
         }
     }
     
+    func clearLogs() {
+        logs.removeAll()
+    }
+    
     func authorize() async {
         guard HKHealthStore.isHealthDataAvailable() else {
             log("HealthKit not available on this device.")

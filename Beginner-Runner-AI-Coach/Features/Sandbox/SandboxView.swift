@@ -33,7 +33,7 @@ struct SandboxView: View {
                 }
             }
             
-            Section("Logs") {
+            Section {
                 if store.logs.isEmpty {
                     Text("No logs yet. Tap a button above.")
                         .font(.caption)
@@ -42,6 +42,18 @@ struct SandboxView: View {
                     ForEach(store.logs, id: \.self) { log in
                         Text(log)
                             .font(.system(.caption, design: .monospaced))
+                    }
+                }
+            } header: {
+                HStack {
+                    Text("Logs")
+                    Spacer()
+                    if !store.logs.isEmpty {
+                        Button("Clear", role: .destructive) {
+                            store.clearLogs()
+                        }
+                        .font(.caption)
+                        .textCase(.none)
                     }
                 }
             }
