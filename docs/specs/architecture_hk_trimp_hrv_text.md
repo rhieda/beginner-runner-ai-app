@@ -5,16 +5,21 @@ This document provides a text-based representation of the system architecture fo
 ## Layer 1: Features (UI)
 - **SwiftUI View**: Observes the Store and triggers updates.
 - **Store/ViewModel (@Observable)**: Coordinates the data flow between UI and Domain Agents.
-  - *Depends on*: RecoveryAgentService, LoadAgentService.
+  - *Depends on*: AgentOrchestrator, RecoveryAgentService, LoadAgentService.
 
-## Layer 2: Domain (Business Logic)
-- **RecoveryAgentService**: 
-  - Responsibility: Calculates 7-day and 30-day HRV moving averages.
-  - Data Source: `HealthKitTimeSeriesRequestable`.
-- **LoadAgentService**:
-  - Responsibility: Calculates Training Impulse (TRIMP) using the Banister formula.
-  - Data Source: `WorkoutDataRequestable`, `HealthKitTimeSeriesRequestable` (for RHR).
+## Layer 2: Domain (Business Logic & AI)
+- **AgentOrchestrator**: 
+  - Responsibility: Orchestrates the parallel execution of AI agents and applies safety guardrails.
+- **AI Agents (LLM-Agnostic)**:
+  - `LoadAgent`: Analyzes TRIMP and stress.
+  - `RecoveryAgent`: Analyzes HRV trends and readiness.
+  - `CoachAgent`: Synthesizes reports into a structured `CustomWorkoutComposition`.
+- **Deterministic Services**:
+  - `RecoveryAgentService`: Calculates 7-day and 30-day HRV moving averages.
+  - `LoadAgentService`: Calculates Training Impulse (TRIMP) using the Banister formula.
+- **PhysiologicalSafetyGuardrail**: Validates AI output against hard-coded safety rules.
 - **Interfaces**:
+  - `LLMProviderProtocol`: For AI communication abstraction.
   - `HealthKitTimeSeriesRequestable`: Protocol for fetching historical daily averages.
   - `WorkoutDataRequestable`: Protocol for fetching detailed workout metrics.
 
@@ -39,7 +44,13 @@ This document provides a text-based representation of the system architecture fo
 [ FEATURES LAYER ]
       |
       v
-[ DOMAIN LAYER (Agents) ] <--- [ INTERFACES ]
+[ DOMAIN LAYER (Orchestrator) ] <--- [ AI AGENTS (Load, Recovery, Coach) ]
+      |                                     ^
+      |                                     |
+      +---> [ DETERMINISTIC SERVICES ] <----+
+      |             (TRIMP, HRV)
+      v
+[ DATA LAYER (Repository) ] <--- [ INTERFACES ]
       |                             ^
       v                             |
 [ DATA LAYER (Repository) ] --------|
