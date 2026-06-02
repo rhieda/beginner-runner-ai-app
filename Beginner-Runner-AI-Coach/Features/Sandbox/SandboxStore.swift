@@ -133,7 +133,10 @@ final class SandboxStore {
                 recentWorkouts: [],
                 sevenDayHRV: 55.2,
                 thirtyDayHRV: 56.1,
-                userGoal: "Build endurance without injury"
+                userGoal: "Build endurance without injury",
+                logger: { [weak self] message in
+                    self?.log(message)
+                }
             )
             
             let duration = CFAbsoluteTimeGetCurrent() - start
