@@ -13,6 +13,14 @@ struct SandboxView: View {
                 }
             }
             
+            Section("AI Orchestrator") {
+                Button {
+                    Task { await store.testAIAgents() }
+                } label: {
+                    Label("Run Multi-Agent Pipeline", systemImage: "cpu")
+                }
+            }
+            
             Section("Data Provider Tests") {
                 Button {
                     Task { await store.testHRV() }
