@@ -92,6 +92,10 @@ iOSInjectionProject/
 .LSOverride
 Icon
 
+# Secrets
+Secrets.plist
+*.xcconfig
+
 
 # Thumbnails
 ._*

@@ -14,6 +14,13 @@ struct SandboxView: View {
             }
             
             Section("AI Orchestrator") {
+                Picker("LLM Provider", selection: $store.selectedProvider) {
+                    ForEach(LLMProviderType.allCases) { type in
+                        Text(type.rawValue).tag(type)
+                    }
+                }
+                .pickerStyle(.menu)
+
                 Button {
                     Task { await store.testAIAgents() }
                 } label: {
