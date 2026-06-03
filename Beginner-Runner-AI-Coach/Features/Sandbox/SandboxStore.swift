@@ -13,6 +13,9 @@ final class SandboxStore {
     private let loadAgent = LoadAgentService()
     private let recoveryAgent = RecoveryAgentService()
     
+    // Inject the Orchestrator with the mock provider for UI testing
+    private let aiOrchestrator = AgentOrchestrator(provider: SandboxLLMProvider())
+    
     func log(_ message: String) {
         Task { @MainActor in
             logs.insert("\(Date().formatted(date: .omitted, time: .standard)): \(message)", at: 0)
@@ -115,6 +118,40 @@ final class SandboxStore {
             }
         } catch {
             log("Workout Fetch Error: \(error.localizedDescription)")
+        }
+    }
+
+    func testAIAgents() async {
+        log("Executing AI Multi-Agent Orchestrator...")
+        do {
+            let start = CFAbsoluteTimeGetCurrent()
+            
+            // In a real scenario, these values would come from the specific data providers.
+            // Using mocked biometrics for the sandbox demonstration.
+            let workout = try await aiOrchestrator.generateWorkout(
+                trimpScore: 65.4,
+                recentWorkouts: [],
+                sevenDayHRV: 55.2,
+                thirtyDayHRV: 56.1,
+                userGoal: "Build endurance without injury",
+                logger: { [weak self] message in
+                    self?.log(message)
+                }
+            )
+            
+            let duration = CFAbsoluteTimeGetCurrent() - start
+            
+            log("✅ Pipeline completed in \(String(format: "%.2f", duration))s")
+            log("🏋️ Generated Workout:")
+            log("Warmup: \(workout.warmup.durationInMinutes)m")
+            for (index, block) in workout.blocks.enumerated() {
+                let intensity = block.work.intensityLevel ?? "medium"
+                log("Block \(index + 1): \(block.work.durationInMinutes)m (\(intensity)) | Rec: \(block.recovery.durationInMinutes)m")
+            }
+            log("Cooldown: \(workout.cooldown.durationInMinutes)m")
+            
+        } catch {
+            log("❌ AI Agent Pipeline Error: \(error.localizedDescription)")
         }
     }
 }
