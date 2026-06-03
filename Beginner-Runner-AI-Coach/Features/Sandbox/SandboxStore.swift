@@ -6,6 +6,8 @@ import HealthKit
 final class SandboxStore {
     var logs: [String] = []
     
+    var selectedProvider: LLMProviderType = .mock
+    
     private let healthStore = HKHealthStore()
     private let hrvProvider = HRVDataProvider()
     private let rhrProvider = RHRDataProvider()
@@ -13,8 +15,10 @@ final class SandboxStore {
     private let loadAgent = LoadAgentService()
     private let recoveryAgent = RecoveryAgentService()
     
-    // Inject the Orchestrator with the mock provider for UI testing
-    private let aiOrchestrator = AgentOrchestrator(provider: SandboxLLMProvider())
+    // Compute Orchestrator based on selected provider
+    private var aiOrchestrator: AgentOrchestrator {
+        AgentOrchestrator(provider: LLMProviderFactory.create(type: selectedProvider))
+    }
     
     func log(_ message: String) {
         Task { @MainActor in
