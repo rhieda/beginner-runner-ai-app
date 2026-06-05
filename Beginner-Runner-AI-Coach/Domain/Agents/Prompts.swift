@@ -62,14 +62,14 @@ struct AgentPrompts {
     OUTPUT FORMAT (JSON):
     You must respond strictly with valid JSON matching this schema, representing a CustomWorkoutComposition:
     {
-      "warmup": { "durationInMinutes": <Int> },
+      "warmup": { "durationInMinutes": <Int>, "intensityLevel": "<Low|Moderate|High>" },
       "blocks": [
         {
-          "work": { "durationInMinutes": <Int>, "intensityLevel": "<low|medium|high>" },
-          "recovery": { "durationInMinutes": <Int>, "intensityLevel": "<low>" }
+          "work": { "durationInMinutes": <Int>, "intensityLevel": "<Low|Moderate|High>" },
+          "recovery": { "durationInMinutes": <Int>, "intensityLevel": "<Low|Moderate|High>" }
         }
       ],
-      "cooldown": { "durationInMinutes": <Int> }
+      "cooldown": { "durationInMinutes": <Int>, "intensityLevel": "<Low|Moderate|High>" }
     }
     Do not output any markdown or text outside the JSON.
     """
