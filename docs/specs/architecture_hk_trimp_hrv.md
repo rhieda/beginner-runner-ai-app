@@ -21,6 +21,7 @@ flowchart TD
         subgraph DeterministicServices [Deterministic Services]
             RecoveryService[RecoveryAgentService]
             LoadService[LoadAgentService]
+            WorkoutService[WorkoutKitService]
         end
         
         Safety[PhysiologicalSafetyGuardrail]
@@ -32,10 +33,12 @@ flowchart TD
         HRVProvider[HRVDataProvider]
         RHRProvider[RHRDataProvider]
         WorkoutProvider[WorkoutDataProvider]
+        WorkoutKitInfra[WorkoutKit Service Implementation]
     end
 
     subgraph Infrastructure [Infrastructure Layer]
         HealthKit[HealthKit API]
+        WorkoutKit[WorkoutKit API]
         SwiftData[SwiftData Cache]
         
         subgraph LLMInfrastructure [LLM Infrastructure]
@@ -72,10 +75,14 @@ flowchart TD
 
     RecoveryService -.-> Interfaces
     LoadService -.-> Interfaces
+    WorkoutService -.-> Interfaces
     
     Repo --> HRVProvider
     Repo --> RHRProvider
     Repo --> WorkoutProvider
+    
+    WorkoutService --> WorkoutKitInfra
+    WorkoutKitInfra --> WorkoutKit
     
     HRVProvider --> HealthKit
     RHRProvider --> HealthKit
@@ -85,6 +92,7 @@ flowchart TD
     %% Styling
     style Interfaces fill:#f0f4ff,stroke:#2b5797,stroke-width:2px
     style HealthKit fill:#fff0f0,stroke:#b91d1d,stroke-width:2px
+    style WorkoutKit fill:#fff0f0,stroke:#b91d1d,stroke-width:2px
     style SwiftData fill:#f0fff0,stroke:#16a34a,stroke-width:2px
     style LLMInfrastructure fill:#f3e8ff,stroke:#7e22ce,stroke-width:2px,stroke-dasharray: 5 5
     style Safety fill:#fee2e2,stroke:#ef4444,stroke-width:2px

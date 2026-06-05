@@ -6,10 +6,16 @@ struct CoachAgentInput: Encodable {
     let userGoal: String
 }
 
+enum WorkoutIntensity: String, Codable, CaseIterable {
+    case low = "Low"
+    case moderate = "Moderate"
+    case high = "High"
+}
+
 struct CustomWorkoutComposition: Codable {
     struct Step: Codable {
         let durationInMinutes: Int
-        let intensityLevel: String?
+        let intensityLevel: WorkoutIntensity?
     }
     
     struct Block: Codable {
