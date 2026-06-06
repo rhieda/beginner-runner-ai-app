@@ -17,27 +17,27 @@ final class MultiAgentTests: XCTestCase {
         
         XCTAssertEqual(workout.warmup.durationInMinutes, 10)
         XCTAssertEqual(workout.blocks.count, 1)
-        XCTAssertEqual(workout.blocks[0].work.intensityLevel, "medium")
+        XCTAssertEqual(workout.blocks[0].work.intensityLevel, .moderate)
     }
     
     func testSafetyGuardrailFatigue() {
         let guardrail = PhysiologicalSafetyGuardrail()
         let unsafeWorkout = CustomWorkoutComposition(
-            warmup: .init(durationInMinutes: 15, intensityLevel: "medium"),
+            warmup: .init(durationInMinutes: 15, intensityLevel: .moderate),
             blocks: [
                 .init(
-                    work: .init(durationInMinutes: 30, intensityLevel: "high"),
-                    recovery: .init(durationInMinutes: 1, intensityLevel: "low")
+                    work: .init(durationInMinutes: 30, intensityLevel: .high),
+                    recovery: .init(durationInMinutes: 1, intensityLevel: .low)
                 )
             ],
-            cooldown: .init(durationInMinutes: 15, intensityLevel: "medium")
+            cooldown: .init(durationInMinutes: 15, intensityLevel: .moderate)
         )
         
         let safeWorkout = guardrail.validate(workout: unsafeWorkout, recoveryStatus: "fatigued")
         
         XCTAssertEqual(safeWorkout.warmup.durationInMinutes, 10)
-        XCTAssertEqual(safeWorkout.warmup.intensityLevel, "low")
-        XCTAssertEqual(safeWorkout.blocks[0].work.intensityLevel, "low")
+        XCTAssertEqual(safeWorkout.warmup.intensityLevel, .low)
+        XCTAssertEqual(safeWorkout.blocks[0].work.intensityLevel, .low)
         XCTAssertEqual(safeWorkout.blocks[0].work.durationInMinutes, 5)
     }
 }

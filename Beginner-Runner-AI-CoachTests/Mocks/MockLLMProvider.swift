@@ -26,8 +26,8 @@ class MockLLMProvider: LLMProviderProtocol {
               "warmup": { "durationInMinutes": 10 },
               "blocks": [
                 {
-                  "work": { "durationInMinutes": 20, "intensityLevel": "medium" },
-                  "recovery": { "durationInMinutes": 5, "intensityLevel": "low" }
+                  "work": { "durationInMinutes": 20, "intensityLevel": "Moderate" },
+                  "recovery": { "durationInMinutes": 5, "intensityLevel": "Low" }
                 }
               ],
               "cooldown": { "durationInMinutes": 10 }
