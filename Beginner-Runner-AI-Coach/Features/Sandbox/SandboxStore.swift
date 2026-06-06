@@ -5,6 +5,7 @@ import HealthKit
 @Observable
 final class SandboxStore {
     var logs: [String] = []
+    var generatedWorkout: CustomWorkoutComposition? = nil
     
     var selectedProvider: LLMProviderType = .mock
     
@@ -143,13 +144,17 @@ final class SandboxStore {
                 }
             )
             
+            await MainActor.run {
+                self.generatedWorkout = workout
+            }
+            
             let duration = CFAbsoluteTimeGetCurrent() - start
             
             log("✅ Pipeline completed in \(String(format: "%.2f", duration))s")
             log("🏋️ Generated Workout:")
             log("Warmup: \(workout.warmup.durationInMinutes)m")
             for (index, block) in workout.blocks.enumerated() {
-                let intensity = block.work.intensityLevel ?? "medium"
+                let intensity = block.work.intensityLevel?.rawValue ?? "Moderate"
                 log("Block \(index + 1): \(block.work.durationInMinutes)m (\(intensity)) | Rec: \(block.recovery.durationInMinutes)m")
             }
             log("Cooldown: \(workout.cooldown.durationInMinutes)m")

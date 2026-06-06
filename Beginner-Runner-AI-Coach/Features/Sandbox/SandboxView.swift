@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SandboxView: View {
     @State private var store = SandboxStore()
+    @State private var isShowingWorkoutPreview = false
     
     var body: some View {
         List {
@@ -25,6 +26,15 @@ struct SandboxView: View {
                     Task { await store.testAIAgents() }
                 } label: {
                     Label("Run Multi-Agent Pipeline", systemImage: "cpu")
+                }
+                
+                if let workout = store.generatedWorkout {
+                    Button {
+                        isShowingWorkoutPreview = true
+                    } label: {
+                        Label("Preview Generated Workout", systemImage: "eye")
+                    }
+                    .foregroundStyle(.blue)
                 }
             }
             
@@ -74,6 +84,15 @@ struct SandboxView: View {
             }
         }
         .navigationTitle("Provider Sandbox")
+        .sheet(isPresented: $isShowingWorkoutPreview) {
+            if let workout = store.generatedWorkout {
+                WorkoutPreviewView(store: {
+                    let previewStore = WorkoutPreviewStore()
+                    previewStore.setWorkout(workout)
+                    return previewStore
+                }())
+            }
+        }
     }
 }
 

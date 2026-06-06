@@ -23,14 +23,14 @@ class SandboxLLMProvider: LLMProviderProtocol {
         } else if systemInstruction.contains("Head Coach Agent") {
             return """
             {
-              "warmup": { "durationInMinutes": 10, "intensityLevel": "low" },
+              "warmup": { "durationInMinutes": 10, "intensityLevel": "Low" },
               "blocks": [
                 {
-                  "work": { "durationInMinutes": 25, "intensityLevel": "medium" },
-                  "recovery": { "durationInMinutes": 5, "intensityLevel": "low" }
+                  "work": { "durationInMinutes": 25, "intensityLevel": "Moderate" },
+                  "recovery": { "durationInMinutes": 5, "intensityLevel": "Low" }
                 }
               ],
-              "cooldown": { "durationInMinutes": 10, "intensityLevel": "low" }
+              "cooldown": { "durationInMinutes": 10, "intensityLevel": "Low" }
             }
             """
         }

@@ -14,25 +14,25 @@ struct PhysiologicalSafetyGuardrail {
         if recoveryStatus.lowercased() == "fatigued" {
             let safeWarmup = CustomWorkoutComposition.Step(
                 durationInMinutes: min(workout.warmup.durationInMinutes, 10),
-                intensityLevel: "low"
+                intensityLevel: .low
             )
             
             let safeBlocks = workout.blocks.map { block in
                 CustomWorkoutComposition.Block(
                     work: CustomWorkoutComposition.Step(
                         durationInMinutes: min(block.work.durationInMinutes, 5),
-                        intensityLevel: "low"
+                        intensityLevel: .low
                     ),
                     recovery: CustomWorkoutComposition.Step(
                         durationInMinutes: max(block.recovery.durationInMinutes, 2),
-                        intensityLevel: "low"
+                        intensityLevel: .low
                     )
                 )
             }
             
             let safeCooldown = CustomWorkoutComposition.Step(
                 durationInMinutes: min(workout.cooldown.durationInMinutes, 10),
-                intensityLevel: "low"
+                intensityLevel: .low
             )
             
             validatedWorkout = CustomWorkoutComposition(

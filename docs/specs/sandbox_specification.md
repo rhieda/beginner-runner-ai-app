@@ -17,11 +17,12 @@ The **Provider Sandbox** is a development-only interface designed to test Health
 ### 1.3 AI Multi-Agent Testing
 - **Orchestration Pipeline**: Executes the full `AgentOrchestrator` flow using a `SandboxLLMProvider`.
 - **Mocking**: Simulates responses for `LoadAgent`, `RecoveryAgent`, and `CoachAgent` with realistic JSON payloads and network latency.
+- **Workout Preview Integration**: Once a workout is generated, a "Preview Generated Workout" button appears, allowing the developer to view the structure in the `WorkoutPreviewView` and test the synchronization flow.
 - **Enhanced Logging**: Utilizes the Orchestrator's logging callback to display granular execution steps in the UI, including:
   - Parallel start of agents.
   - Individual agent results and statuses.
   - Guardrail application steps.
-  - Final parsed workout structure.
+  - Final parsed workout structure with type-safe intensity levels (`WorkoutIntensity`).
 
 ## 2. Technical Components
 
@@ -29,7 +30,7 @@ The **Provider Sandbox** is a development-only interface designed to test Health
 A local implementation of `LLMProviderProtocol` used specifically in the sandbox. It allows testing without external API calls and provides predictable results for debugging the UI and orchestration logic.
 
 ### 2.2 `SandboxStore`
-An `@Observable` store that encapsulates the testing logic. It acts as the "Controller" for the sandbox, managing logs and orchestrating the different test scenarios.
+An `@Observable` store that encapsulates the testing logic. It acts as the "Controller" for the sandbox, managing logs and orchestrating the different test scenarios. It now stores the `generatedWorkout` to enable cross-feature navigation.
 
 ## 3. Usage for Developers
 1. Open the app and navigate to **Settings > Developer Sandbox** (or through a direct button if available).
