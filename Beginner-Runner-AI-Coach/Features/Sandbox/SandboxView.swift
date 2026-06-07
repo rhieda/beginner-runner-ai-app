@@ -38,6 +38,52 @@ struct SandboxView: View {
                 }
             }
             
+            Section("Simulated Biometrics (Dev Tools)") {
+                Toggle("Use Simulated Data", isOn: $store.useSimulatedMetrics)
+                    .disabled(store.selectedProvider == .mock)
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("Simulated TRIMP")
+                        Spacer()
+                        Text(String(format: "%.1f", store.simulatedTrimp))
+                            .foregroundStyle(.secondary)
+                            .font(.system(.body, design: .monospaced))
+                    }
+                    Slider(value: $store.simulatedTrimp, in: 0...200, step: 0.5)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("Simulated 7d HRV")
+                        Spacer()
+                        Text(String(format: "%.0f ms", store.simulatedSevenDayHRV))
+                            .foregroundStyle(.secondary)
+                            .font(.system(.body, design: .monospaced))
+                    }
+                    Slider(value: $store.simulatedSevenDayHRV, in: 10...150, step: 1)
+                }
+                
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack {
+                        Text("Simulated 30d HRV")
+                        Spacer()
+                        Text(String(format: "%.0f ms", store.simulatedThirtyDayHRV))
+                            .foregroundStyle(.secondary)
+                            .font(.system(.body, design: .monospaced))
+                    }
+                    Slider(value: $store.simulatedThirtyDayHRV, in: 10...150, step: 1)
+                }
+                
+                HStack {
+                    Text("User Goal")
+                    Spacer()
+                    TextField("Goal description", text: $store.simulatedUserGoal)
+                        .multilineTextAlignment(.trailing)
+                        .textFieldStyle(.roundedBorder)
+                }
+            }
+            
             Section("Data Provider Tests") {
                 Button {
                     Task { await store.testHRV() }

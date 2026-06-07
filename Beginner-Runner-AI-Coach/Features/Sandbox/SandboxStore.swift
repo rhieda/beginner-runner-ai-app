@@ -7,7 +7,19 @@ final class SandboxStore {
     var logs: [String] = []
     var generatedWorkout: CustomWorkoutComposition? = nil
     
-    var selectedProvider: LLMProviderType = .mock
+    var selectedProvider: LLMProviderType = .mock {
+        didSet {
+            if selectedProvider == .mock {
+                useSimulatedMetrics = true
+            }
+        }
+    }
+    
+    var useSimulatedMetrics: Bool = true
+    var simulatedTrimp: Double = 65.4
+    var simulatedSevenDayHRV: Double = 55.2
+    var simulatedThirtyDayHRV: Double = 56.1
+    var simulatedUserGoal: String = "Build endurance without injury"
     
     private let healthStore = HKHealthStore()
     private let hrvProvider = HRVDataProvider()
@@ -232,14 +244,16 @@ final class SandboxStore {
             let start = CFAbsoluteTimeGetCurrent()
             let workout: CustomWorkoutComposition
             
-            if selectedProvider == .mock {
-                log("Using mocked biometrics for the sandbox demonstration.")
+            if selectedProvider == .mock || useSimulatedMetrics {
+                log("Using simulated metrics for the sandbox execution.")
+                log("Parameters simulated: HRV 7d=\(String(format: "%.1f", simulatedSevenDayHRV)) | 30d=\(String(format: "%.1f", simulatedThirtyDayHRV)) | TRIMP=\(String(format: "%.1f", simulatedTrimp))")
+                
                 workout = try await aiOrchestrator.generateWorkout(
-                    trimpScore: 65.4,
+                    trimpScore: simulatedTrimp,
                     recentWorkouts: [],
-                    sevenDayHRV: 55.2,
-                    thirtyDayHRV: 56.1,
-                    userGoal: "Build endurance without injury",
+                    sevenDayHRV: simulatedSevenDayHRV,
+                    thirtyDayHRV: simulatedThirtyDayHRV,
+                    userGoal: simulatedUserGoal,
                     logger: { [weak self] message in
                         self?.log(message)
                     }
@@ -253,7 +267,7 @@ final class SandboxStore {
                     recentWorkouts: metrics.recentWorkouts,
                     sevenDayHRV: metrics.sevenDayHRV,
                     thirtyDayHRV: metrics.thirtyDayHRV,
-                    userGoal: "Build endurance without injury",
+                    userGoal: simulatedUserGoal,
                     logger: { [weak self] message in
                         self?.log(message)
                     }
