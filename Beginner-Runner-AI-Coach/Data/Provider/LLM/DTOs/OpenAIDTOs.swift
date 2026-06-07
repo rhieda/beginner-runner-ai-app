@@ -5,7 +5,7 @@ struct OpenAIRequest: Encodable {
     let messages: [OpenAIMessage]
     let temperature: Double?
     
-    init(model: String = "gpt-4-turbo-preview", messages: [OpenAIMessage], temperature: Double? = 0.7) {
+    init(model: String = "gpt-4-turbo-preview", messages: [OpenAIMessage], temperature: Double? = 0.0) {
         self.model = model
         self.messages = messages
         self.temperature = temperature

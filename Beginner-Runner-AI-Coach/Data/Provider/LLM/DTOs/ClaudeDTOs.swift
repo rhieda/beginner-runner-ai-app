@@ -12,7 +12,7 @@ struct ClaudeRequest: Encodable {
         case maxTokens = "max_tokens"
     }
     
-    init(model: String = "claude-3-sonnet-20240229", system: String? = nil, messages: [ClaudeMessage], maxTokens: Int = 1024, temperature: Double? = 0.7) {
+    init(model: String = "claude-3-sonnet-20240229", system: String? = nil, messages: [ClaudeMessage], maxTokens: Int = 1024, temperature: Double? = 0.0) {
         self.model = model
         self.system = system
         self.messages = messages

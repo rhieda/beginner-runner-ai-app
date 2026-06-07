@@ -59,7 +59,11 @@ struct AgentOrchestrator {
         
         // 3. Safety Guardrail validation
         logger?("🛡️ [Guardrail] Applying physiological safety checks...")
-        let safeWorkout = guardrail.validate(workout: rawWorkout, recoveryStatus: recoveryReport.status)
+        let safeWorkout = guardrail.validate(
+            workout: rawWorkout,
+            recoveryStatus: recoveryReport.status,
+            loadStatus: loadReport.status
+        )
         
         logger?("🏁 Pipeline finished successfully.")
         return safeWorkout
