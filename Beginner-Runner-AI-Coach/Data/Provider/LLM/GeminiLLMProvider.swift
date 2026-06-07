@@ -30,7 +30,7 @@ class GeminiLLMProvider: LLMProviderProtocol {
                 GeminiContent(role: "user", parts: [GeminiPart(text: prompt)])
             ],
             systemInstruction: GeminiContent(role: nil, parts: [GeminiPart(text: systemInstruction)]),
-            generationConfig: GeminiGenerationConfig(temperature: 0.7, responseMimeType: "application/json")
+            generationConfig: GeminiGenerationConfig(temperature: 0.0, responseMimeType: "application/json")
         )
         
         request.httpBody = try JSONEncoder().encode(geminiRequest)

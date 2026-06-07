@@ -20,6 +20,21 @@ struct AgentPrompts {
       "status": "<undertraining|adapting|overreaching>",
       "physiologicalEvaluation": "<String: A concise physiological evaluation of their physical stress>"
     }
+
+    EXAMPLES:
+    Input:
+    {
+      "trimpScore": 120.5,
+      "workoutHistory": [
+        { "date": "2026-06-01", "duration": 45, "intensity": "high" },
+        { "date": "2026-06-03", "duration": 60, "intensity": "moderate" }
+      ]
+    }
+    Output:
+    {
+      "status": "overreaching",
+      "physiologicalEvaluation": "The user has a high acute TRIMP score coupled with consecutive high-intensity training, indicating potential overreaching and high musculoskeletal stress."
+    }
     """
     
     static let recoveryAgentSystemPrompt = """
@@ -38,6 +53,18 @@ struct AgentPrompts {
     {
       "status": "<recovered|fatigued>",
       "physiologicalEvaluation": "<String: A concise physiological evaluation of their recovery status>"
+    }
+
+    EXAMPLES:
+    Input:
+    {
+      "sevenDayHRVAvg": 45.2,
+      "thirtyDayHRVAvg": 60.1
+    }
+    Output:
+    {
+      "status": "fatigued",
+      "physiologicalEvaluation": "The 7-day HRV average (45.2 ms) has dropped significantly below the 30-day baseline (60.1 ms), indicating accumulated physiological stress and fatigue."
     }
     """
     
@@ -72,5 +99,24 @@ struct AgentPrompts {
       "cooldown": { "durationInMinutes": <Int>, "intensityLevel": "<Low|Moderate|High>" }
     }
     Do not output any markdown or text outside the JSON.
+
+    EXAMPLES:
+    Input:
+    {
+      "loadReport": { "status": "adapting", "evaluation": "Adapting well to training load." },
+      "recoveryReport": { "status": "fatigued", "evaluation": "HRV shows accumulated fatigue." },
+      "userGoal": "Build endurance without injury"
+    }
+    Output:
+    {
+      "warmup": { "durationInMinutes": 10, "intensityLevel": "Low" },
+      "blocks": [
+        {
+          "work": { "durationInMinutes": 5, "intensityLevel": "Low" },
+          "recovery": { "durationInMinutes": 3, "intensityLevel": "Low" }
+        }
+      ],
+      "cooldown": { "durationInMinutes": 10, "intensityLevel": "Low" }
+    }
     """
 }
