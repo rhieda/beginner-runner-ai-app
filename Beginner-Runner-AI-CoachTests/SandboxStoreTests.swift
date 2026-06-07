@@ -16,7 +16,7 @@ final class SandboxStoreTests: XCTestCase {
     
     func testRealProviderSelected() async {
         let store = SandboxStore()
-        store.selectedProvider = .openai
+        store.selectedProvider = .gpt4o
         store.clearLogs()
         
         await store.testAIAgents()

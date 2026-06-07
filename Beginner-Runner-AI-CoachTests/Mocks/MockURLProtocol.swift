@@ -28,3 +28,30 @@ class MockURLProtocol: URLProtocol {
     
     override func stopLoading() {}
 }
+
+extension URLRequest {
+    func getBodyData() -> Data? {
+        if let httpBody = self.httpBody {
+            return httpBody
+        }
+        if let httpBodyStream = self.httpBodyStream {
+            httpBodyStream.open()
+            let bufferSize = 1024
+            let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: bufferSize)
+            defer { buffer.deallocate() }
+            var data = Data()
+            while httpBodyStream.hasBytesAvailable {
+                let read = httpBodyStream.read(buffer, maxLength: bufferSize)
+                if read < 0 {
+                    return nil
+                } else if read == 0 {
+                    break
+                }
+                data.append(buffer, count: read)
+            }
+            httpBodyStream.close()
+            return data
+        }
+        return nil
+    }
+}
