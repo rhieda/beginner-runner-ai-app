@@ -3,10 +3,12 @@ import Foundation
 class ClaudeLLMProvider: LLMProviderProtocol {
     private let networkClient: LLMNetworkClientProtocol
     private let apiKey: String
+    private let model: String
     
-    init(networkClient: LLMNetworkClientProtocol = LLMNetworkClient(), apiKey: String = LLMConfig.claudeKey) {
+    init(networkClient: LLMNetworkClientProtocol = LLMNetworkClient(), apiKey: String = LLMConfig.claudeKey, model: String = "claude-3-sonnet-20240229") {
         self.networkClient = networkClient
         self.apiKey = apiKey
+        self.model = model
     }
     
     func generateResponse(prompt: String, systemInstruction: String) async throws -> String {
@@ -22,6 +24,7 @@ class ClaudeLLMProvider: LLMProviderProtocol {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let claudeRequest = ClaudeRequest(
+            model: model,
             system: systemInstruction,
             messages: [ClaudeMessage(role: "user", content: prompt)]
         )
