@@ -45,8 +45,8 @@ graph TD
     TRIMP --> LA
     HRV --> RA
     
-    LA -->|LoadReport (Status & Avaliação)| Orch
-    RA -->|RecoveryReport (Status & Avaliação)| Orch
+    LA -->|"LoadReport (Status & Avaliação)"| Orch
+    RA -->|"RecoveryReport (Status & Avaliação)"| Orch
     Goal --> Orch
     
     Orch -->|CoachAgentInput| Coach
