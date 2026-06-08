@@ -7,7 +7,7 @@ final class SandboxStore {
     var logs: [String] = []
     var generatedWorkout: CustomWorkoutComposition? = nil
     
-    var selectedProvider: LLMProviderType = .mock {
+    var selectedLLMProvider: LLMProviderType = .mock {
         didSet {
             if selectedProvider == .mock {
                 useSimulatedMetrics = true
@@ -25,12 +25,12 @@ final class SandboxStore {
     private let hrvProvider = HRVDataProvider()
     private let rhrProvider = RHRDataProvider()
     private let workoutProvider = WorkoutDataProvider()
-    private let loadAgent = LoadAgentService()
-    private let recoveryAgent = RecoveryAgentService()
+    private let localLoadAgent = LoadAgentService()
+    private let localRecoveryAgent = RecoveryAgentService()
     
     // Compute Orchestrator based on selected provider
     private var aiOrchestrator: AgentOrchestrator {
-        AgentOrchestrator(provider: LLMProviderFactory.create(type: selectedProvider))
+        AgentOrchestrator(provider: LLMProviderFactory.create(type: selectedLLMProvider))
     }
     
     func log(_ message: String) {
@@ -78,7 +78,7 @@ final class SandboxStore {
                 log("  [\(dateStr)]: \(String(format: "%.1f", sample.value)) ms")
             }
             
-            let trends = recoveryAgent.calculateMovingAverages(from: samples)
+            let trends = localRecoveryAgent.calculateMovingAverages(from: samples)
             let sevenDayStr = trends.sevenDay != nil ? String(format: "%.1f", trends.sevenDay!) : "N/A"
             let thirtyDayStr = trends.thirtyDay != nil ? String(format: "%.1f", trends.thirtyDay!) : "N/A"
             
@@ -123,7 +123,7 @@ final class SandboxStore {
                 let rhrSamples = try await rhrProvider.requestTimeSeries(from: start, to: end)
                 let rhr = rhrSamples.first?.value ?? 60.0
                 
-                let trimp = loadAgent.calculateTRIMP(
+                let trimp = localLoadAgent.calculateTRIMP(
                     durationInMinutes: durationMin,
                     avgHeartRate: avgHR,
                     maxHeartRate: maxHR,
@@ -137,6 +137,8 @@ final class SandboxStore {
             log("Workout Fetch Error: \(error.localizedDescription)")
         }
     }
+    
+    // MARK: - Real integration
 
     struct RealBiometrics {
         let sevenDayHRV: Double
@@ -147,12 +149,12 @@ final class SandboxStore {
 
     private func fetchAndCalculateHRV(end: Date) async -> (sevenDay: Double, thirtyDay: Double) {
         let start30 = Calendar.current.date(byAdding: .day, value: -30, to: end)!
-        var sevenDayHRV: Double = 55.2
-        var thirtyDayHRV: Double = 56.1
+        var sevenDayHRV: Double = simulatedSevenDayHRV
+        var thirtyDayHRV: Double = simulatedThirtyDayHRV
         
         do {
             let hrvSamples = try await hrvProvider.requestTimeSeries(from: start30, to: end)
-            let trends = recoveryAgent.calculateMovingAverages(from: hrvSamples)
+            let trends = localRecoveryAgent.calculateMovingAverages(from: hrvSamples)
             if let seven = trends.sevenDay {
                 sevenDayHRV = seven
             } else {
@@ -213,7 +215,7 @@ final class SandboxStore {
             log("⚠️ RHR fetch error: \(error.localizedDescription). Using baseline: 60.0 bpm.")
         }
         
-        let trimp = loadAgent.calculateTRIMP(
+        let trimp = localLoadAgent.calculateTRIMP(
             durationInMinutes: durationMin,
             avgHeartRate: avgHR,
             maxHeartRate: maxHR,
@@ -244,7 +246,7 @@ final class SandboxStore {
             let start = CFAbsoluteTimeGetCurrent()
             let workout: CustomWorkoutComposition
             
-            if selectedProvider == .mock || useSimulatedMetrics {
+            if selectedLLMProvider == .mock || useSimulatedMetrics {
                 log("Using simulated metrics for the sandbox execution.")
                 log("Parameters simulated: HRV 7d=\(String(format: "%.1f", simulatedSevenDayHRV)) | 30d=\(String(format: "%.1f", simulatedThirtyDayHRV)) | TRIMP=\(String(format: "%.1f", simulatedTrimp))")
                 

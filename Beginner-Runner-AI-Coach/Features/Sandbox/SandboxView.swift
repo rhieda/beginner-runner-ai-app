@@ -15,7 +15,7 @@ struct SandboxView: View {
             }
             
             Section("AI Orchestrator") {
-                Picker("LLM Provider", selection: $store.selectedProvider) {
+                Picker("LLM Provider", selection: $store.selectedLLMProvider) {
                     ForEach(LLMProviderType.allCases) { type in
                         Text(type.rawValue).tag(type)
                     }
@@ -40,7 +40,7 @@ struct SandboxView: View {
             
             Section("Simulated Biometrics (Dev Tools)") {
                 Toggle("Use Simulated Data", isOn: $store.useSimulatedMetrics)
-                    .disabled(store.selectedProvider == .mock)
+                    .disabled(store.selectedLLMProvider == .mock)
                 
                 VStack(alignment: .leading, spacing: 4) {
                     HStack {

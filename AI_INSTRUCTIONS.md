@@ -40,6 +40,7 @@ Este projeto utiliza especificações como **Única Fonte de Verdade**.
 ## 4. Testes e Validação
 - Toda regra de negócio em `Domain` ou lógica de estado em `Store` deve ter testes unitários em `Beginner-Runner-AI-CoachTests`.
 - Use o padrão **Given-When-Then** para descrever os casos de teste, baseando-se diretamente nos critérios de aceite da Spec.
+- Testes unitários devem ser rigorosos e devem atingir uma cobertura acima de 85%.
 
 ---
 *Ao iniciar uma tarefa, confirme que você leu este arquivo e o `architecture-sample.md`.*

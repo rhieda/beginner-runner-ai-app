@@ -27,23 +27,8 @@ struct BeginnerRunnerAICoachApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .task {
-                    try? await start()
-                }
         }
         .modelContainer(sharedModelContainer)
-    }
-
-    func start() async throws {
-        let datasource = HKHealthStore()
-        let fetcher = StepsDataProvider(healthStore: datasource)
-        let data = try await fetcher
-            .requestAuthorization()
-            .requestData(
-                from: Date.distantPast,
-                to: .now
-            )
-        dump(data)
     }
 }
 
