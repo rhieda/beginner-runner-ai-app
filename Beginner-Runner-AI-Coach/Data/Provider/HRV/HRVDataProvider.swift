@@ -83,6 +83,7 @@ final actor HRVDataProvider: HealthKitDataRequestable, HealthKitTimeSeriesReques
                             endDate: statistics.endDate,
                             unitString: "ms"
                         )
+                        dump(sample)
                         samples.append(sample)
                     }
                 }

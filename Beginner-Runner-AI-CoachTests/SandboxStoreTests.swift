@@ -5,7 +5,7 @@ final class SandboxStoreTests: XCTestCase {
     
     func testMockProviderSelected() async {
         let store = SandboxStore()
-        store.selectedProvider = .mock
+        store.selectedLLMProvider = .mock
         store.clearLogs()
         
         await store.testAIAgents()
@@ -16,7 +16,7 @@ final class SandboxStoreTests: XCTestCase {
     
     func testRealProviderSelected() async {
         let store = SandboxStore()
-        store.selectedProvider = .gpt4o
+        store.selectedLLMProvider = .gpt4o
         store.clearLogs()
         
         await store.testAIAgents()
