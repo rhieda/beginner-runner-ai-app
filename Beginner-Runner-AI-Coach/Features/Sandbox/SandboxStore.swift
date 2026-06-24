@@ -9,7 +9,7 @@ final class SandboxStore {
     
     var selectedLLMProvider: LLMProviderType = .mock {
         didSet {
-            if selectedProvider == .mock {
+            if selectedLLMProvider == .mock {
                 useSimulatedMetrics = true
             }
         }
