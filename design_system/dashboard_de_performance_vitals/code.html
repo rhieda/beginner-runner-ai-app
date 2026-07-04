@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="dark" lang="pt-BR" style=""><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg><head>
+<!DOCTYPE html><html class="dark" lang="pt-BR" style=""><head></head><body class="flex flex-col min-h-screen"><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
 <title>VITALS - Mobile Dashboard</title>
@@ -142,8 +142,8 @@
             overscroll-behavior-y: none;
         }
     </style>
-</head>
-<body class="flex flex-col min-h-screen">
+
+
 <!-- TopAppBar -->
 <header class="fixed top-0 w-full z-50 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-container-padding h-16 w-full bg-surface-glass">
 <div class="flex items-center gap-3">
@@ -186,28 +186,28 @@
 <!-- Secondary Metrics Grid (Bento Style) -->
 <section class="grid grid-cols-2 gap-grid-gutter">
 <!-- HRV Card -->
-<div class="glass-card rounded-lg p-4 flex flex-col justify-between">
-<div class="flex justify-between items-start mb-4">
+<div class="glass-card rounded-lg p-4 flex flex-col space-y-stack-gap">
+<div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-neon-green" style="font-variation-settings: 'FILL' 1;">favorite</span>
-<span class="font-label-caps text-[10px] text-on-surface-variant">VAR. CARDÍACA</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant text-center">VAR. CARDÍACA</span>
 </div>
-<div class="flex flex-col">
+<div class="flex flex-col items-center">
 <span class="font-display-metrics text-headline-lg text-primary">74<span class="text-body-sm font-normal ml-1">ms</span></span>
-<div class="flex items-center gap-1 mt-1">
+<div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-neon-green text-sm">trending_up</span>
 <span class="text-[10px] font-bold text-neon-green">+12% vs ONTEM</span>
 </div>
 </div>
 </div>
 <!-- RHR Card -->
-<div class="glass-card rounded-lg p-4 flex flex-col justify-between">
-<div class="flex justify-between items-start mb-4">
+<div class="glass-card rounded-lg p-4 flex flex-col space-y-stack-gap">
+<div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-data-cyan" style="font-variation-settings: 'FILL' 1;">pulse_alert</span>
 <span class="font-label-caps text-[10px] text-on-surface-variant">FREQUÊNCIA REPOUSO</span>
 </div>
-<div class="flex flex-col">
+<div class="flex flex-col items-center">
 <span class="font-display-metrics text-headline-lg text-primary">52<span class="text-body-sm font-normal ml-1">bpm</span></span>
-<div class="flex items-center gap-1 mt-1">
+<div class="flex items-center gap-1">
 <span class="material-symbols-outlined text-on-surface-variant text-sm">remove</span>
 <span class="text-[10px] font-bold text-on-surface-variant">ESTÁVEL</span>
 </div>
@@ -282,6 +282,8 @@
             });
         });
     </script>
+
+
 
 
 </body></html>
