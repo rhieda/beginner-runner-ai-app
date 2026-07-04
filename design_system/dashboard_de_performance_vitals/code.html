@@ -1,0 +1,287 @@
+<!DOCTYPE html><html class="dark" lang="pt-BR" style=""><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
+<title>VITALS - Mobile Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;display=swap" rel="stylesheet">
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "surface-dim": "#131315",
+                "surface-container-lowest": "#0e0e10",
+                "surface-container-highest": "#353437",
+                "on-surface-variant": "#c0caad",
+                "surface-container-low": "#1b1b1d",
+                "surface-container": "#1f1f21",
+                "on-secondary": "#690006",
+                "on-primary-container": "#457000",
+                "surface-glass": "rgba(28, 28, 30, 0.7)",
+                "inverse-primary": "#416900",
+                "electric-lime": "#D4FF00",
+                "surface-variant": "#353437",
+                "primary": "#ffffff",
+                "error": "#ffb4ab",
+                "surface-bright": "#39393b",
+                "on-primary-fixed-variant": "#304f00",
+                "secondary-container": "#d30017",
+                "on-surface": "#e5e1e4",
+                "secondary-fixed": "#ffdad6",
+                "on-primary": "#203700",
+                "surface-tint": "#8ddc00",
+                "primary-fixed": "#a1fb00",
+                "surface": "#131315",
+                "primary-fixed-dim": "#8ddc00",
+                "on-error": "#690005",
+                "on-tertiary-container": "#006f77",
+                "on-primary-fixed": "#102000",
+                "tertiary-fixed-dim": "#00dbe9",
+                "surface-container-high": "#2a2a2c",
+                "primary-container": "#a1fb00",
+                "secondary-fixed-dim": "#ffb4ab",
+                "secondary": "#ffb4ab",
+                "neon-green": "#A4FF00",
+                "on-tertiary-fixed-variant": "#004f54",
+                "on-secondary-container": "#ffe2de",
+                "inverse-on-surface": "#303032",
+                "data-blue": "#7DF4FF",
+                "on-secondary-fixed-variant": "#93000c",
+                "on-tertiary-fixed": "#002022",
+                "on-background": "#e5e1e4",
+                "tertiary-fixed": "#7df4ff",
+                "on-error-container": "#ffdad6",
+                "outline-variant": "#414a34",
+                "data-cyan": "#00DBE9",
+                "tertiary-container": "#7df4ff",
+                "background": "#131315",
+                "on-secondary-fixed": "#410002",
+                "tertiary": "#ffffff",
+                "error-container": "#93000a",
+                "on-tertiary": "#00363a",
+                "outline": "#8a947a",
+                "inverse-surface": "#e5e1e4"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "stack-gap": "12px",
+                "unit": "4px",
+                "grid-gutter": "16px",
+                "section-margin": "32px",
+                "container-padding": "20px"
+            },
+            "fontFamily": {
+                "data-tabular": ["JetBrains Mono"],
+                "headline-lg-mobile": ["Inter"],
+                "body-sm": ["Inter"],
+                "body-lg": ["Inter"],
+                "label-caps": ["Inter"],
+                "display-metrics": ["JetBrains Mono"],
+                "headline-md": ["Inter"],
+                "headline-lg": ["Inter"]
+            },
+            "fontSize": {
+                "data-tabular": ["16px", {"lineHeight": "20px", "fontWeight": "500"}],
+                "headline-lg-mobile": ["28px", {"lineHeight": "32px", "fontWeight": "800"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                "display-metrics": ["48px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "28px", "fontWeight": "700"}],
+                "headline-lg": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "800"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #131315;
+            color: #e5e1e4;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        .glass-card {
+            background: rgba(28, 28, 30, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .neon-glow {
+            filter: drop-shadow(0 0 8px rgba(164, 255, 0, 0.4));
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .ring-progress {
+            transition: stroke-dashoffset 1s ease-out;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        .pill-glow:active {
+            transform: scale(0.96);
+            box-shadow: 0 0 20px rgba(164, 255, 0, 0.2);
+        }
+
+        /* Prevent scroll bounce for a native app feel */
+        html, body {
+            height: 100%;
+            overscroll-behavior-y: none;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 backdrop-blur-xl border-b border-white/5 flex justify-between items-center px-container-padding h-16 w-full bg-surface-glass">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-neon-green/20">
+<img class="w-full h-full object-cover" data-alt="A professional athletic headshot of a focused individual, low-key dramatic lighting with neon green rim light highlights, cyberpunk aesthetic, high resolution photography with shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKEBgC2uqjAV7n3W3oQe6PGFv4lXy8-RZxyotlS239QHSePgb0EJ0H_7nzQK9516rNsnoYcZ8c2udziWdqw9sfUul8NbiLB-YLAjh3whDVdGIlu8iC2x-7rq6oClDN6Iwv9aiNyLPnw2c-e4aTN7qHxEjJrMWX_jn0GlqigdtUCWKKGoUsJI0hanjUclGRkkkUZed8hNaNslI3c8gkaX58vTiIl7GVq1Q1fByVcW59AzaXsqkuKD8">
+</div>
+<h1 class="font-headline-md text-headline-md font-extrabold text-neon-green tracking-tighter">VITALS</h1>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-200">
+            settings
+        </button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 pt-24 px-container-padding space-y-section-margin pb-40">
+<!-- Hero Section: Readiness Ring -->
+<section class="flex flex-col items-center justify-center py-4">
+<div class="relative w-64 h-64 flex items-center justify-center">
+<!-- Background Glow -->
+<div class="absolute inset-0 bg-neon-green/5 rounded-full blur-3xl"></div>
+<!-- Circular Metric -->
+<svg class="w-full h-full" viewBox="0 0 100 100">
+<!-- Background Track -->
+<circle class="text-surface-container-highest/20" cx="50" cy="50" fill="transparent" r="44" stroke="currentColor" stroke-width="6"></circle>
+<!-- Progress Bar -->
+<circle class="ring-progress neon-glow" cx="50" cy="50" fill="transparent" r="44" stroke="url(#neonGradient)" stroke-dasharray="276.46" stroke-dashoffset="38.7" stroke-linecap="round" stroke-width="8" style="stroke-dashoffset: 38.7044;"></circle>
+<defs>
+<linearGradient id="neonGradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#A4FF00"></stop>
+<stop offset="100%" stop-color="#D4FF00"></stop>
+</linearGradient>
+</defs>
+</svg>
+<!-- Inner Labels -->
+<div class="absolute flex flex-col items-center text-center">
+<span class="font-display-metrics text-display-metrics text-primary neon-glow">86</span>
+<span class="font-label-caps text-label-caps text-neon-green mt-1">PRONTIDÃO - ÓTIMA</span>
+</div>
+</div>
+</section>
+<!-- Secondary Metrics Grid (Bento Style) -->
+<section class="grid grid-cols-2 gap-grid-gutter">
+<!-- HRV Card -->
+<div class="glass-card rounded-lg p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-neon-green" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">VAR. CARDÍACA</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display-metrics text-headline-lg text-primary">74<span class="text-body-sm font-normal ml-1">ms</span></span>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-neon-green text-sm">trending_up</span>
+<span class="text-[10px] font-bold text-neon-green">+12% vs ONTEM</span>
+</div>
+</div>
+</div>
+<!-- RHR Card -->
+<div class="glass-card rounded-lg p-4 flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-data-cyan" style="font-variation-settings: 'FILL' 1;">pulse_alert</span>
+<span class="font-label-caps text-[10px] text-on-surface-variant">FREQUÊNCIA REPOUSO</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display-metrics text-headline-lg text-primary">52<span class="text-body-sm font-normal ml-1">bpm</span></span>
+<div class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-on-surface-variant text-sm">remove</span>
+<span class="text-[10px] font-bold text-on-surface-variant">ESTÁVEL</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Status Section -->
+<section class="space-y-4">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant px-1 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-neon-green animate-pulse"></span>
+                ESTADO DO USUÁRIO
+            </h3>
+<div class="space-y-stack-gap">
+<!-- Forma Física -->
+<div class="glass-card rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-neon-green">fitness_center</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-on-surface-variant text-[10px]">FORMA FÍSICA</span>
+<span class="font-headline-md text-body-lg font-bold text-primary">Em Forma</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-neon-green">trending_up</span>
+</div>
+<!-- Estado -->
+<div class="glass-card rounded-lg p-4 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-data-cyan">bedtime</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-caps text-on-surface-variant text-[10px]">ESTADO ATUAL</span>
+<span class="font-headline-md text-body-lg font-bold text-primary">Descansado</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-data-cyan">check_circle</span>
+</div>
+</div>
+</section>
+<!-- Primary Action Button -->
+<section class="pt-4 fixed bottom-0 left-0 w-full p-4 bg-surface-dim/80 backdrop-blur-md z-40 pb-8">
+<button class="w-full h-16 bg-primary-fixed rounded-full pill-glow transition-all flex items-center justify-center gap-3 active:scale-95 shadow-[0_0_25px_rgba(164,255,0,0.25)]">
+<span class="material-symbols-outlined text-on-primary-fixed font-bold">bolt</span>
+<span class="text-on-primary-fixed font-bold text-body-lg tracking-wide">Gerar Treino de Corrida</span>
+</button>
+</section>
+</main>
+<!-- BottomNavBar -->
+
+<script>
+        // Micro-interaction for the ring progress
+        document.addEventListener('DOMContentLoaded', () => {
+            const ring = document.querySelector('.ring-progress');
+            if (ring) {
+                // Animate to 86% - total dasharray is approx 276
+                const percent = 86;
+                const circumference = 2 * Math.PI * 44;
+                const offset = circumference - (percent / 100 * circumference);
+                ring.style.strokeDashoffset = offset;
+            }
+
+            // Simple parallax effect on cards on scroll
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const cards = document.querySelectorAll('.glass-card');
+                cards.forEach((card, index) => {
+                    const speed = 0.05 + (index * 0.01);
+                    card.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+            });
+        });
+    </script>
+
+
+</body></html>
