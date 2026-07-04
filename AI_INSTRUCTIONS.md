@@ -41,6 +41,8 @@ Este projeto utiliza especificações como **Única Fonte de Verdade**.
 - Toda regra de negócio em `Domain` ou lógica de estado em `Store` deve ter testes unitários em `Beginner-Runner-AI-CoachTests`.
 - Use o padrão **Given-When-Then** para descrever os casos de teste, baseando-se diretamente nos critérios de aceite da Spec.
 - Testes unitários devem ser rigorosos e devem atingir uma cobertura acima de 85%.
+- Toda implementação deve ser testada unitariamente.
+- Siga rigorosamente as instruções de arquitetura e design patterns, como o Spec-Driven Design (SDD) e a arquitetura de Clean Architecture.
 
 ---
 *Ao iniciar uma tarefa, confirme que você leu este arquivo e o `architecture-sample.md`.*

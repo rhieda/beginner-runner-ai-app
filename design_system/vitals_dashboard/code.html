@@ -1,0 +1,321 @@
+<!DOCTYPE html><html class="dark" lang="en"><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Vitals - Performance Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#d30017",
+                    "tertiary-fixed": "#7df4ff",
+                    "on-background": "#e4e2e4",
+                    "on-primary": "#203700",
+                    "on-tertiary": "#00363a",
+                    "surface-container-lowest": "#0e0e10",
+                    "surface-container": "#1f1f21",
+                    "primary": "#ffffff",
+                    "outline": "#8a947a",
+                    "error-container": "#93000a",
+                    "tertiary-container": "#7df4ff",
+                    "on-tertiary-fixed": "#002022",
+                    "on-surface": "#e4e2e4",
+                    "inverse-primary": "#416900",
+                    "on-primary-fixed-variant": "#304f00",
+                    "tertiary": "#ffffff",
+                    "surface-variant": "#353437",
+                    "primary-fixed-dim": "#8ddc00",
+                    "secondary-fixed-dim": "#ffb4ab",
+                    "tertiary-fixed-dim": "#00dbe9",
+                    "surface-container-low": "#1b1b1d",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "inverse-surface": "#e4e2e4",
+                    "on-primary-fixed": "#102000",
+                    "inverse-on-surface": "#303032",
+                    "primary-fixed": "#a1fb00",
+                    "secondary-fixed": "#ffdad6",
+                    "on-tertiary-container": "#006f77",
+                    "on-secondary-fixed-variant": "#93000c",
+                    "outline-variant": "#414a34",
+                    "background": "#131315",
+                    "on-secondary-container": "#ffe2de",
+                    "on-primary-container": "#457000",
+                    "surface-container-high": "#2a2a2c",
+                    "surface-container-highest": "#353437",
+                    "on-secondary-fixed": "#410002",
+                    "on-error": "#690005",
+                    "primary-container": "#a1fb00",
+                    "surface-bright": "#39393b",
+                    "on-secondary": "#690006",
+                    "surface-tint": "#8ddc00",
+                    "error": "#ffb4ab",
+                    "surface": "#131315",
+                    "on-surface-variant": "#c0caad",
+                    "secondary": "#ffb4ab",
+                    "surface-dim": "#131315",
+                    "on-error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "stack-gap": "12px",
+                    "unit": "4px",
+                    "section-margin": "32px",
+                    "grid-gutter": "16px"
+            },
+            "fontFamily": {
+                    "data-tabular": ["JetBrains Mono"],
+                    "display-metrics": ["JetBrains Mono"],
+                    "headline-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "data-tabular": ["16px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "display-metrics": ["48px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "32px", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #e4e2e4;
+            -webkit-font-smoothing: antialiased;
+        }
+        .glass-card {
+            background: rgba(28, 28, 30, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .neon-glow-green {
+            filter: drop-shadow(0 0 8px rgba(161, 251, 0, 0.4));
+        }
+        .ring-gradient-bg {
+            background: conic-gradient(from 180deg at 50% 50%, #A4FF00 0deg, #D4FF00 360deg);
+        }
+        .chart-glow {
+            filter: drop-shadow(0 0 4px rgba(161, 251, 0, 0.6));
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="font-body-lg text-body-lg bg-black">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-surface-variant/20 flex justify-between items-center px-container-padding h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-surface-variant/30">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="A high-contrast profile portrait of an athletic individual in a dark, moody gym environment. The lighting is dramatic and low-key, highlighting technical textures of sports gear. The aesthetic is clean and professional, matching a high-end performance dashboard with deep blacks and subtle highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAknMq5aqjRTVFDLhGDun-LcsSwztbx_uuNAQTFJOEX1MqNhzunPZJrhBh5ZXdZJRHvivS7zYCnUO_y1JsTXLmPYMHsSH_XVvYyRg_SttkRQmI2VqjzxKptSMRZb8DgOeMxAHBjJEXflPwFdF9-dE4k0kTHilVyTmO9Hthe8NJHFb4gn_Z9ichi5y78zN54enzPG5O4rpcQykzYYIJMB_YtigbPBq0zWPR5Rvy7PIU1LPHW8AbArkbSShr7IrycLP6UbgYQ_6HNVMk">
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold tracking-tight text-primary">Vitals</h1>
+</div>
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</header>
+<main class="pt-24 pb-32 px-container-padding max-w-2xl mx-auto space-y-section-margin">
+<!-- Readiness Score Section -->
+<section class="flex flex-col items-center justify-center text-center">
+<div class="relative w-64 h-64 flex items-center justify-center">
+<!-- SVG Ring -->
+<svg class="absolute inset-0 w-full h-full -rotate-90 transform" viewBox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="rgba(255,255,255,0.05)" stroke-width="8"></circle>
+<circle class="neon-glow-green" cx="50" cy="50" fill="none" r="45" stroke="url(#readiness-gradient)" stroke-dasharray="283" stroke-dashoffset="40" stroke-linecap="round" stroke-width="8" style="stroke-dashoffset: 40; transition: stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1);"></circle>
+<defs>
+<linearGradient id="readiness-gradient" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#A4FF00"></stop>
+<stop offset="100%" stop-color="#D4FF00"></stop>
+</linearGradient>
+</defs>
+</svg>
+<div class="z-10 flex flex-col items-center">
+<span class="font-label-caps text-label-caps text-on-surface-variant mb-1">READINESS</span>
+<span class="font-display-metrics text-display-metrics text-primary-container">86</span>
+<span class="font-label-caps text-label-caps text-primary-fixed mt-1">OPTIMAL</span>
+</div>
+</div>
+</section>
+<!-- Primary Vitals Grid -->
+<section class="grid grid-cols-2 gap-grid-gutter">
+<!-- HRV Card -->
+<div class="glass-card rounded-lg p-5 flex flex-col justify-between h-36">
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-on-surface-variant">HRV</span>
+<span class="material-symbols-outlined text-primary-container text-lg" data-icon="monitor_heart">monitor_heart</span>
+</div>
+<div>
+<div class="flex items-baseline gap-1">
+<span class="font-display-metrics text-[32px] text-primary">74</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">ms</span>
+</div>
+<div class="flex items-center gap-1 text-[#A4FF00]">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span>
+<span class="font-label-caps text-[10px]">6% ABOVE AVG</span>
+</div>
+</div>
+</div>
+<!-- RHR Card -->
+<div class="glass-card rounded-lg p-5 flex flex-col justify-between h-36">
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-on-surface-variant">RHR</span>
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="favorite">favorite</span>
+</div>
+<div>
+<div class="flex items-baseline gap-1">
+<span class="font-display-metrics text-[32px] text-primary">52</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">bpm</span>
+</div>
+<div class="flex items-center gap-1 text-[#A4FF00]">
+<span class="material-symbols-outlined text-xs" data-icon="trending_down">trending_down</span>
+<span class="font-label-caps text-[10px]">2 BPM LOWER</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Wide Detailed Cards -->
+<section class="space-y-stack-gap">
+<!-- Recovery State -->
+<div class="glass-card rounded-lg p-6 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl" data-icon="bolt">bolt</span>
+</div>
+<div class="flex justify-between items-center mb-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></div>
+<h3 class="font-headline-md text-[18px] text-primary">Recovery State</h3>
+</div>
+<span class="font-data-tabular text-data-tabular text-primary-container">Prime</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-6 leading-relaxed">
+                    Your body is highly responsive today. Focus on intensity training or threshold efforts. Central Nervous System is fully recharged.
+                </p>
+<div class="h-1 w-full bg-surface-variant/30 rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[92%] rounded-full chart-glow"></div>
+</div>
+</div>
+<!-- Sleep Quality -->
+<div class="glass-card rounded-lg p-6">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-[18px] text-primary">Sleep Quality</h3>
+<span class="font-data-tabular text-data-tabular text-tertiary-fixed">8h 12m</span>
+</div>
+<!-- Sleep Mini Chart -->
+<div class="flex items-end justify-between h-24 gap-1 mb-6">
+<div class="w-full bg-tertiary-fixed/20 rounded-t-sm h-[40%]"></div>
+<div class="w-full bg-tertiary-fixed/20 rounded-t-sm h-[60%]"></div>
+<div class="w-full bg-tertiary-fixed/40 rounded-t-sm h-[80%]"></div>
+<div class="w-full bg-tertiary-fixed rounded-t-sm h-[100%]"></div>
+<div class="w-full bg-tertiary-fixed/80 rounded-t-sm h-[70%]"></div>
+<div class="w-full bg-tertiary-fixed/50 rounded-t-sm h-[50%]"></div>
+<div class="w-full bg-tertiary-fixed/30 rounded-t-sm h-[40%]"></div>
+<div class="w-full bg-tertiary-fixed/20 rounded-t-sm h-[30%]"></div>
+<div class="w-full bg-tertiary-fixed rounded-t-sm h-[90%]"></div>
+<div class="w-full bg-tertiary-fixed/60 rounded-t-sm h-[75%]"></div>
+</div>
+<div class="grid grid-cols-3 gap-4 border-t border-surface-variant/20 pt-4">
+<div class="text-center">
+<p class="font-label-caps text-[10px] text-on-surface-variant mb-1 uppercase">Deep</p>
+<p class="font-data-tabular text-body-sm text-primary">1h 45m</p>
+</div>
+<div class="text-center">
+<p class="font-label-caps text-[10px] text-on-surface-variant mb-1 uppercase">REM</p>
+<p class="font-data-tabular text-body-sm text-primary">2h 10m</p>
+</div>
+<div class="text-center">
+<p class="font-label-caps text-[10px] text-on-surface-variant mb-1 uppercase">Efficiency</p>
+<p class="font-data-tabular text-body-sm text-primary">94%</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Activity Bento -->
+<section class="space-y-4">
+<h2 class="font-label-caps text-label-caps text-on-surface-variant px-1 uppercase tracking-widest">Recent Activity</h2>
+<div class="glass-card rounded-lg p-4 flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" data-icon="directions_run">directions_run</span>
+</div>
+<div class="flex-1">
+<h4 class="font-headline-md text-[16px] text-primary">Interval Run</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">5.2 km • 164 avg bpm</p>
+</div>
+<div class="text-right">
+<p class="font-data-tabular text-body-sm text-primary">07:22</p>
+<p class="font-label-caps text-[10px] text-primary-container">AM</p>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-2 bg-surface/80 backdrop-blur-xl border-t border-surface-variant/20 rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-primary-fixed bg-primary-container/10 rounded-xl px-3 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-label-caps text-label-caps mt-1">Generator</span>
+</a>
+
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="show_chart">show_chart</span>
+<span class="font-label-caps text-label-caps mt-1">Trends</span>
+</a>
+</nav>
+<!-- Floating Atmosphere Interaction Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Subtle parallax/tilt effect for cards on hover (simulated for mobile/desktop)
+            const cards = document.querySelectorAll('.glass-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('touchstart', () => {
+                    card.style.transform = 'scale(0.98)';
+                    card.style.transition = 'transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                });
+                
+                card.addEventListener('touchend', () => {
+                    card.style.transform = 'scale(1)';
+                });
+            });
+
+            // Readiness ring animation simulation
+            const ring = document.querySelector('circle[stroke-dasharray="283"]');
+            if (ring) {
+                ring.style.strokeDashoffset = '283';
+                setTimeout(() => {
+                    ring.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    ring.style.strokeDashoffset = '40';
+                }, 300);
+            }
+        });
+    </script>
+
+
+</body></html>

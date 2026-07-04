@@ -1,0 +1,267 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#d30017",
+                    "tertiary-fixed": "#7df4ff",
+                    "on-background": "#e4e2e4",
+                    "on-primary": "#203700",
+                    "on-tertiary": "#00363a",
+                    "surface-container-lowest": "#0e0e10",
+                    "surface-container": "#1f1f21",
+                    "primary": "#ffffff",
+                    "outline": "#8a947a",
+                    "error-container": "#93000a",
+                    "tertiary-container": "#7df4ff",
+                    "on-tertiary-fixed": "#002022",
+                    "on-surface": "#e4e2e4",
+                    "inverse-primary": "#416900",
+                    "on-primary-fixed-variant": "#304f00",
+                    "tertiary": "#ffffff",
+                    "surface-variant": "#353437",
+                    "primary-fixed-dim": "#8ddc00",
+                    "secondary-fixed-dim": "#ffb4ab",
+                    "tertiary-fixed-dim": "#00dbe9",
+                    "surface-container-low": "#1b1b1d",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "inverse-surface": "#e4e2e4",
+                    "on-primary-fixed": "#102000",
+                    "inverse-on-surface": "#303032",
+                    "primary-fixed": "#a1fb00",
+                    "secondary-fixed": "#ffdad6",
+                    "on-tertiary-container": "#006f77",
+                    "on-secondary-fixed-variant": "#93000c",
+                    "outline-variant": "#414a34",
+                    "background": "#131315",
+                    "on-secondary-container": "#ffe2de",
+                    "on-primary-container": "#457000",
+                    "surface-container-high": "#2a2a2c",
+                    "surface-container-highest": "#353437",
+                    "on-secondary-fixed": "#410002",
+                    "on-error": "#690005",
+                    "primary-container": "#a1fb00",
+                    "surface-bright": "#39393b",
+                    "on-secondary": "#690006",
+                    "surface-tint": "#8ddc00",
+                    "error": "#ffb4ab",
+                    "surface": "#131315",
+                    "on-surface-variant": "#c0caad",
+                    "secondary": "#ffb4ab",
+                    "surface-dim": "#131315",
+                    "on-error-container": "#ffdad6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-padding": "20px",
+                    "stack-gap": "12px",
+                    "unit": "4px",
+                    "section-margin": "32px",
+                    "grid-gutter": "16px"
+            },
+            "fontFamily": {
+                    "data-tabular": ["JetBrains Mono"],
+                    "display-metrics": ["JetBrains Mono"],
+                    "headline-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-caps": ["Inter"]
+            },
+            "fontSize": {
+                    "data-tabular": ["16px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "display-metrics": ["48px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "32px", "fontWeight": "800"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { background-color: #000000; color: #e4e2e4; -webkit-font-smoothing: antialiased; }
+        .glass-card { background: rgba(28, 28, 30, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .neon-glow-primary { box-shadow: 0 0 15px rgba(161, 251, 0, 0.2); }
+        .inner-border { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05); }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #a1fb00;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(161, 251, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-surface-variant/20 flex justify-between items-center px-container-padding h-16">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold tracking-tight text-primary">Vitals</h1>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-150" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYg3NARknaYZmfMUJ4cbCTh7IBw1Yrgfbn6TReB3YdtmSjQ5MTmxV33E12b21up1r6osFlgieVhSSBSRgJLTL56PEnwQdfyXI-o9nud8Erp_AE3v0s4OZ4JM7G_8CzRgZnOER7yJbtuvHzsitBWI5EOs1KzSmmeIwNSQMZwNoIUFnrPKhEK9GYms50rkQKMgm7gbjNaqPbHOY0PMBa4f_Ry6TU_1gY5LRyD7a-RDNZxPHcBoptpF1tmCQ96PbIY74l3FquWntLx_U">
+</div>
+</div>
+</header>
+<main class="mt-20 px-container-padding flex flex-col gap-section-margin">
+<!-- Readiness Score / HRV Insight -->
+<section class="flex flex-col gap-4">
+<div class="glass-card rounded-lg p-6 flex flex-col gap-2 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary-container/10 blur-3xl -z-10"></div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-1 uppercase">Today's Readiness</p>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">High Intensity Day</h2>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-display-metrics text-display-metrics text-primary-fixed">88</span>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Optimal</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 mt-4">
+<div class="flex flex-col gap-1">
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="favorite">favorite</span> HRV
+                        </p>
+<p class="font-data-tabular text-data-tabular text-primary">74 <span class="text-[12px] opacity-60">ms</span></p>
+</div>
+<div class="flex flex-col gap-1">
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="timer">timer</span> RHR
+                        </p>
+<p class="font-data-tabular text-data-tabular text-primary">52 <span class="text-[12px] opacity-60">bpm</span></p>
+</div>
+</div>
+</div>
+</section>
+<!-- Intensity Slider -->
+<section class="flex flex-col gap-4">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-primary">Target Strain</h3>
+<span class="bg-primary-container/20 text-primary-fixed font-label-caps text-label-caps px-3 py-1 rounded-full" id="intensity-label">LEVEL 7</span>
+</div>
+<div class="glass-card rounded-lg p-6 inner-border">
+<input class="w-full h-1.5 bg-surface-container-highest rounded-full appearance-none cursor-pointer" id="intensity-slider" max="10" min="1" type="range" value="7">
+<div class="flex justify-between mt-4">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Recovery</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Peak Effort</span>
+</div>
+</div>
+</section>
+<!-- Generator UI -->
+<section class="flex flex-col gap-4">
+<div class="flex justify-between items-end">
+<h3 class="font-headline-md text-headline-md text-primary">Run Generator</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">45 Mins • 480 kCal Est.</p>
+</div>
+<!-- Exercise List Preview (Asymmetric Layout) -->
+<div class="flex flex-col gap-stack-gap"><div class="grid grid-cols-12 gap-3">
+  <div class="col-span-8 glass-card rounded-lg p-4 flex justify-between items-center border-l-4 border-primary-container">
+    <div>
+      <p class="font-label-caps text-label-caps text-primary-fixed mb-1">WARMUP</p>
+      <p class="font-body-lg text-body-lg text-primary">Light Jog</p>
+    </div>
+    <div class="text-right">
+      <p class="font-data-tabular text-data-tabular text-primary">10 Mins</p>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">Zone 2</p>
+    </div>
+  </div>
+  <div class="col-span-4 glass-card rounded-lg flex items-center justify-center p-2">
+    <span class="material-symbols-outlined text-4xl opacity-50 text-primary-fixed" data-icon="directions_run">directions_run</span>
+  </div>
+</div>
+<div class="grid grid-cols-12 gap-3">
+  <div class="col-span-4 glass-card rounded-lg flex items-center justify-center p-2">
+    <span class="material-symbols-outlined text-4xl opacity-50 text-tertiary-fixed" data-icon="timer">timer</span>
+  </div>
+  <div class="col-span-8 glass-card rounded-lg p-4 flex justify-between items-center border-l-4 border-tertiary-container">
+    <div>
+      <p class="font-label-caps text-label-caps text-tertiary-fixed mb-1">INTERVALS</p>
+      <p class="font-body-lg text-body-lg text-primary">400m Repeats</p>
+    </div>
+    <div class="text-right">
+      <p class="font-data-tabular text-data-tabular text-primary">8 x 400m</p>
+      <p class="font-body-sm text-body-sm text-on-surface-variant">90s Rest</p>
+    </div>
+  </div>
+</div>
+<div class="glass-card rounded-lg p-4 flex justify-between items-center border-l-4 border-secondary-container">
+  <div class="flex items-center gap-4">
+    <div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center">
+      <span class="material-symbols-outlined text-secondary text-[20px]" data-icon="speed" data-weight="fill">speed</span>
+    </div>
+    <div>
+      <p class="font-label-caps text-label-caps text-secondary-fixed-dim mb-1">COOLDOWN</p>
+      <p class="font-body-lg text-body-lg text-primary">Slow Walk</p>
+    </div>
+  </div>
+  <div class="text-right">
+    <p class="font-data-tabular text-data-tabular text-primary">5 Mins</p>
+    <p class="font-body-sm text-body-sm text-on-surface-variant">Heart Rate Recovery</p>
+  </div>
+</div></div>
+<!-- Generate Button -->
+<button class="mt-4 w-full bg-primary-container text-on-primary-container font-headline-md text-headline-md py-5 rounded-full flex items-center justify-center gap-2 active:scale-[0.98] transition-transform neon-glow-primary">
+<span class="material-symbols-outlined" data-icon="bolt" data-weight="fill" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                Generate Session
+            </button>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-t border-surface-variant/20 flex justify-around items-center px-4 pb-8 pt-2">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary-fixed bg-primary-container/10 rounded-xl px-3 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="font-label-caps text-label-caps">Generator</span>
+</a>
+
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="show_chart">show_chart</span>
+<span class="font-label-caps text-label-caps">Trends</span>
+</a>
+</nav>
+<script>
+        const slider = document.getElementById('intensity-slider');
+        const label = document.getElementById('intensity-label');
+        
+        slider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            label.textContent = `LEVEL ${val}`;
+            
+            // Dynamic color shift based on intensity
+            if(val <= 3) {
+                label.className = 'bg-tertiary-container/20 text-tertiary-fixed font-label-caps text-label-caps px-3 py-1 rounded-full';
+            } else if (val <= 7) {
+                label.className = 'bg-primary-container/20 text-primary-fixed font-label-caps text-label-caps px-3 py-1 rounded-full';
+            } else {
+                label.className = 'bg-secondary-container/20 text-secondary-fixed-dim font-label-caps text-label-caps px-3 py-1 rounded-full';
+            }
+        });
+    </script>
+
+
+</body></html>
