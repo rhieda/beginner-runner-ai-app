@@ -1,10 +1,8 @@
 import Foundation
-import SwiftData
 
 /// Base Stored Sample Data
-@Model
 class HealthDataBaseLocalSample: Identifiable {
-    @Attribute(.unique) var id: UUID
+    var id: UUID
     var value: Double
     var beginDate: Date
     var endDate: Date

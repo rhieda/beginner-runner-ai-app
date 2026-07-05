@@ -6,7 +6,7 @@ final class AgentTests: XCTestCase {
     // MARK: - RecoveryAgentService Tests
     
     func testCalculateMovingAverages() {
-        let service = RecoveryAgentService()
+        let service = RecoveryCalculationService()
         
         let now = Date()
         let calendar = Calendar.current
@@ -31,7 +31,7 @@ final class AgentTests: XCTestCase {
     // MARK: - LoadAgentService Tests
     
     func testCalculateTRIMP_Male() {
-        let service = LoadAgentService()
+        let service = LoadTrimpService()
         
         // Given: 60 min, avg HR 150, max HR 190, resting HR 60, male
         // deltaHR = (150 - 60) / (190 - 60) = 90 / 130 = 0.6923

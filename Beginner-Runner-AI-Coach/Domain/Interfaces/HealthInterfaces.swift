@@ -66,8 +66,3 @@ protocol WorkoutDataRequestable: Actor {
     ) async throws -> [WorkoutSample]
 }
 
-/// Allows user to store data
-protocol HealthKitDataStorable: Actor {
-    associatedtype T
-    func store(input: T) throws
-}

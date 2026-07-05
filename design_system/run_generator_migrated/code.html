@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Run Generator - Vitals Kinetic</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@500;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .neon-glow-green {
+            filter: drop-shadow(0 0 8px rgba(164, 255, 0, 0.4));
+        }
+        .neon-glow-cyan {
+            filter: drop-shadow(0 0 8px rgba(0, 219, 233, 0.4));
+        }
+        .neon-glow-red {
+            filter: drop-shadow(0 0 8px rgba(211, 0, 23, 0.4));
+        }
+        body {
+            background-color: #000000;
+            color: #e5e1e4;
+            overflow-x: hidden;
+        }
+        /* Custom range slider styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #A4FF00;
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 0 10px rgba(164, 255, 0, 0.8);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "secondary": "#ffb4ab",
+                      "surface": "#131315",
+                      "tertiary-fixed": "#7df4ff",
+                      "surface-container-low": "#1b1b1d",
+                      "primary-fixed": "#a1fb00",
+                      "on-primary-fixed": "#102000",
+                      "on-tertiary": "#00363a",
+                      "error": "#ffb4ab",
+                      "data-cyan": "#00DBE9",
+                      "on-surface-variant": "#c0caad",
+                      "inverse-surface": "#e5e1e4",
+                      "surface-variant": "#353437",
+                      "tertiary-container": "#7df4ff",
+                      "surface-container-lowest": "#0e0e10",
+                      "electric-lime": "#D4FF00",
+                      "secondary-container": "#d30017",
+                      "on-secondary-fixed-variant": "#93000c",
+                      "surface-bright": "#39393b",
+                      "on-tertiary-fixed-variant": "#004f54",
+                      "primary": "#ffffff",
+                      "on-error": "#690005",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-high": "#2a2a2c",
+                      "secondary-fixed": "#ffdad6",
+                      "data-blue": "#7DF4FF",
+                      "primary-fixed-dim": "#8ddc00",
+                      "on-primary": "#203700",
+                      "on-primary-container": "#457000",
+                      "outline-variant": "#414a34",
+                      "on-tertiary-container": "#006f77",
+                      "outline": "#8a947a",
+                      "neon-green": "#A4FF00",
+                      "on-surface": "#e5e1e4",
+                      "on-secondary-container": "#ffe2de",
+                      "tertiary": "#ffffff",
+                      "surface-glass": "rgba(28, 28, 30, 0.7)",
+                      "surface-container-highest": "#353437",
+                      "on-tertiary-fixed": "#002022",
+                      "primary-container": "#a1fb00",
+                      "surface-dim": "#131315",
+                      "on-background": "#e5e1e4",
+                      "on-primary-fixed-variant": "#304f00",
+                      "tertiary-fixed-dim": "#00dbe9",
+                      "on-secondary-fixed": "#410002",
+                      "surface-tint": "#8ddc00",
+                      "on-secondary": "#690006",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#303032",
+                      "inverse-primary": "#416900",
+                      "background": "#131315",
+                      "surface-container": "#1f1f21",
+                      "secondary-fixed-dim": "#ffb4ab"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "grid-gutter": "16px",
+                      "section-margin": "32px",
+                      "unit": "4px",
+                      "stack-gap": "12px",
+                      "container-padding": "20px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Inter"],
+                      "data-tabular": ["JetBrains Mono"],
+                      "label-caps": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "display-metrics": ["JetBrains Mono"],
+                      "body-lg": ["Inter"],
+                      "body-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", {"lineHeight": "28px", "fontWeight": "700"}],
+                      "data-tabular": ["16px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "32px", "fontWeight": "800"}],
+                      "headline-lg": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                      "display-metrics": ["48px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-sm text-body-sm pb-32">
+<!-- Top AppBar -->
+<header class="bg-surface-glass dark:bg-surface-glass backdrop-blur-xl border-b border-white/10 shadow-sm shadow-neon-green/10 docked full-width top-0 sticky flex justify-between items-center w-full px-container h-16 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full border border-neon-green/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A futuristic close-up portrait of a professional athlete with subtle biometric data overlays on their face, glowing green light reflecting on their skin, dark atmospheric background, high-performance aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAstl0eCRkmMTeSiPfviKWU1-USNUU-K69bIONyeuWDVjU2RqF4po4nESc5akuSUZDuZ6o2-fGkhkGWYVHSvDc3rhAwrMKwHygrt3MEP83Yeyh0S6sQZLEa9iFvP3fw7Plwg0mM9LByy_a-UfO7_CwWVtMvZdDtvqWSFhfTXrXbWacG1xgB3Iuz1xoVvRq6ovRr2oNBGsPbC00YXWe-m6_0EA8Vb-h2EESIyHQ39Cg3W7BB_OKnm9b_"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-black text-neon-green tracking-tighter">VITALS KINETIC</h1>
+</div>
+<button class="text-primary dark:text-primary hover:opacity-80 transition-opacity active:scale-95 duration-200 transition-transform">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<main class="px-container pt-8 space-y-section-margin">
+<!-- Readiness Summary Section -->
+<section class="space-y-4">
+<div class="flex justify-between items-end">
+<div class="space-y-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">System Status</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Run Generator</h2>
+</div>
+<div class="text-right">
+<span class="font-label-caps text-label-caps text-neon-green uppercase">Readiness</span>
+<div class="font-display-metrics text-display-metrics text-neon-green neon-glow-green">88</div>
+</div>
+</div>
+<div class="glass-card rounded-lg p-5 flex items-center justify-between border-l-4 border-l-neon-green">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary">High Intensity Day</h3>
+<p class="text-on-surface-variant">Neuromuscular recovery at 94%. Optimal for VO2 max work.</p>
+</div>
+<div class="w-12 h-12 bg-neon-green/10 rounded-full flex items-center justify-center text-neon-green">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+</div>
+</section>
+<!-- Recovery/Effort Slider Section -->
+<section class="space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase">Target Effort Level</h3>
+<span class="font-data-tabular text-data-tabular text-neon-green" id="effort-value">8.5 / 10</span>
+</div>
+<div class="glass-card rounded-lg p-6 space-y-6">
+<input class="w-full h-2 rounded-lg cursor-pointer accent-neon-green" id="effort-slider" max="10" min="1" step="0.5" type="range" value="8.5"/>
+<div class="flex justify-between text-[10px] font-label-caps text-on-surface-variant/50 uppercase">
+<span>Recovery</span>
+<span>Threshold</span>
+<span>Max Effort</span>
+</div>
+</div>
+</section>
+<!-- Session Blocks Section -->
+<section class="space-y-4">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant uppercase">Engineered Sequence</h3>
+<div class="space-y-grid-gutter">
+<!-- Warmup Block -->
+<div class="glass-card rounded-lg p-1 overflow-hidden">
+<div class="flex items-stretch h-20">
+<div class="w-3 bg-neon-green shadow-[0_0_15px_rgba(164,255,0,0.3)]"></div>
+<div class="flex-1 px-4 py-3 flex justify-between items-center">
+<div>
+<h4 class="font-headline-md text-headline-md text-primary leading-none">Warmup</h4>
+<p class="text-on-surface-variant text-body-sm mt-1">Zone 1-2 • Progressive Mobility</p>
+</div>
+<div class="text-right">
+<span class="font-display-metrics text-headline-md text-neon-green">10</span>
+<span class="text-on-surface-variant font-label-caps ml-1">MINS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Intervals Block -->
+<div class="glass-card rounded-lg p-1 overflow-hidden">
+<div class="flex items-stretch h-20">
+<div class="w-3 bg-data-cyan shadow-[0_0_15px_rgba(0,219,233,0.3)]"></div>
+<div class="flex-1 px-4 py-3 flex justify-between items-center">
+<div>
+<h4 class="font-headline-md text-headline-md text-primary leading-none">Intervals</h4>
+<p class="text-on-surface-variant text-body-sm mt-1">8 x 400m @ Race Pace</p>
+</div>
+<div class="text-right">
+<span class="font-display-metrics text-headline-md text-data-cyan">32</span>
+<span class="text-on-surface-variant font-label-caps ml-1">MINS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Cooldown Block -->
+<div class="glass-card rounded-lg p-1 overflow-hidden">
+<div class="flex items-stretch h-20">
+<div class="w-3 bg-secondary-container shadow-[0_0_15px_rgba(211,0,23,0.3)]"></div>
+<div class="flex-1 px-4 py-3 flex justify-between items-center">
+<div>
+<h4 class="font-headline-md text-headline-md text-primary leading-none">Cooldown</h4>
+<p class="text-on-surface-variant text-body-sm mt-1">Static Stretching • HR Reset</p>
+</div>
+<div class="text-right">
+<span class="font-display-metrics text-headline-md text-secondary-container">5</span>
+<span class="text-on-surface-variant font-label-caps ml-1">MINS</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Action -->
+<section class="pt-4 pb-12">
+<button class="w-full bg-neon-green text-on-primary-fixed py-5 rounded-lg font-headline-md text-headline-md uppercase tracking-widest shadow-[0_0_30px_rgba(164,255,0,0.4)] active:scale-95 transition-all duration-200">
+                Generate Session
+            </button>
+<p class="text-center mt-6 text-on-surface-variant/40 font-label-caps">Syncs automatically to Vitals Kinetic Hub</p>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="bg-surface-glass backdrop-blur-xl border-t border-white/10 shadow-2xl shadow-neon-green/20 fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-2 pb-6">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-neon-green hover:opacity-100 transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/10 text-neon-green rounded-xl py-1 px-3 shadow-[0_0_15px_rgba(164,255,0,0.3)] active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-caps text-label-caps mt-1">Generator</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-neon-green hover:opacity-100 transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="font-label-caps text-label-caps mt-1">Session</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-neon-green hover:opacity-100 transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="font-label-caps text-label-caps mt-1">Trends</span>
+</a>
+</nav>
+<script>
+        const slider = document.getElementById('effort-slider');
+        const display = document.getElementById('effort-value');
+
+        slider.oninput = function() {
+            display.innerHTML = this.value + ' / 10';
+            
+            // Adjust opacity of components based on slider value for a reactive feel
+            const blocks = document.querySelectorAll('.glass-card');
+            blocks.forEach((block, index) => {
+                if(index > 0) { // skip the readiness summary
+                    const intensity = this.value / 10;
+                    block.style.transform = `scale(${0.98 + (intensity * 0.04)})`;
+                }
+            });
+        }
+    </script>
+</body></html>

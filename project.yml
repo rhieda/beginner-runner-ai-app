@@ -34,7 +34,6 @@ targets:
     dependencies:
       - sdk: HealthKit.framework
       - sdk: WorkoutKit.framework
-      - sdk: SwiftData.framework
     preBuildScripts:
       - name: SwiftLint
         script: |

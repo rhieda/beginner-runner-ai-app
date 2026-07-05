@@ -5,130 +5,349 @@ struct SandboxView: View {
     @State private var isShowingWorkoutPreview = false
     
     var body: some View {
-        List {
-            Section("HealthKit Authorization") {
-                Button {
-                    Task { await store.authorize() }
-                } label: {
-                    Label("Request Permissions", systemImage: "lock.shield")
-                }
-            }
+        ZStack {
+            // Dark canvas background
+            Theme.Colors.background
+                .ignoresSafeArea()
             
-            Section("AI Orchestrator") {
-                Picker("LLM Provider", selection: $store.selectedLLMProvider) {
-                    ForEach(LLMProviderType.allCases) { type in
-                        Text(type.rawValue).tag(type)
-                    }
-                }
-                .pickerStyle(.menu)
-
-                Button {
-                    Task { await store.testAIAgents() }
-                } label: {
-                    Label("Run Multi-Agent Pipeline", systemImage: "cpu")
-                }
-                
-                if let workout = store.generatedWorkout {
-                    Button {
-                        isShowingWorkoutPreview = true
-                    } label: {
-                        Label("Preview Generated Workout", systemImage: "eye")
-                    }
-                    .foregroundStyle(.blue)
-                }
-            }
-            
-            Section("Simulated Biometrics (Dev Tools)") {
-                Toggle("Use Simulated Data", isOn: $store.useSimulatedMetrics)
-                    .disabled(store.selectedLLMProvider == .mock)
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack {
-                        Text("Simulated TRIMP")
-                        Spacer()
-                        Text(String(format: "%.1f", store.simulatedTrimp))
-                            .foregroundStyle(.secondary)
-                            .font(.system(.body, design: .monospaced))
-                    }
-                    Slider(value: $store.simulatedTrimp, in: 0...200, step: 0.5)
-                }
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack {
-                        Text("Simulated 7d HRV")
-                        Spacer()
-                        Text(String(format: "%.0f ms", store.simulatedSevenDayHRV))
-                            .foregroundStyle(.secondary)
-                            .font(.system(.body, design: .monospaced))
-                    }
-                    Slider(value: $store.simulatedSevenDayHRV, in: 10...150, step: 1)
-                }
-                
-                VStack(alignment: .leading, spacing: 4) {
-                    HStack {
-                        Text("Simulated 30d HRV")
-                        Spacer()
-                        Text(String(format: "%.0f ms", store.simulatedThirtyDayHRV))
-                            .foregroundStyle(.secondary)
-                            .font(.system(.body, design: .monospaced))
-                    }
-                    Slider(value: $store.simulatedThirtyDayHRV, in: 10...150, step: 1)
-                }
-                
-                HStack {
-                    Text("User Goal")
-                    Spacer()
-                    TextField("Goal description", text: $store.simulatedUserGoal)
-                        .multilineTextAlignment(.trailing)
-                        .textFieldStyle(.roundedBorder)
-                }
-            }
-            
-            Section("Data Provider Tests") {
-                Button {
-                    Task { await store.testHRV() }
-                } label: {
-                    Label("Test HRV (30 days)", systemImage: "waveform.path.ecg")
-                }
-                
-                Button {
-                    Task { await store.testRHR() }
-                } label: {
-                    Label("Test RHR (7 days)", systemImage: "heart.fill")
-                }
-                
-                Button {
-                    Task { await store.testWorkouts() }
-                } label: {
-                    Label("Test Workouts & TRIMP", systemImage: "figure.run")
-                }
-            }
-            
-            Section {
-                if store.logs.isEmpty {
-                    Text("No logs yet. Tap a button above.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                } else {
-                    ForEach(store.logs, id: \.self) { log in
-                        Text(log)
-                            .font(.system(.caption, design: .monospaced))
-                    }
-                }
-            } header: {
-                HStack {
-                    Text("Logs")
-                    Spacer()
-                    if !store.logs.isEmpty {
-                        Button("Clear", role: .destructive) {
-                            store.clearLogs()
+            ScrollView {
+                VStack(spacing: Theme.Spacing.sectionMargin) {
+                    
+                    // SECTION 1: HealthKit Authorization
+                    VStack(alignment: .leading, spacing: Theme.Spacing.stackGap) {
+                        HStack(spacing: 8) {
+                            PulseIndicator(color: Theme.Colors.primaryContainer)
+                            Text("HealthKit Authorization".uppercased())
+                                .font(Theme.Typography.labelCaps)
+                                .kerning(1.2)
+                                .foregroundStyle(Theme.Colors.onSurfaceVariant)
                         }
-                        .font(.caption)
-                        .textCase(.none)
+                        .padding(.horizontal, Theme.Spacing.unit)
+                        
+                        VStack(spacing: 0) {
+                            Button {
+                                Task { await store.authorize() }
+                            } label: {
+                                HStack {
+                                    Label("Request Permissions", systemImage: "lock.shield")
+                                        .font(Theme.Typography.bodyLg)
+                                        .fontWeight(.semibold)
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .font(.system(size: 14, weight: .bold))
+                                }
+                                .padding()
+                                .foregroundStyle(Theme.Colors.primaryContainer)
+                                .contentShape(Rectangle())
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .glassCard(cornerRadius: Theme.Radius.default)
                     }
+                    
+                    // SECTION 2: AI Orchestrator
+                    VStack(alignment: .leading, spacing: Theme.Spacing.stackGap) {
+                        HStack(spacing: 8) {
+                            PulseIndicator(color: Theme.Colors.primaryContainer)
+                            Text("AI Orchestrator".uppercased())
+                                .font(Theme.Typography.labelCaps)
+                                .kerning(1.2)
+                                .foregroundStyle(Theme.Colors.onSurfaceVariant)
+                        }
+                        .padding(.horizontal, Theme.Spacing.unit)
+                        
+                        VStack(spacing: Theme.Spacing.stackGap) {
+                            HStack {
+                                Text("LLM Provider")
+                                    .font(Theme.Typography.bodyLg)
+                                    .foregroundStyle(Theme.Colors.onSurface)
+                                Spacer()
+                                Picker("LLM Provider", selection: $store.selectedLLMProvider) {
+                                    ForEach(LLMProviderType.allCases) { type in
+                                        Text(type.rawValue).tag(type)
+                                    }
+                                }
+                                .pickerStyle(.menu)
+                                .tint(Theme.Colors.primaryContainer)
+                            }
+                            .padding(.horizontal, 4)
+                            
+                            Divider()
+                                .background(Theme.Colors.borderGlass)
+                            
+                            Button {
+                                Task { await store.testAIAgents() }
+                            } label: {
+                                HStack {
+                                    Label("Run Multi-Agent Pipeline", systemImage: "cpu")
+                                        .font(Theme.Typography.bodyLg)
+                                        .fontWeight(.semibold)
+                                    Spacer()
+                                    Image(systemName: "play.fill")
+                                        .font(.system(size: 14))
+                                }
+                                .padding()
+                                .background(Theme.Colors.surfaceContainerLow)
+                                .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
+                                .foregroundStyle(Theme.Colors.primaryContainer)
+                            }
+                            .buttonStyle(.plain)
+                            
+                            if store.generatedWorkout != nil {
+                                Button {
+                                    isShowingWorkoutPreview = true
+                                } label: {
+                                    HStack {
+                                        Label("Preview Generated Workout", systemImage: "eye")
+                                            .font(Theme.Typography.bodyLg)
+                                            .fontWeight(.bold)
+                                        Spacer()
+                                        Image(systemName: "arrow.right")
+                                            .font(.system(size: 14, weight: .bold))
+                                    }
+                                    .padding()
+                                    .background(Theme.Colors.primaryContainer)
+                                    .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
+                                    .foregroundStyle(Theme.Colors.onPrimary)
+                                    .neonGlow(color: Theme.Colors.primaryContainer, radius: 4)
+                                }
+                                .buttonStyle(.plain)
+                                .transition(.scale.combined(with: .opacity))
+                            }
+                        }
+                        .padding()
+                        .glassCard(cornerRadius: Theme.Radius.default)
+                    }
+                    
+                    // SECTION 3: Simulated Biometrics (Dev Tools)
+                    VStack(alignment: .leading, spacing: Theme.Spacing.stackGap) {
+                        HStack(spacing: 8) {
+                            PulseIndicator(color: Theme.Colors.secondaryContainer)
+                            Text("Simulated Biometrics (Dev Tools)".uppercased())
+                                .font(Theme.Typography.labelCaps)
+                                .kerning(1.2)
+                                .foregroundStyle(Theme.Colors.onSurfaceVariant)
+                        }
+                        .padding(.horizontal, Theme.Spacing.unit)
+                        
+                        VStack(spacing: Theme.Spacing.stackGap * 1.5) {
+                            Toggle(isOn: $store.useSimulatedMetrics) {
+                                Text("Use Simulated Data")
+                                    .font(Theme.Typography.bodyLg)
+                                    .foregroundStyle(Theme.Colors.onSurface)
+                            }
+                            .tint(Theme.Colors.primaryContainer)
+                            .disabled(store.selectedLLMProvider == .mock)
+                            
+                            Divider()
+                                .background(Theme.Colors.borderGlass)
+                            
+                            // Simulated TRIMP Slider
+                            VStack(alignment: .leading, spacing: Theme.Spacing.unit * 2) {
+                                HStack {
+                                    Text("Simulated TRIMP")
+                                        .font(Theme.Typography.bodySm)
+                                        .foregroundStyle(Theme.Colors.onSurface)
+                                    Spacer()
+                                    Text(String(format: "%.1f", store.simulatedTrimp))
+                                        .font(Theme.Typography.dataTabular)
+                                        .foregroundStyle(Theme.Colors.primaryContainer)
+                                }
+                                Slider(value: $store.simulatedTrimp, in: 0...200, step: 0.5)
+                                    .tint(Theme.Colors.primaryContainer)
+                            }
+                            
+                            // Simulated 7d HRV Slider
+                            VStack(alignment: .leading, spacing: Theme.Spacing.unit * 2) {
+                                HStack {
+                                    Text("Simulated 7d HRV")
+                                        .font(Theme.Typography.bodySm)
+                                        .foregroundStyle(Theme.Colors.onSurface)
+                                    Spacer()
+                                    Text(String(format: "%.0f ms", store.simulatedSevenDayHRV))
+                                        .font(Theme.Typography.dataTabular)
+                                        .foregroundStyle(Theme.Colors.primaryContainer)
+                                }
+                                Slider(value: $store.simulatedSevenDayHRV, in: 10...150, step: 1)
+                                    .tint(Theme.Colors.primaryContainer)
+                            }
+                            
+                            // Simulated 30d HRV Slider
+                            VStack(alignment: .leading, spacing: Theme.Spacing.unit * 2) {
+                                HStack {
+                                    Text("Simulated 30d HRV")
+                                        .font(Theme.Typography.bodySm)
+                                        .foregroundStyle(Theme.Colors.onSurface)
+                                    Spacer()
+                                    Text(String(format: "%.0f ms", store.simulatedThirtyDayHRV))
+                                        .font(Theme.Typography.dataTabular)
+                                        .foregroundStyle(Theme.Colors.primaryContainer)
+                                }
+                                Slider(value: $store.simulatedThirtyDayHRV, in: 10...150, step: 1)
+                                    .tint(Theme.Colors.primaryContainer)
+                            }
+                            
+                            Divider()
+                                .background(Theme.Colors.borderGlass)
+                            
+                            HStack {
+                                Text("User Goal")
+                                    .font(Theme.Typography.bodySm)
+                                    .foregroundStyle(Theme.Colors.onSurface)
+                                Spacer()
+                                TextField("Goal description", text: $store.simulatedUserGoal)
+                                    .multilineTextAlignment(.trailing)
+                                    .font(Theme.Typography.bodySm)
+                                    .textFieldStyle(.plain)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 6)
+                                    .background(Theme.Colors.surfaceContainerLowest)
+                                    .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: Theme.Radius.sm)
+                                            .stroke(Theme.Colors.borderGlass, lineWidth: 1)
+                                    )
+                                    .frame(width: 180)
+                            }
+                        }
+                        .padding()
+                        .glassCard(cornerRadius: Theme.Radius.default)
+                    }
+                    
+                    // SECTION 4: Data Provider Tests
+                    VStack(alignment: .leading, spacing: Theme.Spacing.stackGap) {
+                        HStack(spacing: 8) {
+                            PulseIndicator(color: Theme.Colors.tertiaryContainer)
+                            Text("Data Provider Tests".uppercased())
+                                .font(Theme.Typography.labelCaps)
+                                .kerning(1.2)
+                                .foregroundStyle(Theme.Colors.onSurfaceVariant)
+                        }
+                        .padding(.horizontal, Theme.Spacing.unit)
+                        
+                        VStack(spacing: Theme.Spacing.stackGap) {
+                            Button {
+                                Task { await store.testHRV() }
+                            } label: {
+                                HStack {
+                                    Label("Test HRV (30 days)", systemImage: "waveform.path.ecg")
+                                        .font(Theme.Typography.bodyLg)
+                                        .fontWeight(.semibold)
+                                    Spacer()
+                                    Image(systemName: "arrow.right")
+                                        .font(.system(size: 12))
+                                }
+                                .padding()
+                                .background(Theme.Colors.surfaceContainerLow)
+                                .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
+                                .foregroundStyle(Theme.Colors.tertiaryContainer)
+                            }
+                            .buttonStyle(.plain)
+                            
+                            Button {
+                                Task { await store.testRHR() }
+                            } label: {
+                                HStack {
+                                    Label("Test RHR (7 days)", systemImage: "heart.fill")
+                                        .font(Theme.Typography.bodyLg)
+                                        .fontWeight(.semibold)
+                                    Spacer()
+                                    Image(systemName: "arrow.right")
+                                        .font(.system(size: 12))
+                                }
+                                .padding()
+                                .background(Theme.Colors.surfaceContainerLow)
+                                .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
+                                .foregroundStyle(Theme.Colors.secondary)
+                            }
+                            .buttonStyle(.plain)
+                            
+                            Button {
+                                Task { await store.testWorkouts() }
+                            } label: {
+                                HStack {
+                                    Label("Test Workouts & TRIMP", systemImage: "figure.run")
+                                        .font(Theme.Typography.bodyLg)
+                                        .fontWeight(.semibold)
+                                    Spacer()
+                                    Image(systemName: "arrow.right")
+                                        .font(.system(size: 12))
+                                }
+                                .padding()
+                                .background(Theme.Colors.surfaceContainerLow)
+                                .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
+                                .foregroundStyle(Theme.Colors.primaryContainer)
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .padding()
+                        .glassCard(cornerRadius: Theme.Radius.default)
+                    }
+                    
+                    // SECTION 5: Log Terminal
+                    VStack(spacing: Theme.Spacing.stackGap) {
+                        HStack {
+                            Text("Logs".uppercased())
+                                .font(Theme.Typography.labelCaps)
+                                .kerning(1.2)
+                                .foregroundStyle(Theme.Colors.primary)
+                            Spacer()
+                            if !store.logs.isEmpty {
+                                Button("Clear") {
+                                    store.clearLogs()
+                                }
+                                .font(Theme.Typography.labelCaps)
+                                .foregroundStyle(Theme.Colors.secondary)
+                            }
+                        }
+                        .padding(.horizontal, Theme.Spacing.unit)
+                        
+                        VStack {
+                            ScrollViewReader { proxy in
+                                ScrollView {
+                                    LazyVStack(alignment: .leading, spacing: 6) {
+                                        if store.logs.isEmpty {
+                                            Text("No logs yet. Tap a button above.")
+                                                .font(Theme.Typography.bodySm)
+                                                .foregroundStyle(Theme.Colors.onSurfaceVariant)
+                                                .italic()
+                                        } else {
+                                            ForEach(store.logs.indices, id: \.self) { index in
+                                                Text(store.logs[index])
+                                                    .font(Theme.Typography.dataTabular)
+                                                    .foregroundStyle(Theme.Colors.onSurfaceVariant)
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                    .id(index)
+                                            }
+                                        }
+                                    }
+                                    .padding(8)
+                                }
+                                .onChange(of: store.logs.count) {
+                                    if !store.logs.isEmpty {
+                                        withAnimation {
+                                            proxy.scrollTo(store.logs.count - 1, anchor: .bottom)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .frame(height: 180)
+                        .background(Theme.Colors.surfaceContainerLowest)
+                        .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: Theme.Radius.sm)
+                                .stroke(Theme.Colors.borderGlass, lineWidth: 1)
+                        )
+                    }
+                    .padding()
+                    .glassCard(cornerRadius: Theme.Radius.default)
                 }
+                .padding(.horizontal, Theme.Spacing.containerPadding)
+                .padding(.vertical, Theme.Spacing.sectionMargin)
             }
         }
+        .preferredColorScheme(.dark)
         .navigationTitle("Provider Sandbox")
         .sheet(isPresented: $isShowingWorkoutPreview) {
             if let workout = store.generatedWorkout {

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Progress Trends | VITALS KINETIC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary": "#ffb4ab",
+                    "surface": "#131315",
+                    "tertiary-fixed": "#7df4ff",
+                    "surface-container-low": "#1b1b1d",
+                    "primary-fixed": "#a1fb00",
+                    "on-primary-fixed": "#102000",
+                    "on-tertiary": "#00363a",
+                    "error": "#ffb4ab",
+                    "data-cyan": "#00DBE9",
+                    "on-surface-variant": "#c0caad",
+                    "inverse-surface": "#e5e1e4",
+                    "surface-variant": "#353437",
+                    "tertiary-container": "#7df4ff",
+                    "surface-container-lowest": "#0e0e10",
+                    "electric-lime": "#D4FF00",
+                    "secondary-container": "#d30017",
+                    "on-secondary-fixed-variant": "#93000c",
+                    "surface-bright": "#39393b",
+                    "on-tertiary-fixed-variant": "#004f54",
+                    "primary": "#ffffff",
+                    "on-error": "#690005",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-high": "#2a2a2c",
+                    "secondary-fixed": "#ffdad6",
+                    "data-blue": "#7DF4FF",
+                    "primary-fixed-dim": "#8ddc00",
+                    "on-primary": "#203700",
+                    "on-primary-container": "#457000",
+                    "outline-variant": "#414a34",
+                    "on-tertiary-container": "#006f77",
+                    "outline": "#8a947a",
+                    "neon-green": "#A4FF00",
+                    "on-surface": "#e5e1e4",
+                    "on-secondary-container": "#ffe2de",
+                    "tertiary": "#ffffff",
+                    "surface-glass": "rgba(28, 28, 30, 0.7)",
+                    "surface-container-highest": "#353437",
+                    "on-tertiary-fixed": "#002022",
+                    "primary-container": "#a1fb00",
+                    "surface-dim": "#131315",
+                    "on-background": "#e5e1e4",
+                    "on-primary-fixed-variant": "#304f00",
+                    "tertiary-fixed-dim": "#00dbe9",
+                    "on-secondary-fixed": "#410002",
+                    "surface-tint": "#8ddc00",
+                    "on-secondary": "#690006",
+                    "error-container": "#93000a",
+                    "inverse-on-surface": "#303032",
+                    "inverse-primary": "#416900",
+                    "background": "#131315",
+                    "surface-container": "#1f1f21",
+                    "secondary-fixed-dim": "#ffb4ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "grid-gutter": "16px",
+                    "section-margin": "32px",
+                    "unit": "4px",
+                    "stack-gap": "12px",
+                    "container-padding": "20px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "data-tabular": ["JetBrains Mono"],
+                    "label-caps": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "display-metrics": ["JetBrains Mono"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "data-tabular": ["16px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "32px", "fontWeight": "800"}],
+                    "headline-lg": ["32px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "800"}],
+                    "display-metrics": ["48px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            color: #e5e1e4;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .glass-card {
+            background: rgba(28, 28, 30, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1rem;
+        }
+
+        .neon-glow-text {
+            text-shadow: 0 0 10px rgba(164, 255, 0, 0.5);
+        }
+
+        .neon-glow-box {
+            box-shadow: 0 0 20px rgba(164, 255, 0, 0.15);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #A4FF00;
+            border-radius: 2px;
+        }
+
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .animate-pulse-soft {
+            animation: pulse-soft 2s ease-in-out infinite;
+        }
+
+        /* Material Symbols Fill State */
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen font-body-sm text-body-sm pb-24">
+<!-- Top AppBar Component -->
+<header class="bg-surface-glass backdrop-blur-xl border-b border-white/10 docked full-width top-0 sticky flex justify-between items-center w-full px-5 h-16 z-50 shadow-sm shadow-neon-green/10">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-neon-green/30">
+<img class="w-full h-full object-cover" data-alt="A futuristic high-resolution profile headshot of a professional athlete with cybernetic detailing, illuminated by a sharp neon green rim light against a deep obsidian black background. The aesthetic is clean, high-performance, and minimalist, matching a technical telemetry suite interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNMlWieE9XGn6FmAOs88P_vb1B1iToBzo--1MoFMrMSLhoiZgOAOLRKVuHmVvUJy_eJbbipnVk3OH1p8TXGZyVoT2EgUsLWHvcUaGzaQnojkfdBK5JilGTdOtSXnhfRGYh1aJAc-GoSBWHH5e0Y15z1jhzjSqcEOwhXP0XNfzuNPN_MplRLFyv-6Iw5xj5_ivyYKUeOYmvf4R1cb6-jlU7SoV_R1wDWK6E9x8fhF9PFr4ozrLsGBQ9"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-black text-neon-green tracking-tighter uppercase">VITALS KINETIC</h1>
+</div>
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 duration-200 transition-transform">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</header>
+<main class="max-w-4xl mx-auto px-5 pt-8 space-y-8">
+<!-- Header Section -->
+<section class="flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-neon-green animate-pulse"></span>
+<p class="font-label-caps text-label-caps text-neon-green uppercase tracking-widest">Performance Insights</p>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary">Progress Trends</h2>
+</section>
+<!-- Bento Grid: HRV & RHR Charts -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- HRV Card -->
+<div class="glass-card p-6 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-neon-green/5 blur-3xl rounded-full"></div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">HRV Average (30d)</p>
+<p class="font-display-metrics text-display-metrics text-neon-green neon-glow-text">64<span class="text-headline-md font-headline-md ml-1">ms</span></p>
+</div>
+<span class="material-symbols-outlined text-neon-green/50">monitoring</span>
+</div>
+<!-- Mini HRV Chart Placeholder -->
+<div class="h-24 w-full mt-2 flex items-end gap-1">
+<div class="bg-neon-green/20 w-full rounded-t-sm transition-all hover:bg-neon-green/50" style="height: 60%"></div>
+<div class="bg-neon-green/20 w-full rounded-t-sm transition-all hover:bg-neon-green/50" style="height: 45%"></div>
+<div class="bg-neon-green/40 w-full rounded-t-sm transition-all hover:bg-neon-green/50" style="height: 80%"></div>
+<div class="bg-neon-green/30 w-full rounded-t-sm transition-all hover:bg-neon-green/50" style="height: 65%"></div>
+<div class="bg-neon-green/20 w-full rounded-t-sm transition-all hover:bg-neon-green/50" style="height: 50%"></div>
+<div class="bg-neon-green/50 w-full rounded-t-sm transition-all hover:bg-neon-green/50" style="height: 90%"></div>
+<div class="bg-neon-green/30 w-full rounded-t-sm transition-all hover:bg-neon-green/50" style="height: 70%"></div>
+<div class="bg-neon-green/20 w-full rounded-t-sm transition-all hover:bg-neon-green/50" style="height: 55%"></div>
+<div class="bg-neon-green/40 w-full rounded-t-sm transition-all hover:bg-neon-green/50" style="height: 75%"></div>
+<div class="bg-neon-green/60 w-full rounded-t-sm transition-all hover:bg-neon-green/50" style="height: 85%"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-neon-green text-[16px]">trending_up</span>
+                    8% above baseline
+                </p>
+</div>
+<!-- RHR Card -->
+<div class="glass-card p-6 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-data-cyan/5 blur-3xl rounded-full"></div>
+<div class="flex justify-between items-start">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase">RHR Average (30d)</p>
+<p class="font-display-metrics text-display-metrics text-data-cyan">52<span class="text-headline-md font-headline-md ml-1">bpm</span></p>
+</div>
+<span class="material-symbols-outlined text-data-cyan/50">favorite</span>
+</div>
+<!-- Mini RHR Chart Placeholder -->
+<div class="h-24 w-full mt-2 flex items-end gap-1">
+<div class="bg-data-cyan/60 w-full rounded-t-sm" style="height: 80%"></div>
+<div class="bg-data-cyan/40 w-full rounded-t-sm" style="height: 70%"></div>
+<div class="bg-data-cyan/30 w-full rounded-t-sm" style="height: 60%"></div>
+<div class="bg-data-cyan/20 w-full rounded-t-sm" style="height: 55%"></div>
+<div class="bg-data-cyan/20 w-full rounded-t-sm" style="height: 50%"></div>
+<div class="bg-data-cyan/30 w-full rounded-t-sm" style="height: 45%"></div>
+<div class="bg-data-cyan/40 w-full rounded-t-sm" style="height: 40%"></div>
+<div class="bg-data-cyan/20 w-full rounded-t-sm" style="height: 42%"></div>
+<div class="bg-data-cyan/50 w-full rounded-t-sm" style="height: 38%"></div>
+<div class="bg-data-cyan/60 w-full rounded-t-sm" style="height: 35%"></div>
+</div>
+<p class="text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-data-cyan text-[16px]">trending_down</span>
+                    Stabilized at optimal range
+                </p>
+</div>
+</div>
+<!-- Recovery Correlation Section -->
+<section class="space-y-4">
+<h3 class="font-headline-md text-headline-md text-primary">Recovery Correlation</h3>
+<div class="glass-card p-6 space-y-6">
+<!-- Progress Bars -->
+<div class="space-y-4">
+<!-- Sleep vs HRV -->
+<div class="space-y-2">
+<div class="flex justify-between font-label-caps text-label-caps">
+<span>Sleep vs HRV</span>
+<span class="text-neon-green">82% Correlation</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden border border-white/5">
+<div class="h-full bg-neon-green rounded-full shadow-[0_0_8px_rgba(164,255,0,0.4)]" style="width: 82%"></div>
+</div>
+</div>
+<!-- Strain vs RHR -->
+<div class="space-y-2">
+<div class="flex justify-between font-label-caps text-label-caps">
+<span>Strain vs RHR</span>
+<span class="text-tertiary-fixed">64% Correlation</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden border border-white/5">
+<div class="h-full bg-tertiary-fixed rounded-full shadow-[0_0_8px_rgba(125,244,255,0.4)]" style="width: 64%"></div>
+</div>
+</div>
+<!-- Hydration Impact -->
+<div class="space-y-2">
+<div class="flex justify-between font-label-caps text-label-caps">
+<span>Hydration Impact</span>
+<span class="text-on-surface-variant">45% Correlation</span>
+</div>
+<div class="h-2 bg-surface-container-highest rounded-full overflow-hidden border border-white/5">
+<div class="h-full bg-on-surface-variant/40 rounded-full" style="width: 45%"></div>
+</div>
+</div>
+</div>
+<p class="text-body-sm text-on-surface-variant italic leading-relaxed">
+                    Insight: Consistent sleep patterns are highly predictive of your HRV peaks. Your recovery score is most sensitive to hydration levels during metabolic peaks.
+                </p>
+</div>
+</section>
+<!-- Recent Sessions List -->
+<section class="space-y-4">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-primary">Recent Sessions</h3>
+<button class="text-neon-green text-label-caps font-label-caps hover:underline">VIEW LOG</button>
+</div>
+<div class="space-y-3">
+<!-- Session 1 -->
+<div class="glass-card p-4 flex items-center justify-between hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-neon-green/10 flex items-center justify-center text-neon-green">
+<span class="material-symbols-outlined">directions_run</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[16px] text-primary">Interval Sprints</h4>
+<p class="text-on-surface-variant text-body-sm">Today • 45 min</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter bg-secondary-container text-on-secondary-container">High Strain</span>
+<p class="font-data-tabular text-data-tabular text-primary">168 avg bpm</p>
+</div>
+</div>
+<!-- Session 2 -->
+<div class="glass-card p-4 flex items-center justify-between hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed/10 flex items-center justify-center text-tertiary-fixed">
+<span class="material-symbols-outlined">self_improvement</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[16px] text-primary">Deep Rest Meditation</h4>
+<p class="text-on-surface-variant text-body-sm">Yesterday • 20 min</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter bg-primary-container/20 text-neon-green">Optimal Recovery</span>
+<p class="font-data-tabular text-data-tabular text-primary">54 avg bpm</p>
+</div>
+</div>
+<!-- Session 3 -->
+<div class="glass-card p-4 flex items-center justify-between hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">fitness_center</span>
+</div>
+<div>
+<h4 class="font-headline-md text-[16px] text-primary">Hypertrophy Load</h4>
+<p class="text-on-surface-variant text-body-sm">2 days ago • 1h 12m</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter bg-surface-container-highest text-on-surface-variant">Baseline</span>
+<p class="font-data-tabular text-data-tabular text-primary">142 avg bpm</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Decorative Spacer for Nav -->
+<div class="h-12"></div>
+</main>
+<!-- BottomNavBar Component -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-2 pb-6 bg-surface-glass backdrop-blur-xl border-t border-white/10 rounded-t-lg shadow-2xl shadow-neon-green/20">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-neon-green hover:opacity-100 transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-neon-green hover:opacity-100 transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-label-caps text-label-caps">Generator</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-60 hover:text-neon-green hover:opacity-100 transition-all active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="font-label-caps text-label-caps">Session</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container/10 text-neon-green rounded-xl py-1 px-3 shadow-[0_0_15px_rgba(164,255,0,0.3)] active:scale-90 duration-300 ease-out" href="#">
+<span class="material-symbols-outlined filled">insights</span>
+<span class="font-label-caps text-label-caps">Trends</span>
+</a>
+</nav>
+<!-- Micro-interactions Script -->
+<script>
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousedown', () => {
+                card.style.transform = 'scale(0.98)';
+                card.style.transition = 'transform 0.1s ease';
+            });
+            card.addEventListener('mouseup', () => {
+                card.style.transform = 'scale(1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

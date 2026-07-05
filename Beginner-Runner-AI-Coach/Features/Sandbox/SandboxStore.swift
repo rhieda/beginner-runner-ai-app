@@ -9,7 +9,7 @@ final class SandboxStore {
     
     var selectedLLMProvider: LLMProviderType = .mock {
         didSet {
-            if selectedProvider == .mock {
+            if selectedLLMProvider == .mock {
                 useSimulatedMetrics = true
             }
         }
@@ -25,8 +25,8 @@ final class SandboxStore {
     private let hrvProvider = HRVDataProvider()
     private let rhrProvider = RHRDataProvider()
     private let workoutProvider = WorkoutDataProvider()
-    private let localLoadAgent = LoadAgentService()
-    private let localRecoveryAgent = RecoveryAgentService()
+    private let localLoadAgent = LoadTrimpService()
+    private let localRecoveryAgent = RecoveryCalculationService()
     
     // Compute Orchestrator based on selected provider
     private var aiOrchestrator: AgentOrchestrator {

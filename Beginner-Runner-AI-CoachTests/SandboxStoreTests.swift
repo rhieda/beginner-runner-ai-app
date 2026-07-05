@@ -10,13 +10,14 @@ final class SandboxStoreTests: XCTestCase {
         
         await store.testAIAgents()
         
-        XCTAssertTrue(store.logs.contains { $0.contains("Using mocked biometrics for the sandbox demonstration.") })
+        XCTAssertTrue(store.logs.contains { $0.contains("Using simulated metrics for the sandbox execution.") })
         XCTAssertNotNil(store.generatedWorkout)
     }
     
     func testRealProviderSelected() async {
         let store = SandboxStore()
         store.selectedLLMProvider = .gpt4o
+        store.useSimulatedMetrics = false
         store.clearLogs()
         
         await store.testAIAgents()
