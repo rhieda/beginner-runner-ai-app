@@ -10,7 +10,7 @@ final class SandboxStoreTests: XCTestCase {
         
         await store.testAIAgents()
         
-        XCTAssertTrue(store.logs.contains { $0.contains("Using simulated metrics for the sandbox execution.") })
+        XCTAssertTrue(store.logs.contains { $0.text.contains("Using simulated metrics for the sandbox execution.") })
         XCTAssertNotNil(store.generatedWorkout)
     }
     
@@ -22,6 +22,6 @@ final class SandboxStoreTests: XCTestCase {
         
         await store.testAIAgents()
         
-        XCTAssertTrue(store.logs.contains { $0.contains("Collecting real HealthKit metrics for AI Orchestrator...") })
+        XCTAssertTrue(store.logs.contains { $0.text.contains("Collecting real HealthKit metrics for AI Orchestrator...") })
     }
 }

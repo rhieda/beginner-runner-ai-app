@@ -2,9 +2,15 @@ import Foundation
 import Observation
 import HealthKit
 
+struct LogEntry: Identifiable, Equatable {
+    let id = UUID()
+    let timestamp = Date()
+    let text: String
+}
+
 @Observable
 final class SandboxStore {
-    var logs: [String] = []
+    var logs: [LogEntry] = []
     var generatedWorkout: CustomWorkoutComposition? = nil
     
     var selectedLLMProvider: LLMProviderType = .mock {
@@ -35,7 +41,7 @@ final class SandboxStore {
     
     func log(_ message: String) {
         Task { @MainActor in
-            logs.insert("\(Date().formatted(date: .omitted, time: .standard)): \(message)", at: 0)
+            logs.append(LogEntry(text: message))
         }
     }
     

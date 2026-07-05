@@ -27,6 +27,11 @@ final class VitalsDashboardStore {
     private let localLoadAgent = LoadTrimpService()
     private let localRecoveryAgent = RecoveryCalculationService()
     
+    // Compute Orchestrator based on selected provider
+    private var aiOrchestrator: AgentOrchestrator {
+        AgentOrchestrator(provider: LLMProviderFactory.create(type: selectedLLMProvider))
+    }
+    
     init() {}
     
     func log(_ message: String) {
@@ -89,7 +94,7 @@ final class VitalsDashboardStore {
                 return
             }
             
-            let dashboardData = processDashboardData(
+            let dashboardData = try await processDashboardData(
                 hrvSamples: hrvSamples,
                 rhrSamples: rhrSamples,
                 workouts: workouts
@@ -120,11 +125,71 @@ final class VitalsDashboardStore {
         return (hrvSamples, rhrSamples, workouts)
     }
     
-    private func processDashboardData(
+    struct HRVMetrics {
+        let trend: [Double]
+        let average: Double
+        let max: Double
+        let min: Double
+        let changePercentage: Double
+    }
+    
+    struct RHRMetrics {
+        let trend: [Double]
+        let average: Double
+        let max: Double
+        let min: Double
+        let status: String
+    }
+    
+    private func calculateHRVMetrics(from samples: [HealthDataBaseLocalSample]) -> HRVMetrics {
+        let trend = samples.sorted { $0.beginDate < $1.beginDate }.suffix(7).map { $0.value }
+        let average = trend.isEmpty ? 0.0 : trend.reduce(0.0, +) / Double(trend.count)
+        let maxVal = trend.max() ?? 0.0
+        let minVal = trend.min() ?? 0.0
+        
+        let change: Double
+        if samples.count >= 2 {
+            let sortedHrv = samples.sorted { $0.beginDate > $1.beginDate }
+            let todayVal = sortedHrv[0].value
+            let yesterdayVal = sortedHrv[1].value
+            change = yesterdayVal > 0 ? ((todayVal - yesterdayVal) / yesterdayVal) * 100.0 : 0.0
+        } else {
+            change = 0.0
+        }
+        return HRVMetrics(trend: trend, average: average, max: maxVal, min: minVal, changePercentage: change)
+    }
+    
+    private func calculateRHRMetrics(from samples: [HealthDataBaseLocalSample]) -> RHRMetrics {
+        let trend = samples.sorted { $0.beginDate < $1.beginDate }.suffix(7).map { $0.value }
+        let average = trend.isEmpty ? 0.0 : trend.reduce(0.0, +) / Double(trend.count)
+        let maxVal = trend.max() ?? 0.0
+        let minVal = trend.min() ?? 0.0
+        
+        let status: String
+        if trend.count >= 2 {
+            let firstHalf = trend.prefix(trend.count / 2)
+            let secondHalf = trend.suffix(trend.count / 2)
+            let firstHalfAvg = firstHalf.reduce(0.0, +) / Double(firstHalf.count)
+            let secondHalfAvg = secondHalf.reduce(0.0, +) / Double(secondHalf.count)
+            let change = secondHalfAvg - firstHalfAvg
+            if change > 2.0 {
+                status = "ELEVADO"
+            } else if change < -2.0 {
+                status = "EM QUEDA"
+            } else {
+                status = "ESTÁVEL"
+            }
+        } else {
+            status = "ESTÁVEL"
+        }
+        return RHRMetrics(trend: trend, average: average, max: maxVal, min: minVal, status: status)
+    }
+
+    func processDashboardData(
         hrvSamples: [HealthDataBaseLocalSample],
         rhrSamples: [HealthDataBaseLocalSample],
         workouts: [WorkoutSample]
-    ) -> VitalsDashboardData {
+    ) async throws -> VitalsDashboardData {
         // Perform recovery calculations
         let hrvTrends = localRecoveryAgent.calculateMovingAverages(from: hrvSamples)
         
@@ -138,63 +203,24 @@ final class VitalsDashboardStore {
             let ratio = thirtyDayHRV > 0 ? (sevenDayHRV / thirtyDayHRV) : 1.0
             readinessScore = min(100, max(0, Int(ratio * 86)))
             
-            if readinessScore >= 85 {
-                readinessLabel = "PRONTIDÃO - ÓTIMA"
-            } else if readinessScore >= 70 {
-                readinessLabel = "PRONTIDÃO - BOA"
-            } else {
-                readinessLabel = "PRONTIDÃO - BAIXA"
-            }
+            readinessLabel = readinessScore >= 85 ? "PRONTIDÃO - ÓTIMA" : (readinessScore >= 70 ? "PRONTIDÃO - BOA" : "PRONTIDÃO - BAIXA")
             
-            recoveryState = sevenDayHRV >= thirtyDayHRV ? "Descansado" : "Fadigado"
+            // Query AI Recovery Agent (falls back to local comparison if offline)
+            let recoveryReport = try? await aiOrchestrator.analyzeRecovery(
+                sevenDayHRV: sevenDayHRV,
+                thirtyDayHRV: thirtyDayHRV
+            )
+            let recoveryStatus = recoveryReport?.status ?? (sevenDayHRV >= thirtyDayHRV ? "recovered" : "fatigued")
+            recoveryState = recoveryStatus == "recovered" ? "Descansado" : "Fadigado"
         } else {
             readinessScore = 0
             readinessLabel = "INDISPONÍVEL"
             recoveryState = "Sem dados"
         }
         
-        // HRV metrics
-        let hrvTrend = hrvSamples.sorted { $0.beginDate < $1.beginDate }.suffix(7).map { $0.value }
-        let hrvAverage = hrvTrend.isEmpty ? 0.0 : hrvTrend.reduce(0.0, +) / Double(hrvTrend.count)
-        let hrvMax = hrvTrend.max() ?? 0.0
-        let hrvMin = hrvTrend.min() ?? 0.0
-        
-        // Calculate change percentage vs yesterday
-        let hrvChangePercentage: Double
-        if hrvSamples.count >= 2 {
-            let sortedHrv = hrvSamples.sorted { $0.beginDate > $1.beginDate }
-            let todayVal = sortedHrv[0].value
-            let yesterdayVal = sortedHrv[1].value
-            hrvChangePercentage = yesterdayVal > 0 ? ((todayVal - yesterdayVal) / yesterdayVal) * 100 : 0.0
-        } else {
-            hrvChangePercentage = 0.0
-        }
-        
-        // RHR metrics
-        let rhrTrend = rhrSamples.sorted { $0.beginDate < $1.beginDate }.suffix(7).map { $0.value }
+        let hrvMetrics = calculateHRVMetrics(from: hrvSamples)
+        let rhrMetrics = calculateRHRMetrics(from: rhrSamples)
         let rhrCurrent = rhrSamples.sorted { $0.beginDate > $1.beginDate }.first?.value ?? 0.0
-        let rhrAverage = rhrTrend.isEmpty ? 0.0 : rhrTrend.reduce(0.0, +) / Double(rhrTrend.count)
-        let rhrMax = rhrTrend.max() ?? 0.0
-        let rhrMin = rhrTrend.min() ?? 0.0
-        
-        // Determine RHR status/trend
-        let rhrStatus: String
-        if rhrTrend.count >= 2 {
-            let firstHalf = rhrTrend.prefix(rhrTrend.count / 2)
-            let secondHalf = rhrTrend.suffix(rhrTrend.count / 2)
-            let firstHalfAvg = firstHalf.reduce(0.0, +) / Double(firstHalf.count)
-            let secondHalfAvg = secondHalf.reduce(0.0, +) / Double(secondHalf.count)
-            let change = secondHalfAvg - firstHalfAvg
-            if change > 2.0 {
-                rhrStatus = "ELEVADO"
-            } else if change < -2.0 {
-                rhrStatus = "EM QUEDA"
-            } else {
-                rhrStatus = "ESTÁVEL"
-            }
-        } else {
-            rhrStatus = "ESTÁVEL"
-        }
         
         // Calculate last workout TRIMP
         var lastWorkoutTRIMP = 0.0
@@ -213,33 +239,61 @@ final class VitalsDashboardStore {
         }
         
         // Fitness state mapping
-        // TODO: rever limites de TRIMP após validação científica (proposição arbitrária)
         let fitnessState: String
         if workouts.isEmpty {
             fitnessState = "Sem dados"
-        } else if lastWorkoutTRIMP > 80.0 {
-            fitnessState = "Sobrecarga"
-        } else if lastWorkoutTRIMP >= 40.0 {
-            fitnessState = "Em Forma"
         } else {
-            fitnessState = "Pouco Treino"
+            // Map workouts list to Coder/Load agent compatible entry structures
+            let recentWorkoutsEntries = workouts.map { sample in
+                let durationMin = Int(sample.duration / 60.0)
+                let intensity: String
+                if let hrValue = sample.averageHeartRate {
+                    intensity = hrValue > 160 ? "high" : (hrValue > 130 ? "moderate" : "low")
+                } else {
+                    intensity = "moderate"
+                }
+                return LoadAgentInput.WorkoutEntry(
+                    date: sample.endDate.formatted(date: .abbreviated, time: .omitted),
+                    duration: durationMin,
+                    intensity: intensity
+                )
+            }
+            
+            // Query AI Load Agent (falls back to local comparison if offline)
+            let loadReport = try? await aiOrchestrator.analyzeLoad(
+                trimpScore: lastWorkoutTRIMP,
+                recentWorkouts: recentWorkoutsEntries
+            )
+            
+            // TODO: rever limites de TRIMP após validação científica (proposição arbitrária)
+            let loadStatus = loadReport?.status ?? (lastWorkoutTRIMP > 80.0 ? "overreaching" : (lastWorkoutTRIMP >= 40.0 ? "adapting" : "undertraining"))
+            switch loadStatus {
+            case "overreaching":
+                fitnessState = "Sobrecarga"
+            case "adapting":
+                fitnessState = "Em Forma"
+            case "undertraining":
+                fitnessState = "Pouco Treino"
+            default:
+                fitnessState = "Pouco Treino"
+            }
         }
         
         return VitalsDashboardData(
             readinessScore: readinessScore,
             readinessLabel: readinessLabel,
             hrvCurrent: hrvCurrent,
-            hrvTrend: hrvTrend,
-            hrvChangePercentage: hrvChangePercentage,
-            hrvAverage: hrvAverage,
-            hrvMax: hrvMax,
-            hrvMin: hrvMin,
+            hrvTrend: hrvMetrics.trend,
+            hrvChangePercentage: hrvMetrics.changePercentage,
+            hrvAverage: hrvMetrics.average,
+            hrvMax: hrvMetrics.max,
+            hrvMin: hrvMetrics.min,
             rhrCurrent: rhrCurrent,
-            rhrTrend: rhrTrend,
-            rhrAverage: rhrAverage,
-            rhrMax: rhrMax,
-            rhrMin: rhrMin,
-            rhrStatus: rhrStatus,
+            rhrTrend: rhrMetrics.trend,
+            rhrAverage: rhrMetrics.average,
+            rhrMax: rhrMetrics.max,
+            rhrMin: rhrMetrics.min,
+            rhrStatus: rhrMetrics.status,
             fitnessState: fitnessState,
             recoveryState: recoveryState
         )

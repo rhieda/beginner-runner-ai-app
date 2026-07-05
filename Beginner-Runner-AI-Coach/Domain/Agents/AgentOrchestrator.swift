@@ -13,6 +13,32 @@ struct AgentOrchestrator {
         self.guardrail = PhysiologicalSafetyGuardrail()
     }
     
+    /// Analyzes chronic load using the LoadAgent.
+    func analyzeLoad(
+        trimpScore: Double,
+        recentWorkouts: [LoadAgentInput.WorkoutEntry]
+    ) async throws -> LoadReport {
+        try await loadAgent.execute(
+            input: LoadAgentInput(
+                trimpScore: trimpScore,
+                workoutHistory: recentWorkouts
+            )
+        )
+    }
+    
+    /// Analyzes biological readiness using the RecoveryAgent.
+    func analyzeRecovery(
+        sevenDayHRV: Double,
+        thirtyDayHRV: Double
+    ) async throws -> RecoveryReport {
+        try await recoveryAgent.execute(
+            input: RecoveryAgentInput(
+                sevenDayHRVAvg: sevenDayHRV,
+                thirtyDayHRVAvg: thirtyDayHRV
+            )
+        )
+    }
+    
     /// Orchestrates the full pipeline from raw biometric data to a safe, personalized workout.
     /// - Parameter logger: Optional closure to receive granular execution logs.
     func generateWorkout(
@@ -28,19 +54,15 @@ struct AgentOrchestrator {
         
         // 1. Parallel execution of Load and Recovery analysis
         logger?("🤖 [LoadAgent] Starting TRIMP analysis (Score: \(String(format: "%.1f", trimpScore)))...")
-        async let loadReportTask = loadAgent.execute(
-            input: LoadAgentInput(
-                trimpScore: trimpScore,
-                workoutHistory: recentWorkouts
-            )
+        async let loadReportTask = analyzeLoad(
+            trimpScore: trimpScore,
+            recentWorkouts: recentWorkouts
         )
         
         logger?("🤖 [RecoveryAgent] Starting HRV analysis (7d: \(String(format: "%.1f", sevenDayHRV)) | 30d: \(String(format: "%.1f", thirtyDayHRV)))...")
-        async let recoveryReportTask = recoveryAgent.execute(
-            input: RecoveryAgentInput(
-                sevenDayHRVAvg: sevenDayHRV,
-                thirtyDayHRVAvg: thirtyDayHRV
-            )
+        async let recoveryReportTask = analyzeRecovery(
+            sevenDayHRV: sevenDayHRV,
+            thirtyDayHRV: thirtyDayHRV
         )
         
         let loadReport = try await loadReportTask

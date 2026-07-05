@@ -19,13 +19,13 @@ A partir desta tela, o usuário pode solicitar a geração de um treino personal
 2. **Índice de Prontidão (Readiness Score):** Calculado no domínio com base na relação entre a média móvel de 7 dias e a de 30 dias de HRV:
    $$Readiness = \min\left(100, \max\left(0, \frac{\text{HRV 7d Avg}}{\text{HRV 30d Avg}} \times 86\right)\right)$$
    *Nota: Se as médias móveis de 7 ou 30 dias de HRV forem nulas devido a dados insuficientes, o escore de prontidão é definido como `0` e rotulado como `"INDISPONÍVEL"`.*
-3. **Forma Física (Fitness State):** Mapeado a partir do estresse de treino crônico (TRIMP médio dos últimos treinos):
+3. **Forma Física (Fitness State):** Determinado prioritariamente via inferência inteligente do `LoadAgent` (analisando a intensidade TRIMP e o histórico de treinos recentes). Em caso de falha de conexão ou timeout na inferência, o sistema realiza o fallback automático para o mapeamento fisiológico determinístico local:
    - Sem treinos recentes: **Sem dados**
    - TRIMP > 80: **Sobrecarga** (`overreaching`)
    - TRIMP entre 40 e 80: **Em Forma** (`adapting`)
    - TRIMP < 40: **Pouco Treino** (`undertraining`)
    *Nota: Esses limites (40 e 80) são uma proposição arbitrária temporária para exibição na UI offline e devem ser sinalizados no código-fonte com um comentário explicativo (`// TODO: rever limites de TRIMP após validação científica`).*
-4. **Estado Atual (Recovery State):** Mapeado a partir da tendência de HRV determinada pelo `RecoveryAgentService`:
+4. **Estado Atual (Recovery State):** Determinado prioritariamente via inferência inteligente do `RecoveryAgent` (analisando as médias móveis de HRV de 7 e 30 dias). Em caso de falha na inferência, o sistema realiza o fallback automático para a regra fisiológica determinística local:
    - Médias de HRV nulas / Dados insuficientes: **Sem dados**
    - HRV 7d >= HRV 30d: **Descansado** (`recovered`)
    - HRV 7d < HRV 30d: **Fadigado** (`fatigued`)

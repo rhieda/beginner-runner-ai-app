@@ -312,21 +312,27 @@ struct SandboxView: View {
                                                 .foregroundStyle(Theme.Colors.onSurfaceVariant)
                                                 .italic()
                                         } else {
-                                            ForEach(store.logs.indices, id: \.self) { index in
-                                                Text(store.logs[index])
-                                                    .font(Theme.Typography.dataTabular)
-                                                    .foregroundStyle(Theme.Colors.onSurfaceVariant)
-                                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                                    .id(index)
+                                            ForEach(store.logs) { log in
+                                                HStack(alignment: .top, spacing: 8) {
+                                                    Text(log.timestamp.formatted(date: .omitted, time: .standard))
+                                                        .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                                                        .foregroundStyle(Theme.Colors.onSurfaceVariant.opacity(0.5))
+                                                    
+                                                    Text(log.text)
+                                                        .font(.system(size: 11, design: .monospaced))
+                                                        .foregroundStyle(logColor(for: log.text))
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                }
+                                                .id(log.id)
                                             }
                                         }
                                     }
                                     .padding(8)
                                 }
                                 .onChange(of: store.logs.count) {
-                                    if !store.logs.isEmpty {
+                                    if let lastLog = store.logs.last {
                                         withAnimation {
-                                            proxy.scrollTo(store.logs.count - 1, anchor: .bottom)
+                                            proxy.scrollTo(lastLog.id, anchor: .bottom)
                                         }
                                     }
                                 }
@@ -358,6 +364,17 @@ struct SandboxView: View {
                 }())
             }
         }
+    }
+    
+    private func logColor(for text: String) -> Color {
+        if text.contains("⚠️") {
+            return Theme.Colors.secondaryContainer
+        } else if text.contains("✅") {
+            return Theme.Colors.neonGreen
+        } else if text.contains("🤖") || text.contains("🛡️") {
+            return Theme.Colors.primaryContainer
+        }
+        return Theme.Colors.onSurfaceVariant
     }
 }
 
