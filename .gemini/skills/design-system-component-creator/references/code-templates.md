@@ -299,3 +299,111 @@ struct SparklineShape: Shape {
 }
 ```
 
+## 7. Premium Log Terminal / Console Panel
+
+Used to render diagnostic logs, AI generation steps, or telemetry console updates with monospaced alignments, color-coded indicators, and automatic scroll-to-bottom behavior.
+
+```swift
+import SwiftUI
+
+// 1. Stable Identified Log Entry Model
+struct LogEntry: Identifiable, Equatable {
+    let id = UUID()
+    let timestamp = Date()
+    let message: String
+}
+
+// 2. High-Fidelity Console View
+struct LogTerminalView: View {
+    let logs: [LogEntry]
+    let onClear: () -> Void
+    
+    var body: some View {
+        VStack(spacing: Theme.Spacing.stackGap) {
+            // Header Row
+            HStack {
+                Text("LOG CONSOLE")
+                    .font(Theme.Typography.labelCaps)
+                    .foregroundStyle(Theme.Colors.primary)
+                    .kerning(1.2)
+                Spacer()
+                if !logs.isEmpty {
+                    Button("Clear", action: onClear)
+                        .font(Theme.Typography.labelCaps)
+                        .foregroundStyle(Theme.Colors.secondary)
+                }
+            }
+            .padding(.horizontal, Theme.Spacing.unit)
+            
+            // Log terminal window
+            VStack {
+                ScrollViewReader { proxy in
+                    ScrollView {
+                        LazyVStack(alignment: .leading, spacing: 6) {
+                            if logs.isEmpty {
+                                Text("No logs yet. Console idle.")
+                                    .font(Theme.Typography.bodySm)
+                                    .foregroundStyle(Theme.Colors.onSurfaceVariant)
+                                    .italic()
+                            } else {
+                                ForEach(logs) { log in
+                                    logRow(log)
+                                        .id(log.id)
+                                }
+                            }
+                        }
+                        .padding(8)
+                    }
+                    .onChange(of: logs.count) {
+                        if let lastLog = logs.last {
+                            withAnimation {
+                                proxy.scrollTo(lastLog.id, anchor: .bottom)
+                            }
+                        }
+                    }
+                }
+            }
+            .frame(height: 180)
+            .background(Theme.Colors.surfaceContainerLowest)
+            .clipShape(RoundedRectangle(cornerRadius: Theme.Radius.sm))
+            .overlay(
+                RoundedRectangle(cornerRadius: Theme.Radius.sm)
+                    .stroke(Theme.Colors.borderGlass, lineWidth: 1)
+            )
+        }
+        .padding(Theme.Spacing.gridGutter)
+        .glassCard()
+    }
+    
+    // Row renderer with colored status formatting
+    @ViewBuilder
+    private func logRow(_ log: LogEntry) -> some View {
+        HStack(alignment: .top, spacing: 8) {
+            // Dimmed timestamp side-column
+            Text(log.timestamp.formatted(date: .omitted, time: .standard))
+                .font(.system(size: 10, weight: .semibold, design: .monospaced))
+                .foregroundStyle(Theme.Colors.onSurfaceVariant.opacity(0.5))
+            
+            // Styled message body
+            Text(log.message)
+                .font(.system(size: 11, design: .monospaced))
+                .foregroundStyle(logColor(for: log.message))
+                .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+    
+    // Color categorization based on log symbol prefixes
+    private func logColor(for text: String) -> Color {
+        if text.contains("⚠️") {
+            return Theme.Colors.secondaryContainer // Warning/Alert color
+        } else if text.contains("✅") {
+            return Theme.Colors.neonGreen // Success color
+        } else if text.contains("🤖") || text.contains("🛡️") {
+            return Theme.Colors.primaryContainer // System/Action accent color
+        }
+        return Theme.Colors.onSurfaceVariant // Default text color
+    }
+}
+```
+
+
