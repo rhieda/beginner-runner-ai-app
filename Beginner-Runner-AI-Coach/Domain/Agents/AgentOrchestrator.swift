@@ -13,6 +13,7 @@ struct AgentOrchestrator {
         self.guardrail = PhysiologicalSafetyGuardrail()
     }
     
+    
     /// Orchestrates the full pipeline from raw biometric data to a safe, personalized workout.
     /// - Parameter logger: Optional closure to receive granular execution logs.
     func generateWorkout(
