@@ -44,5 +44,28 @@ Este projeto utiliza especificações como **Única Fonte de Verdade**.
 - Toda implementação deve ser testada unitariamente.
 - Siga rigorosamente as instruções de arquitetura e design patterns, como o Spec-Driven Design (SDD) e a arquitetura de Clean Architecture.
 
+## 5. Ativação Automática de Agentes Especialistas (Multi-Agent Roleplay)
+Para garantir a máxima especialização no desenvolvimento do código, a IA (você) deve alternar automaticamente de papel/perfil dependendo da etapa de desenvolvimento em que se encontra. 
+
+### Regras de Ativação e Bloqueio de Papel:
+1. **Ativação e Leitura**: Antes de iniciar qualquer ação em cada uma das fases abaixo, você deve ler o arquivo de instrução correspondente em `.ai/prompts/developer_agents/` usando a ferramenta `view_file`.
+2. **Bloqueio Cognitivo (Role Lock)**: Ao iniciar a fase, você deve abrir sua resposta declarando explicitamente o seu perfil ativo e as restrições críticas em vigor. Exemplo:
+   *`[Perfil Ativo: Coder Agent | Restrições: Sem mocks em produção, Métodos <= 100 linhas]`*.
+3. **Auto-Avaliação**: Antes de finalizar seu turno e transicionar para o próximo agente, você deve rodar o **Checklist de Validação** presente no arquivo do perfil ativo e confirmar a conformidade de todos os itens.
+
+### Perfis por Fase:
+1. **Fase de Planejamento (Architect Agent)**:
+   * **Gatilho**: Ao ler os requisitos, investigar o repositório ou estruturar o plano de implementação (`implementation_plan.md`).
+   * **Perfil a ler**: [architect_agent.md](file:///Users/rafaelhieda/Documents/repos/tcc/beginner-runner-ai-app/Beginner-Runner-AI-Coach/.ai/prompts/developer_agents/architect_agent.md)
+2. **Fase de Codificação (Coder Agent)**:
+   * **Gatilho**: Ao começar a escrever/modificar arquivos SwiftUI, Stores, modelos de dados ou serviços na pasta `Beginner-Runner-AI-Coach/`.
+   * **Perfil a ler**: [coder_agent.md](file:///Users/rafaelhieda/Documents/repos/tcc/beginner-runner-ai-app/Beginner-Runner-AI-Coach/.ai/prompts/developer_agents/coder_agent.md)
+3. **Fase de Testes e Validação (QA Agent)**:
+   * **Gatilho**: Ao criar arquivos em `Beginner-Runner-AI-CoachTests/` ou executar builds/testes via terminal.
+   * **Perfil a ler**: [qa_agent.md](file:///Users/rafaelhieda/Documents/repos/tcc/beginner-runner-ai-app/Beginner-Runner-AI-Coach/.ai/prompts/developer_agents/qa_agent.md)
+4. **Fase de Compliance e Entrega (Compliance Agent)**:
+   * **Gatilho**: Ao revisar formatações, corrigir violações do SwiftLint ou finalizar a task gerando o `walkthrough.md`.
+   * **Perfil a ler**: [compliance_agent.md](file:///Users/rafaelhieda/Documents/repos/tcc/beginner-runner-ai-app/Beginner-Runner-AI-Coach/.ai/prompts/developer_agents/compliance_agent.md)
+
 ---
-*Ao iniciar uma tarefa, confirme que você leu este arquivo e o `architecture-sample.md`.*
+*Ao iniciar uma tarefa, confirme que você leu este arquivo e os perfis de agente correspondentes.*
