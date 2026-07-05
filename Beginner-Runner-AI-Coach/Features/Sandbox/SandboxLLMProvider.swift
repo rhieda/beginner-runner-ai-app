@@ -2,9 +2,17 @@ import Foundation
 
 /// A mock LLM provider specifically built for testing the AI orchestration within the Sandbox UI.
 class SandboxLLMProvider: LLMProviderProtocol {
+    static var simulateError = false
+    
     func generateResponse(prompt: String, systemInstruction: String) async throws -> String {
-        // Simulate network delay
-        try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+        if SandboxLLMProvider.simulateError {
+            throw AIAgentError.invalidOutput("Simulated Sandbox error for fallback testing")
+        }
+        
+        // Simulate network delay (skip during XCTest to keep test runs fast)
+        if NSClassFromString("XCTestCase") == nil {
+            try await Task.sleep(nanoseconds: 1_000_000_000) // 1 second
+        }
         
         if systemInstruction.contains("Load Analysis Agent") {
             return """
