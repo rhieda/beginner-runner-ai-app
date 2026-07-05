@@ -18,6 +18,10 @@ Use this skill when designing, building, or modifying SwiftUI user interface com
    * All metrics, values, counts, scores, and timestamps must use `Theme.Typography.displayMetrics` or `Theme.Typography.dataTabular` (JetBrains Mono).
 4. **Descriptive Labels**:
    * Use capitalized labels with extra tracking/kerning for section headers and captions via `Theme.Typography.labelCaps` with `.kerning(1.2)`.
+5. **Modular Sub-views & SwiftLint Compliance**:
+   * Decompose complex Bento layouts, dashboards, and detailed cards into separate standalone `View` structs (rather than massive inline `@ViewBuilder` functions or functions with $>5$ parameters) to stay compliant with SwiftLint rules (e.g., function body $\le 100$ lines, type body $\le 400$ lines, file body $\le 500$ lines, tuple members $\le 2$).
+6. **Native Navigation & Toolbars**:
+   * When navigating via `NavigationStack`, make use of native SwiftUI `.toolbar` structures rather than custom top bars. Center titles using `ToolbarItem(placement: .principal)` and apply glassmorphism on the bar using `.toolbarBackground(Theme.Colors.surfaceGlass, for: .navigationBar)` to ensure clean layouts. Present detailed workflows containing custom headers in `.fullScreenCover` to bypass double navigation bar issues.
 
 ## Task Workflow
 

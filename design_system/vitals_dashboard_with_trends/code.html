@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="dark" lang="pt-BR" style=""><head></head><body class="flex flex-col min-h-screen"><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
+<!DOCTYPE html><html class="dark" lang="pt-BR" style=""><head></head><body class="flex flex-col min-h-screen"><svg aria-hidden="true" class="inline-defs-container" style="position:absolute;width:0;height:0;overflow:hidden"></svg>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
 <title>VITALS - Mobile Dashboard</title>
@@ -142,10 +142,13 @@
             overscroll-behavior-y: none;
         }
     </style>
-
-
 <!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 flex items-center px-container-padding h-16 justify-end bg-transparent relative"><h1 class="absolute left-1/2 -translate-x-1/2 font-headline-md text-headline-md font-bold text-primary">Dashboard</h1><button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-200">settings</button></header>
+<header class="fixed top-0 w-full z-50 flex items-center px-container-padding h-16 justify-end" style="background-color: transparent; backdrop-filter: none; border-bottom-width: medium; border-bottom-style: none; border-bottom-color: currentcolor; box-shadow: none;"><div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+    <h1 class="font-headline-md text-headline-md font-bold text-primary">Dashboard</h1>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity active:scale-95 duration-200 relative z-10">
+    settings
+</button></header>
 <!-- Main Content Canvas -->
 <main class="flex-1 pt-24 px-container-padding space-y-section-margin pb-40">
 <!-- Hero Section: Readiness Ring -->
@@ -175,6 +178,73 @@
 </section>
 <!-- Secondary Metrics Grid (Bento Style) -->
 <section class="grid grid-cols-2 gap-grid-gutter">
+<!-- HRV Trend Chart -->
+<div class="glass-card rounded-lg p-4 flex flex-col space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-[10px] text-on-surface-variant font-bold">HRV (ms)</span>
+<span class="text-[10px] font-bold text-neon-green">7-DIA</span>
+</div>
+<div class="h-10 w-full relative flex items-end gap-1 px-1">
+<!-- Simple SVG Sparkline for HRV -->
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 40"><line x1="0" y1="38" x2="100" y2="38" stroke="rgba(164, 255, 0, 0.1)" stroke-width="0.5"></line>
+<defs>
+<linearGradient id="chartGradientHRV" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#A4FF00" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#A4FF00" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<path d="M0 35 Q 15 10, 30 25 T 60 15 T 100 5" fill="none" stroke="#A4FF00" stroke-linecap="round" stroke-width="2" class="neon-glow"></path>
+<path d="M0 35 Q 15 10, 30 25 T 60 15 T 100 5 V 40 H 0 Z" fill="url(#chartGradientHRV)"></path>
+</svg>
+<div class="absolute inset-0 pointer-events-none">
+  <div class="absolute top-0 right-2 flex items-center gap-1">
+    <div class="w-1 h-1 rounded-full bg-neon-green"></div>
+    <span class="text-[8px] font-bold text-neon-green">MAX: 82</span>
+  </div>
+  <div class="absolute bottom-1 left-2 flex items-center gap-1">
+    <div class="w-1 h-1 rounded-full bg-on-surface-variant/40"></div>
+    <span class="text-[8px] font-bold text-on-surface-variant/60">MIN: 64</span>
+  </div>
+</div></div>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] text-primary font-bold text-neon-green">MÉD: 72</span>
+<span class="material-symbols-outlined text-neon-green text-sm">trending_up</span>
+</div>
+</div>
+<!-- RHR Trend Chart -->
+<div class="glass-card rounded-lg p-4 flex flex-col space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-label-caps text-[10px] text-on-surface-variant font-bold">RHR (bpm)</span>
+<span class="text-[10px] font-bold text-neon-green">7-DIA</span>
+</div>
+<div class="h-10 w-full relative flex items-end gap-1 px-1">
+<!-- Simple SVG Sparkline for RHR -->
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 40"><line x1="0" y1="38" x2="100" y2="38" stroke="rgba(164, 255, 0, 0.1)" stroke-width="0.5"></line>
+<defs>
+<linearGradient id="chartGradientRHR" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#A4FF00" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#A4FF00" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<path d="M0 10 Q 20 30, 40 15 T 70 25 T 100 35" fill="none" stroke="#A4FF00" stroke-linecap="round" stroke-width="2" class="neon-glow"></path>
+<path d="M0 10 Q 20 30, 40 15 T 70 25 T 100 35 V 40 H 0 Z" fill="url(#chartGradientRHR)"></path>
+</svg>
+<div class="absolute inset-0 pointer-events-none">
+  <div class="absolute top-0 left-2 flex items-center gap-1">
+    <div class="w-1 h-1 rounded-full bg-neon-green"></div>
+    <span class="text-[8px] font-bold text-neon-green">MAX: 58</span>
+  </div>
+  <div class="absolute bottom-1 right-2 flex items-center gap-1">
+    <div class="w-1 h-1 rounded-full bg-on-surface-variant/40"></div>
+    <span class="text-[8px] font-bold text-on-surface-variant/60">MIN: 49</span>
+  </div>
+</div></div>
+<div class="flex justify-between items-center mt-1">
+<span class="text-[10px] text-primary font-bold text-neon-green">MÉD: 54</span>
+<span class="material-symbols-outlined text-neon-green text-sm">trending_down</span>
+</div>
+</div>
+</section><section class="grid grid-cols-2 gap-grid-gutter">
 <!-- HRV Card -->
 <div class="glass-card rounded-lg p-4 flex flex-col space-y-stack-gap">
 <div class="flex items-center gap-2">
@@ -240,7 +310,7 @@
 </div>
 </section>
 <!-- Primary Action Button -->
-<section class="pt-4 fixed bottom-0 left-0 w-full p-4 z-40 pb-8 bg-surface">
+<section class="pt-4 fixed bottom-0 left-0 w-full p-4 z-40 pb-8" style="background-color: #131315;">
 <button class="w-full h-16 bg-primary-fixed rounded-full pill-glow transition-all flex items-center justify-center gap-3 active:scale-95 shadow-[0_0_25px_rgba(164,255,0,0.25)]">
 <span class="material-symbols-outlined text-on-primary-fixed font-bold">bolt</span>
 <span class="text-on-primary-fixed font-bold text-body-lg tracking-wide">Gerar Treino de Corrida</span>
@@ -248,7 +318,6 @@
 </section>
 </main>
 <!-- BottomNavBar -->
-
 <script>
         // Micro-interaction for the ring progress
         document.addEventListener('DOMContentLoaded', () => {

@@ -1,6 +1,6 @@
 import Foundation
 
-protocol LoadAgentProtocol: Sendable {
+protocol LoadTRIMPRepresentable: Sendable {
     func calculateTRIMP(
         durationInMinutes: Double,
         avgHeartRate: Double,
@@ -10,7 +10,7 @@ protocol LoadAgentProtocol: Sendable {
     ) -> Double
 }
 
-struct LoadAgentService: LoadAgentProtocol {
+struct LoadTrimpService: LoadTRIMPRepresentable {
     /// Calculates the Training Impulse (TRIMP) using Banister's original formula.
     ///
     /// TRIMP quantifies the physiological stress of a workout session by combining duration,

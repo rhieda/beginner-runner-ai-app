@@ -1,5 +1,5 @@
 ---
-name: Vitals Cyber-Athletic
+name: VITALS Cyber-Athletic
 colors:
   surface: '#131315'
   surface-dim: '#131315'
@@ -26,9 +26,9 @@ colors:
   secondary-container: '#01dbe9'
   on-secondary-container: '#005c62'
   tertiary: '#ffffff'
-  on-tertiary: '#690006'
-  tertiary-container: '#ffdad6'
-  on-tertiary-container: '#cb0016'
+  on-tertiary: '#2a3400'
+  tertiary-container: '#caf300'
+  on-tertiary-container: '#596c00'
   error: '#ffb4ab'
   on-error: '#690005'
   error-container: '#93000a'
@@ -41,17 +41,19 @@ colors:
   secondary-fixed-dim: '#01dbe9'
   on-secondary-fixed: '#002022'
   on-secondary-fixed-variant: '#004f55'
-  tertiary-fixed: '#ffdad6'
-  tertiary-fixed-dim: '#ffb4ab'
-  on-tertiary-fixed: '#410002'
-  on-tertiary-fixed-variant: '#93000c'
+  tertiary-fixed: '#caf300'
+  tertiary-fixed-dim: '#b0d500'
+  on-tertiary-fixed: '#171e00'
+  on-tertiary-fixed-variant: '#3e4c00'
   background: '#131315'
   on-background: '#e5e1e4'
   surface-variant: '#353437'
+  neon-green: '#A4FF00'
   electric-lime: '#D4FF00'
-  surface-glass: rgba(28, 28, 30, 0.7)
   data-cyan: '#00DBE9'
-  neon-glow: rgba(164, 255, 0, 0.4)
+  data-blue: '#7DF4FF'
+  surface-glass: rgba(28, 28, 30, 0.7)
+  error-red: '#FFB4AB'
 typography:
   display-metrics:
     fontFamily: JetBrains Mono
@@ -86,7 +88,7 @@ typography:
     fontWeight: '400'
     lineHeight: 20px
   label-caps:
-    fontFamily: JetBrains Mono
+    fontFamily: Inter
     fontSize: 12px
     fontWeight: '700'
     lineHeight: 16px
@@ -112,60 +114,50 @@ spacing:
 ---
 
 ## Brand & Style
-The brand personality is high-performance, technical, and aggressive, designed for elite athletes and biohackers who view their body as a high-precision machine. It evokes a "Cyber-Athletic" aesthetic—combining the dark, data-heavy visuals of sci-fi interfaces with the high-visibility energy of modern sportswear.
+VITALS is a high-performance health and fitness dashboard designed for the "cyber-athlete." The brand personality is aggressive, technical, and hyper-modern. It evokes the feeling of a futuristic head-up display (HUD) found in performance racing or sci-fi environments.
 
-The design style is a hybrid of **Glassmorphism** and **High-Contrast Bold**. It utilizes deep obsidian surfaces, ultra-vibrant neon accents, and translucent layers with intense backdrop blurs to create a sense of focused, "head-up display" (HUD) clarity.
+The design style is a hybrid of **Glassmorphism** and **High-Contrast / Bold** aesthetics. It utilizes deep dark surfaces, vibrant neon accents, and translucent layers to create a sense of focused energy and data precision. The target audience is data-driven athletes who value performance metrics and a cutting-edge visual experience.
 
 ## Colors
-The palette is dominated by a "Midnight Obsidian" neutral base to maximize the impact of functional neon signals. 
+The palette is built on a "Total Dark" foundation using a deep charcoal neutral (#131315). The primary driver is **Neon Green**, used for critical path actions and healthy metrics. **Data Cyan** and **Electric Lime** serve as secondary accents to differentiate data streams.
 
-- **Primary (Neon Green):** Used for critical readiness metrics, calls to action, and "optimal" status states. It is the primary light source in the UI.
-- **Secondary (Data Cyan):** Reserved for recovery, sleep, and secondary biometric data points to provide visual distinction from active effort metrics.
-- **Neutral:** A range of deep grays and near-blacks (#0E0E10 to #1F1F21) provide the foundation for layered glass effects.
-- **Functional Accents:** High-saturation glows are used to signify active states or positive trends, while muted variants are used for stable or inactive data.
+Color application should follow a "glow-on-dark" principle:
+- **Primary:** Neon Green for high-priority status and main action buttons.
+- **Secondary/Tertiary:** Cyan and Lime for secondary data visualizations.
+- **Glass surfaces:** Semi-transparent dark grays with subtle white borders to maintain legibility against the dark background.
 
 ## Typography
-The system uses a dual-font approach to balance readability with a technical feel. 
+The system uses a dual-font approach. **Inter** handles all UI text, providing a clean, Swiss-style readability. **JetBrains Mono** is reserved for numerical data and metrics, emphasizing the technical, "calculated" nature of the product.
 
-**Inter** is the workhorse for headlines and body text, utilizing heavy weights (800+) for a bold, impactful brand presence. 
-
-**JetBrains Mono** is used for all "Data" layers—metrics, labels, and status indicators. This adds a systematic, monospaced aesthetic that reinforces the feeling of a precision instrument. Tabular figures are essential for comparing heart rates and time-based metrics.
+All "caps" labels should have increased letter spacing (5%) to improve scanability at small sizes. Display metrics use tight tracking to appear more impactful and integrated into the HUD style.
 
 ## Layout & Spacing
-The layout follows a **Fluid Bento Grid** model. On mobile, components occupy either a full-width slot or a 2-column split. 
+The system utilizes a **Fluid Grid** with a baseline unit of 4px. 
 
-- **Margins:** 20px side margins provide breathing room on narrow devices.
-- **Vertical Rhythm:** A 12px gap is maintained between stacked items within a section, while larger sections are separated by 32px to create a clear hierarchy of information clusters.
-- **Interactive Zones:** Primary actions are fixed to the bottom of the viewport with a blurred "safe area" background to ensure thumb accessibility and persistent visibility.
+- **Mobile:** Single or double-column "Bento" style grid. 20px side margins. 16px gutters between cards.
+- **Vertical Rhythm:** Sections are separated by a 32px margin. Internal card elements use a 12px stack gap.
+- **Safe Areas:** The bottom of the screen includes a fixed action area with a 40px buffer to clear system navigation bars.
 
 ## Elevation & Depth
-Depth is achieved through **Glassmorphism** and **Luminous Layering** rather than traditional drop shadows.
+Hierarchy is established through **Glassmorphism** and **Tonal Layering**.
 
-- **Surface Layers:** The background is #131315. "Cards" use a semi-transparent fill (`rgba(28, 28, 30, 0.6)`) with a 20px backdrop blur and a 1px subtle white border at 8% opacity.
-- **Active Elevation:** Elements do not "lift" off the page; instead, they "glow." Use `drop-shadow` with the primary color at 40% opacity for critical metrics and active buttons.
-- **Interaction Depth:** On press, elements scale down slightly (95-96%) and increase their glow intensity, simulating a physical pressure-sensitive surface.
+- **Level 0 (Background):** Deep matte surface (#131315).
+- **Level 1 (Cards):** Glass-cards with 60% opacity, 20px backdrop blur, and a 1px 8% white border.
+- **Level 2 (Active/Overlays):** 80% opacity glass with intense backdrop blurs.
+- **Luminosity:** Depth is also conveyed via "Neon Glows." Critical elements use `drop-shadow` with the element's primary color at 25-40% opacity to simulate light emission.
 
 ## Shapes
-The shape language is dominated by generous, organic curves that contrast with the sharp, technical typography.
+The shape language is dominated by exaggerated **Pill-shaped** geometry. 
 
-- **Base Cards:** Use `rounded-lg` (1rem / 16px) for standard metric containers.
-- **Primary Buttons & Pills:** Use "Full" roundedness (9999px) to create distinct, tappable targets that stand out from the rectangular grid.
-- **Icons:** Enclosed in circular containers or displayed as clean, optical-grid-aligned glyphs with a 400-weight stroke.
+- **Main Containers/Cards:** Use 1rem (16px) rounding for standard cards.
+- **Buttons/Pills:** Use full rounding (9999px) for a sleek, athletic feel.
+- **Large Sections:** Use 2rem (32px) or 3rem (48px) for major layout containers.
+- **Visual Flourishes:** Circular progress rings and rounded-end stroke paths in charts reinforce the organic but technical aesthetic.
 
 ## Components
-
-### Buttons
-- **Primary Action:** Full-width, 64px height, Pill-shaped. Background uses `primary-fixed` (#A4FF00) with dark text. Includes a heavy external glow.
-- **Icon Buttons:** Circular or simple ghost icons with `on-surface-variant` colors, increasing in opacity on hover.
-
-### Cards (Bento Boxes)
-- **Metric Cards:** Use the `glass-card` style. Headlines are `label-caps` in `on-surface-variant`. Main data uses `display-metrics` or `headline-lg`.
-- **Status Cards:** Feature a leading circular icon container with a low-opacity tint of the category color (e.g., 10% green for fitness).
-
-### Data Visualization
-- **Progress Rings:** Use a 6px to 8px stroke width. Background tracks are nearly transparent. The active progress uses a linear gradient (Neon Green to Electric Lime) and a `neon-glow` filter.
-- **Trend Indicators:** Tiny Material Symbols (trending_up/down) paired with `label-caps` text, color-coded to the metric's health.
-
-### Navigation
-- **Top Bar:** Fixed, 64px height, with a high-intensity backdrop blur and a subtle bottom border.
-- **Bottom Action Bar:** A floating or fixed container that uses the `surface-dim` background at 80% opacity to let content peek through while maintaining button legibility.
+- **Primary Buttons:** High-contrast, fully rounded pills using `primary-fixed` (Neon Green) background with `on-primary-fixed` (dark) text. Must include a `pill-glow` effect.
+- **Glass Cards:** The primary container. Must have a subtle border and backdrop-filter. Padding is fixed at 16px (4 units).
+- **Metric Rings:** Centrally aligned circular progress indicators with a stroke-width of 8px. Use linear gradients for the progress path.
+- **Data Sparklines:** Minimalist, rounded stroke paths (2px width) with a semi-transparent area fill underneath.
+- **Status Indicators:** Use small 6px pulses (animate-pulse) next to section headers to indicate "live" data.
+- **Iconography:** Use Material Symbols (Outlined) with a weight of 400. Icons in data cards should often feature a low-opacity circular background of the icon's color.

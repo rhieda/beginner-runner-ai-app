@@ -1,4 +1,4 @@
-<!DOCTYPE html><html class="dark" lang="en"><head>
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>Vitals - Active Session</title>
@@ -120,13 +120,8 @@
 </head>
 <body class="bg-background text-on-background font-body-lg min-h-screen selection:bg-primary-container selection:text-on-primary-container">
 <!-- Top AppBar (JSON Component Mapping) -->
-<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-surface-variant/20 flex justify-between items-center px-container-padding h-16 w-full">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-high border border-outline/20">
-<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A professional close-up portrait of an athletic individual in a high-tech training environment. The lighting is dramatic and low-key, emphasizing determination. The aesthetic is modern and athletic, with deep blacks and sharp highlights that align with a premium performance brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSiFng9hJ5Z24KqQ1cYoMSbtAFRulQ86e7Pk346XhXxQdh4UxUuWRPJKRUD4B6JJ3tRARRo1vGx9vbTjkfvqm0bTuWQWDYVf1Jf-ZJ4Kq75iMa9XdABMhLNsWKYhCMzTDhW62rTauOSWazrlJ97wnBDJrKmMhIB9LCFRrgVTDccgsVCRYisJsfRvR_sJbtYCejMS6PPWVQNwLqgSwYybbtAZ4dXZgRKzW7p9UI9vmxwerhCN7nF-AjONIu4MURoQmkcxIy7L56cUc">
-</div>
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold tracking-tight text-primary">Vitals</h1>
-</div>
+<header class="fixed top-0 w-full z-50 flex items-center px-container-padding h-16 justify-end bg-transparent">
+
 <button class="material-symbols-outlined text-primary hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-150" data-icon="settings">settings</button>
 </header>
 <main class="pt-24 pb-32 px-container-padding max-w-md mx-auto space-y-section-margin">
@@ -150,7 +145,7 @@
 <div class="col-span-2 glass-panel p-6 rounded-lg relative overflow-hidden group">
 <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Time Elapsed</span>
 <div class="mt-2 flex items-baseline gap-2">
-<span class="font-display-metrics text-display-metrics text-primary glow-path" id="timer">00:42:18</span>
+<span class="font-display-metrics text-display-metrics text-primary glow-path" id="timer">00:42:58</span>
 </div>
 <span class="material-symbols-outlined absolute top-4 right-4 text-primary/20 group-hover:text-primary/40 transition-colors" data-icon="timer">timer</span>
 </div>
@@ -158,7 +153,7 @@
 <div class="glass-panel p-6 rounded-lg group">
 <span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Heart Rate</span>
 <div class="mt-2 flex items-baseline gap-1">
-<span class="font-display-metrics text-[32px] text-secondary-fixed-dim animate-pulse-soft" id="hr">148</span>
+<span class="font-display-metrics text-[32px] text-secondary-fixed-dim animate-pulse-soft" id="hr">150</span>
 <span class="font-label-caps text-label-caps text-secondary-fixed-dim/60">BPM</span>
 </div>
 <div class="mt-4 h-1 w-full bg-surface-variant rounded-full overflow-hidden">
@@ -216,7 +211,7 @@
 </section>
 </main>
 <!-- Bottom NavBar (JSON Component Mapping) -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-2 bg-surface/80 backdrop-blur-xl border-t border-surface-variant/20 rounded-t-lg">
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-2 bg-background">
 <a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-colors active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
 <span class="font-label-caps text-label-caps mt-1">Dashboard</span>
@@ -255,4 +250,16 @@
             timerElement.textContent = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
         }, 1000);
     </script>
+
+
+
+
+
+
+
+
+
+
+
+
 </body></html>

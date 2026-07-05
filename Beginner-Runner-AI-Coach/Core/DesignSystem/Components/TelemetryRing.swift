@@ -54,9 +54,15 @@ public struct TelemetryRing: View {
                     .kerning(1.2)
                     .foregroundStyle(Theme.Colors.onSurfaceVariant)
                 
-                Text("\(score)")
-                    .font(Theme.Typography.displayMetrics)
-                    .foregroundStyle(Theme.Colors.primary)
+                if score == 0 && progress == 0.0 {
+                    Text("--")
+                        .font(Theme.Typography.displayMetrics)
+                        .foregroundStyle(Theme.Colors.primary)
+                } else {
+                    Text("\(score)")
+                        .font(Theme.Typography.displayMetrics)
+                        .foregroundStyle(Theme.Colors.primary)
+                }
                 
                 Text(label.uppercased())
                     .font(Theme.Typography.labelCaps)

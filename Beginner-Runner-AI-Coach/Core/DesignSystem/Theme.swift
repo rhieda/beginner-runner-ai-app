@@ -75,6 +75,7 @@ public enum Theme {
         public static let gridGutter: CGFloat = 16
         public static let containerPadding: CGFloat = 20
         public static let sectionMargin: CGFloat = 32
+        public static let topBarTitlePadding: CGFloat = 24
     }
     
     /// Vitals Kinetic Corner Radii

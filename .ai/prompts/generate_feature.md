@@ -1,6 +1,6 @@
 # Prompt: Gerar Feature Completa (SDD)
 
-Atue como um Especialista iOS Senior. Seu objetivo é implementar uma nova funcionalidade no projeto `Beginner-Runner-AI-Coach` seguindo o **Spec-Driven Design**.
+Atue como um Especialista iOS Senior. Seu objetivo é implementar uma nova funcionalidade no projeto `Beginner-Runner-AI-Coach` seguindo o **Spec-Driven Development**.
 
 ## Entradas:
 1. **Especificação:** [COLE AQUI O CONTEÚDO DO ARQUIVO .md DA PASTA docs/specs/]

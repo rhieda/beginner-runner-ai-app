@@ -1,10 +1,10 @@
 import Foundation
 
-protocol RecoveryAgentProtocol: Sendable {
+protocol RecoveryCalculationRepresentatable: Sendable {
     func calculateMovingAverages(from samples: [HealthDataBaseLocalSample]) -> (sevenDay: Double?, thirtyDay: Double?)
 }
 
-struct RecoveryAgentService: RecoveryAgentProtocol {
+struct RecoveryCalculationService: RecoveryCalculationRepresentatable {
     /// Calculates 7-day and 30-day moving averages for Heart Rate Variability (HRV).
     ///
     /// Business Rule: Instead of reacting to daily fluctuations, the AI Coach evaluates biological readiness
