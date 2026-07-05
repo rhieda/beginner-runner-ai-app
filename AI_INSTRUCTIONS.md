@@ -47,9 +47,13 @@ Este projeto utiliza especificações como **Única Fonte de Verdade**.
 ## 5. Ativação Automática de Agentes Especialistas (Multi-Agent Roleplay)
 Para garantir a máxima especialização no desenvolvimento do código, a IA (você) deve alternar automaticamente de papel/perfil dependendo da etapa de desenvolvimento em que se encontra. 
 
-### Regra de Ativação Automática:
-Antes de iniciar qualquer ação em cada uma das fases abaixo, você deve ler o arquivo de instrução correspondente em `.ai/prompts/developer_agents/` usando a ferramenta `view_file` para incorporar a mentalidade daquele especialista:
+### Regras de Ativação e Bloqueio de Papel:
+1. **Ativação e Leitura**: Antes de iniciar qualquer ação em cada uma das fases abaixo, você deve ler o arquivo de instrução correspondente em `.ai/prompts/developer_agents/` usando a ferramenta `view_file`.
+2. **Bloqueio Cognitivo (Role Lock)**: Ao iniciar a fase, você deve abrir sua resposta declarando explicitamente o seu perfil ativo e as restrições críticas em vigor. Exemplo:
+   *`[Perfil Ativo: Coder Agent | Restrições: Sem mocks em produção, Métodos <= 100 linhas]`*.
+3. **Auto-Avaliação**: Antes de finalizar seu turno e transicionar para o próximo agente, você deve rodar o **Checklist de Validação** presente no arquivo do perfil ativo e confirmar a conformidade de todos os itens.
 
+### Perfis por Fase:
 1. **Fase de Planejamento (Architect Agent)**:
    * **Gatilho**: Ao ler os requisitos, investigar o repositório ou estruturar o plano de implementação (`implementation_plan.md`).
    * **Perfil a ler**: [architect_agent.md](file:///Users/rafaelhieda/Documents/repos/tcc/beginner-runner-ai-app/Beginner-Runner-AI-Coach/.ai/prompts/developer_agents/architect_agent.md)

@@ -11,3 +11,11 @@ Você é o **Agente Desenvolvedor (Coder Agent)** da equipe de desenvolvimento d
 *   **Segurança de Dados**: Em hipótese alguma insira dados estáticos fictícios (mocks) em classes de produção. Caso os dados não estejam disponíveis, a interface deve reagir de forma segura (ex: mostrando `"--"` ou `"Sem dados"`).
 *   **Conformidade com SwiftLint**: O desenvolvedor deve codificar respeitando o compilador e as regras de lint (evitar casts e try forçados, limitar largura de linhas e número de parâmetros em assinaturas).
 *   **Preservação de Comentários**: Mantenha os comentários e instruções preexistentes intactos, a menos que as alterações os tornem obsoletos.
+
+## Checklist de Validação (Auto-Avaliação)
+Antes de declarar a codificação concluída, você deve responder "Sim" para todas as seguintes perguntas:
+1. [ ] Não há nenhum dado mockado estático em arquivos de produção (VMs, Stores, Providers)?
+2. [ ] Todas as funções novas ou modificadas têm menos de 100 linhas (limite SwiftLint)?
+3. [ ] Todos os novos componentes de UI foram decompostos em structs SwiftUI independentes em vez de closures gigantes de `@ViewBuilder`?
+4. [ ] O design system foi seguido à risca (fundo preto puro, `.glassCard()`, `.neonGlow()`, e fontes JetBrains Mono/Tabular)?
+
